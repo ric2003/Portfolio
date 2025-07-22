@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { ButtonBorderBeam } from "@/components/ui/button-BorderBeam";
 import { AuroraText } from "@/components/magicui/aurora-text";
 import { Button } from "@/components/ui/button";
 import { Dock, DockIcon } from "@/components/magicui/dock";
@@ -156,19 +155,24 @@ export default function Home() {
                   Based in Cascais, Lisbon
                 </div>
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-zinc-900 dark:text-zinc-100 leading-tight">
-                  Hi, I'm <br />
+                  Hi, I&apos;m <br />
                   <AuroraText speed={3}>Ricardo Gonçalves</AuroraText>
                 </h1>
                 <p className="text-2xl sm:text-2xl text-zinc-600 dark:text-zinc-400 font-medium">
                   Computer Engineering Graduate
                 </p>
                 <p className="text-xl text-zinc-500 dark:text-zinc-500 max-w-lg leading-relaxed">
-                I’m focused on web and mobile development, ready to grow my skills and make meaningful contributions to projects.
+                I&apos;m focused on web and mobile development, ready to grow my skills and make meaningful contributions to projects.
                 </p>
               </div>
               
               <div className="flex flex-col sm:flex-row gap-4">
-                <ButtonBorderBeam text="View My Projects" size="xl" onClick={() => scrollToSection("projects")}/>
+                <Button size="xl" className="group border border-zinc-300 dark:border-zinc-600 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-800 px-8 py-3 rounded-lg font-semibold transition-all duration-300 hover:scale-105" onClick={() => scrollToSection("projects")}>
+                  <span className="flex items-center gap-2">
+                    <Briefcase size={22} />
+                    View My Projects
+                  </span>
+                </Button>
                 <Button size="xl" className="group border border-zinc-300 dark:border-zinc-600 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-800 px-8 py-3 rounded-lg font-semibold transition-all duration-300 hover:scale-105">
                   <span className="flex items-center gap-2">
                     <Download size={22} />
@@ -248,7 +252,7 @@ export default function Home() {
                     <div className="w-3 h-3 bg-green-500 rounded-full"></div>
                   </div>
                   <div className="text-green-400 text-xs font-mono">
-                    console.log("Hello!")
+                    console.log(&quot;Hello!&quot;)
                   </div>
                 </div>
               </div>
@@ -300,7 +304,7 @@ export default function Home() {
               </div>
 
               
-              <h3 className="text-2xl font-semibold text-zinc-900 dark:text-zinc-100 my-6">I've Worked with</h3>
+              <h3 className="text-2xl font-semibold text-zinc-900 dark:text-zinc-100 my-6">I&apos;ve Worked with</h3>
               {/* Tech Stack Bar */}
               <div className="mt-10 flex flex-wrap gap-3 ">
                 {techStack.map((tech, index) => (
@@ -314,7 +318,7 @@ export default function Home() {
             
             {/* What I'm Looking For Section */}
             <div className={`transition-all duration-1000 delay-1000 ${aboutVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-              <h3 className="text-2xl font-semibold text-zinc-900 dark:text-zinc-100 mb-6">What I'm Looking For</h3>
+              <h3 className="text-2xl font-semibold text-zinc-900 dark:text-zinc-100 mb-6">What I&apos;m Looking For</h3>
               
               <div className="space-y-4">
                 <div className={`flex items-start gap-3 transition-opacity duration-700 delay-1200 ${aboutVisible ? 'opacity-100' : 'opacity-0'}`}>
@@ -446,7 +450,7 @@ export default function Home() {
       <section id="contact" className="pt-32 pb-8 px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-2xl mx-auto text-center">
           <h2 className="text-3xl font-bold text-zinc-900 dark:text-zinc-100 mb-8">
-            Let's Connect
+            Let&apos;s Connect
           </h2>
           <div className="flex justify-center items-center gap-12">
             {/* LinkedIn */}

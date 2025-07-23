@@ -10,6 +10,8 @@ import { MagicCard } from "@/components/magicui/magic-card";
 import { Particles } from "@/components/magicui/particles";
 import { InteractiveHoverButton } from "@/components/magicui/interactive-hover-button";
 import { FaLinkedin, FaGithub } from 'react-icons/fa';
+import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { LanguageToggle } from "@/components/ui/language-toggle";
 
 
 const techStack = [
@@ -40,6 +42,7 @@ const navigationItems = [
 export default function Home() {
   const [activeSection, setActiveSection] = useState('hero');
   const [aboutVisible, setAboutVisible] = useState(false);
+  const [language, setLanguage] = useState<'EN' | 'PT'>('EN');
 
   useEffect(() => {
     const sections = ['hero', 'about', 'projects'];
@@ -126,18 +129,18 @@ export default function Home() {
           {/* Separator */}
           <div className="h-16 w-px bg-zinc-300 dark:bg-zinc-600 mx-2" />
           
-          {/* Download CV Button */}
-          <DockIcon
-            className="text-zinc-700 dark:text-zinc-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-950/20 transition-all duration-300 group relative min-w-[100px]"
-          >
-            <div className="flex flex-col items-center justify-center gap-1 px-2 py-1">
-              <Download size={22} />
-              <span className="text-xs font-medium whitespace-nowrap">Download CV</span>
-            </div>
-            
-            {/* Tooltip */}
+          {/* Language Toggle */}
+          <DockIcon className="min-w-[80px] cursor-pointer group relative">
+            <LanguageToggle language={language} setLanguage={setLanguage} />
             <div className="absolute -bottom-12 left-1/2 transform -translate-x-1/2 bg-zinc-900 dark:bg-zinc-700 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap">
-              Download CV
+              Switch to {language === 'EN' ? 'PT' : 'EN'}
+            </div>
+          </DockIcon>
+          {/* Theme Toggle */}
+          <DockIcon className="min-w-[80px] cursor-pointer group relative">
+            <ThemeToggle />
+            <div className="absolute -bottom-12 left-1/2 transform -translate-x-1/2 bg-zinc-900 dark:bg-zinc-700 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap">
+              Theme
             </div>
           </DockIcon>
         </Dock>

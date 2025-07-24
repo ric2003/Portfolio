@@ -1,59 +1,70 @@
 "use client";
 
-import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
-const FlagSVG = ({ language }: { language: "EN" | "PT" }) => {
-    if (language === "EN") {
-      return (
-        <svg
-          width="28"
-          height="20"
-          viewBox="0 0 24 16"
-          className="rounded-sm border border-gray-300"
-        >
-          <rect width="28" height="20" fill="#012169" />
-          <path d="M0 0l24 16M24 0L0 16" stroke="#fff" strokeWidth="2" />
-          <path d="M0 0l24 16M24 0L0 16" stroke="#C8102E" strokeWidth="1" />
-          <path d="M12 0v16M0 8h24" stroke="#fff" strokeWidth="4" />
-          <path d="M12 0v16M0 8h24" stroke="#C8102E" strokeWidth="2" />
-        </svg>
-      );
-    }
-  
+const FlagSVG = ({ locale }: { locale: "en" | "pt" }) => {
+  if (locale === "en") {
     return (
       <svg
-        width="28"
+        width="32"
         height="20"
-        viewBox="0 0 24 16"
+        viewBox="0.5 0 32 20"
         className="rounded-sm border border-gray-300"
       >
-        <rect width="11.2" height="20" fill="#046A38" />
-        <rect x="11.2" width="12.8" height="20" fill="#DA020E" />
-        <circle
-          cx="9.6"
-          cy="8"
-          r="3"
-          fill="#FFDD00"
-          stroke="#046A38"
-          strokeWidth="0.5"
-        />
+        <rect width="34" height="20" fill="#012169" />
+        <path d="M0 0l34 20M34 0L0 20" stroke="#fff" strokeWidth="2.5" />
+        <path d="M0 0l34 20M34 0L0 20" stroke="#C8102E" strokeWidth="1.25" />
+        <path d="M16 0v20M0 10h34" stroke="#fff" strokeWidth="5" />
+        <path d="M16 0v20M0 10h34" stroke="#C8102E" strokeWidth="2.5" />
       </svg>
     );
+  }
+
+  return (
+    <svg
+      width="32"
+      height="20"
+      viewBox="1 0 32 20"
+      className="rounded-sm border border-gray-300"
+    >
+      <rect width="32" height="20" fill="#046A38" />
+      <rect x="14.933" width="20" height="20" fill="#DA020E" />
+      <circle
+        cx="14"
+        cy="10"
+        r="4"
+        fill="#FFDD00"
+        stroke="#046A38"
+        strokeWidth="0"
+      />
+    </svg>
+  );
+};
+
+export function LanguageToggle() {
+  const { t, i18n } = useTranslation();
+
+  const currentLocale = i18n.language as "en" | "pt";
+  const nextLocale = currentLocale === "en" ? "pt" : "en";
+
+  const handleToggleLanguage = () => {
+    i18n.changeLanguage(nextLocale);
   };
 
-export function LanguageToggle({ language, setLanguage }: { language: 'EN' | 'PT', setLanguage: (lang: 'EN' | 'PT') => void }) {
-  const nextLanguage = language === 'EN' ? 'PT' : 'EN';
   return (
     <div
-      className="flex flex-col items-center justify-center gap-1 px-2 py-1 cursor-pointer transition-all duration-300"
-      onClick={() => setLanguage(nextLanguage)}
-      title={`Switch to ${nextLanguage}`}
+      className="flex flex-col items-center justify-center gap-1 px-2 py-1 cursor-pointer"
+      onClick={handleToggleLanguage}
     >
-      <div className="transition-transform duration-300 hover:scale-110 text-2xl">
-      {/* <span className="absolute right-0 text-xs font-medium whitespace-nowrap">{language}</span> */}
-        <FlagSVG language={language} />
+      <div className="relative text-2xl">
+        <span className="absolute -right-1 -top-1 bg-[#007AFF] p-0.5 border border-black font-bold rounded-full text-[0.5rem] whitespace-nowrap">
+          {currentLocale.toUpperCase()}
+        </span>
+        <FlagSVG locale={currentLocale} />
       </div>
-      <p className="text-xs font-medium whitespace-nowrap">{language=="EN"?"Language":"Idioma"}</p>
+      <p className="text-xs font-medium whitespace-nowrap pt-0.5">
+        {t("language_label")}
+      </p>
     </div>
   );
-} 
+}

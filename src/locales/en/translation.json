@@ -1,0 +1,72 @@
+{
+  "language_label": "Language",
+  "navigation": {
+    "home": "Home",
+    "about": "About",
+    "projects": "Projects"
+  },
+  "hero": {
+    "location": "Cascais, Lisbon",
+    "name": "Ricardo Gonçalves",
+    "title": "Computer Engineering Graduate",
+    "description": "I'm focused on web and mobile development, ready to grow my skills and make meaningful contributions to projects.",
+    "view_projects": "View My Projects",
+    "download_cv": "Download CV",
+    "find_me": "Find me on:"
+  },
+  "about": {
+    "title": "About Me",
+    "background_title": "Background",
+    "background_description": "I got into programming through my Bachelor in Computer Engineering but web and mobile development is what really stuck with me.",
+    "background_points": [
+      "Co-developed a water management system for Portuguese reservoirs, designed for farmers and water researchers, now proposed for a European initiative.",
+      "Exploring React Native for mobile app development as a side project to expand my skillset.",
+      "Fluent in English (native) and Portuguese, enabling me to work in diverse environments."
+    ],
+    "tech_stack_title": "I've Worked with",
+    "looking_for_title": "What I'm Looking For",
+    "looking_for_points": [
+      {
+        "title": "Internship Opportunities",
+        "description": "Gain hands-on experience in real projects"
+      },
+      {
+        "title": "Entry-Level Positions", 
+        "description": "Web or mobile development roles to kickstart my career"
+      },
+      {
+        "title": "Development Projects",
+        "description": "Opportunities to contribute and grow my skills"
+      },
+      {
+        "title": "Ready to Add Value",
+        "description": "Eager to work, learn, and contribute meaningfully"
+      }
+    ]
+  },
+  "projects": {
+    "title": "My Projects",
+    "view_project": "View Project",
+    "source_code": "Source Code",
+    "items": [
+      {
+        "title": "Water Wise",
+        "description": "Co-developed a geospatial platform for managing Portuguese reservoirs, designed to support farmers and water researchers with real-time data and soon decision-making tools."
+      },
+      {
+        "title": "Yoke - Fitness App",
+        "description": "Co-developing a mobile fitness app as a side project with a friend to track workouts, nutrition, and progress, featuring exercise libraries and customizable meal planning."
+      },
+      {
+        "title": "SNS Hospitals App",
+        "description": "Co-developed a mobile app to help users find and evaluate hospitals in Portugal, featuring real-time hospital data, interactive maps, and offline support."
+      }
+    ]
+  },
+  "contact": {
+    "title": "Let's Connect",
+    "linkedin": "LinkedIn",
+    "github": "GitHub",
+    "email": "Email"
+  }
+}

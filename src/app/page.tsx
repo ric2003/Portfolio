@@ -10,8 +10,8 @@ import { MagicCard } from "@/components/magicui/magic-card";
 import { Particles } from "@/components/magicui/particles";
 import { InteractiveHoverButton } from "@/components/magicui/interactive-hover-button";
 import { FaLinkedin, FaGithub } from 'react-icons/fa';
-import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { LanguageToggle } from "@/components/ui/language-toggle";
+import { useTranslation } from "react-i18next";
 
 
 const techStack = [
@@ -34,15 +34,17 @@ const scrollToSection = (sectionId: string) => {
 };
 
 const navigationItems = [
-  { id: 'hero', label: 'Home', icon: HomeIcon },
-  { id: 'about', label: 'About', icon: User },
-  { id: 'projects', label: 'Projects', icon: Briefcase },  
+  { id: 'hero', label: 'navigation.home', icon: HomeIcon },
+  { id: 'about', label: 'navigation.about', icon: User },
+  { id: 'projects', label: 'navigation.projects', icon: Briefcase },  
 ];
 
 export default function Home() {
   const [activeSection, setActiveSection] = useState('hero');
   const [aboutVisible, setAboutVisible] = useState(false);
   const [language, setLanguage] = useState<'EN' | 'PT'>('EN');
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     const sections = ['hero', 'about', 'projects'];
@@ -115,12 +117,7 @@ export default function Home() {
               >
                 <div className="flex flex-col items-center justify-center gap-1 px-2 py-1">
                   <IconComponent size={22} />
-                  <span className="text-xs font-medium whitespace-nowrap">{item.label}</span>
-                </div>
-                
-                {/* Tooltip for better UX */}
-                <div className="absolute -bottom-12 left-1/2 transform -translate-x-1/2 bg-zinc-900 dark:bg-zinc-700 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap">
-                  {item.label}
+                  <span className="text-xs font-medium whitespace-nowrap">{t(item.label)}</span>
                 </div>
               </DockIcon>
             );
@@ -131,18 +128,10 @@ export default function Home() {
           
           {/* Language Toggle */}
           <DockIcon className="min-w-[80px] cursor-pointer group relative">
-            <LanguageToggle language={language} setLanguage={setLanguage} />
-            <div className="absolute -bottom-12 left-1/2 transform -translate-x-1/2 bg-zinc-900 dark:bg-zinc-700 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap">
-              Switch to {language === 'EN' ? 'PT' : 'EN'}
-            </div>
+            <LanguageToggle />
+            
           </DockIcon>
-          {/* Theme Toggle */}
-          <DockIcon className="min-w-[80px] cursor-pointer group relative">
-            <ThemeToggle />
-            <div className="absolute -bottom-12 left-1/2 transform -translate-x-1/2 bg-zinc-900 dark:bg-zinc-700 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap">
-              Theme
-            </div>
-          </DockIcon>
+          
         </Dock>
       </nav>
 
@@ -155,36 +144,36 @@ export default function Home() {
               <div className="space-y-4">
                 <div className="flex items-center gap-2 text-sm text-zinc-600 dark:text-zinc-400">
                   <MapPin size={16}/>
-                  Based in Cascais, Lisbon
+                  {t('hero.location')}
                 </div>
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-zinc-900 dark:text-zinc-100 leading-tight">
                   Hi, I&apos;m <br />
-                  <AuroraText speed={3}>Ricardo Gonçalves</AuroraText>
+                  <AuroraText speed={3}>{t('hero.name')}</AuroraText>
                 </h1>
                 <p className="text-2xl sm:text-2xl text-zinc-600 dark:text-zinc-400 font-medium">
-                  Computer Engineering Graduate
+                  {t('hero.title')}
                 </p>
                 <p className="text-xl text-zinc-500 dark:text-zinc-500 max-w-lg leading-relaxed">
-                I&apos;m focused on web and mobile development, ready to grow my skills and make meaningful contributions to projects.
+                  {t('hero.description')}
                 </p>
               </div>
               
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="xl" className="group border border-zinc-300 dark:border-zinc-600 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-800 px-8 py-3 rounded-lg font-semibold transition-all duration-300 hover:scale-105" onClick={() => scrollToSection("projects")}>
-                  <span className="flex items-center gap-2">
-                    <Briefcase size={22} />
-                    View My Projects
+                <Button size="xl" className="group relative border-2 border-blue-300 dark:border-blue-600 text-blue-700 dark:text-blue-300 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-950 dark:to-indigo-950 hover:from-blue-100 hover:to-indigo-100 dark:hover:from-blue-900 dark:hover:to-indigo-900 px-8 py-3 rounded-lg font-semibold transition-all duration-300 hover:scale-110 shadow-lg shadow-blue-200/30 dark:shadow-blue-800/30 hover:shadow-xl hover:shadow-blue-300/50 dark:hover:shadow-blue-700/50 animate-pulse hover:animate-none before:absolute before:inset-0 before:rounded-lg before:bg-gradient-to-r before:from-transparent before:via-white/20 before:to-transparent before:translate-x-[-100%] hover:before:translate-x-[100%] before:transition-transform before:duration-700 overflow-hidden" onClick={() => scrollToSection("projects")}>
+                  <span className="flex items-center gap-2 relative z-10">
+                    <Briefcase size={22} className="group-hover:animate-bounce" />
+                    {t('hero.view_projects')}
                   </span>
                 </Button>
                 <Button size="xl" className="group border border-zinc-300 dark:border-zinc-600 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-800 px-8 py-3 rounded-lg font-semibold transition-all duration-300 hover:scale-105">
                   <span className="flex items-center gap-2">
                     <Download size={22} />
-                    Download CV
+                    {t('hero.download_cv')}
                   </span>
                 </Button>
               </div>
               <div className="flex gap-4 items-center">
-                <p className="text-zinc-600 dark:text-zinc-400">Find me on:</p>
+                <p className="text-zinc-600 dark:text-zinc-400">{t('hero.find_me')}</p>
                 <a
                   href="https://www.linkedin.com/in/ricardo-gonçalves-986780267"
                   target="_blank"
@@ -269,7 +258,7 @@ export default function Home() {
         <div className="max-w-4xl mx-auto left-1/2">
         
           <h2 className={`text-3xl font-bold text-center text-zinc-900 dark:text-zinc-100 mb-12 transition-opacity duration-1000 ${aboutVisible ? 'opacity-100' : 'opacity-0'}`}>
-            About Me
+            {t('about.title')}
           </h2>
           
           
@@ -277,37 +266,25 @@ export default function Home() {
             {/* Background Section */}
             <div className={`transition-all duration-1000 delay-200 ${aboutVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
 
-              <h3 className="text-2xl font-semibold text-zinc-900 dark:text-zinc-100 mb-6">Background</h3>
+              <h3 className="text-2xl font-semibold text-zinc-900 dark:text-zinc-100 mb-6">{t('about.background_title')}</h3>
               
               <p className="text-zinc-600 dark:text-zinc-400 mb-6 leading-relaxed text-lg">
-                I got into programming through my <strong className="text-zinc-900 dark:text-zinc-100">Bachelor in Computer Engineering</strong> but web and mobile development is what really stuck with me.
+                {t('about.background_description')}
               </p>
               
               <div className="space-y-4">
-                <div className={`flex items-start gap-3 transition-opacity duration-700 delay-400 ${aboutVisible ? 'opacity-100' : 'opacity-0'}`}>
-                  <div className="w-2 h-2 bg-zinc-400 rounded-full mt-2 flex-shrink-0"></div>
-                  <div>
-                    <p className="text-md text-zinc-600 dark:text-zinc-400">Co-developed a water management system for Portuguese reservoirs, designed for farmers and water researchers, now proposed for a European initiative.</p>
+                {(t('about.background_points', { returnObjects: true }) as string[]).map((point: string, index: number) => (
+                  <div key={index} className={`flex items-start gap-3 transition-opacity duration-700 delay-${400 + index * 200} ${aboutVisible ? 'opacity-100' : 'opacity-0'}`}>
+                    <div className="w-2 h-2 bg-zinc-400 rounded-full mt-2 flex-shrink-0"></div>
+                    <div>
+                      <p className="text-md text-zinc-600 dark:text-zinc-400">{point}</p>
+                    </div>
                   </div>
-                </div>
-                
-                <div className={`flex items-start gap-3 transition-opacity duration-700 delay-600 ${aboutVisible ? 'opacity-100' : 'opacity-0'}`}>
-                  <div className="w-2 h-2 bg-zinc-400 rounded-full mt-2 flex-shrink-0"></div>
-                  <div>
-                    <p className="text-md text-zinc-600 dark:text-zinc-400">Exploring React Native for mobile app development as a side project to expand my skillset.</p>
-                  </div>
-                </div>
-                
-                <div className={`flex items-start gap-3 transition-opacity duration-700 delay-800 ${aboutVisible ? 'opacity-100' : 'opacity-0'}`}>
-                  <div className="w-2 h-2 bg-zinc-400 rounded-full mt-2 flex-shrink-0"></div>
-                  <div>
-                    <p className="text-md text-zinc-600 dark:text-zinc-400">Fluent in English (native) and Portuguese, enabling me to work in diverse environments.</p>
-                  </div>
-                </div>
+                ))}
               </div>
 
               
-              <h3 className="text-2xl font-semibold text-zinc-900 dark:text-zinc-100 my-6">I&apos;ve Worked with</h3>
+              <h3 className="text-2xl font-semibold text-zinc-900 dark:text-zinc-100 my-6">{t('about.tech_stack_title')}</h3>
               {/* Tech Stack Bar */}
               <div className="mt-10 flex flex-wrap gap-3 ">
                 {techStack.map((tech, index) => (
@@ -321,40 +298,18 @@ export default function Home() {
             
             {/* What I'm Looking For Section */}
             <div className={`transition-all duration-1000 delay-1000 ${aboutVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-              <h3 className="text-2xl font-semibold text-zinc-900 dark:text-zinc-100 mb-6">What I&apos;m Looking For</h3>
+              <h3 className="text-2xl font-semibold text-zinc-900 dark:text-zinc-100 mb-6">{t('about.looking_for_title')}</h3>
               
               <div className="space-y-4">
-                <div className={`flex items-start gap-3 transition-opacity duration-700 delay-1200 ${aboutVisible ? 'opacity-100' : 'opacity-0'}`}>
-                  <div className="w-2 h-2 bg-zinc-400 rounded-full mt-2 flex-shrink-0"></div>
-                  <div>
-                    <p className="font-medium text-zinc-900 dark:text-zinc-100 text-md">Internship Opportunities</p>
-                    <p className="text-md text-zinc-600 dark:text-zinc-400">Gain hands-on experience in real projects</p>
+                {(t('about.looking_for_points', { returnObjects: true }) as Array<{title: string, description: string}>).map((point, index) => (
+                  <div key={index} className={`flex items-start gap-3 transition-opacity duration-700 delay-${1200 + index * 200} ${aboutVisible ? 'opacity-100' : 'opacity-0'}`}>
+                    <div className="w-2 h-2 bg-zinc-400 rounded-full mt-2 flex-shrink-0"></div>
+                    <div>
+                      <p className="font-medium text-zinc-900 dark:text-zinc-100 text-md">{point.title}</p>
+                      <p className="text-md text-zinc-600 dark:text-zinc-400">{point.description}</p>
+                    </div>
                   </div>
-                </div>
-                
-                <div className={`flex items-start gap-3 transition-opacity duration-700 delay-1400 ${aboutVisible ? 'opacity-100' : 'opacity-0'}`}>
-                  <div className="w-2 h-2 bg-zinc-400 rounded-full mt-2 flex-shrink-0"></div>
-                  <div>
-                    <p className="font-medium text-zinc-900 dark:text-zinc-100 text-md">Entry-Level Positions</p>
-                    <p className="text-md text-zinc-600 dark:text-zinc-400">Web or mobile development roles to kickstart my career</p>
-                  </div>
-                </div>
-                
-                <div className={`flex items-start gap-3 transition-opacity duration-700 delay-1600 ${aboutVisible ? 'opacity-100' : 'opacity-0'}`}>
-                  <div className="w-2 h-2 bg-zinc-400 rounded-full mt-2 flex-shrink-0"></div>
-                  <div>
-                    <p className="font-medium text-zinc-900 dark:text-zinc-100 text-md">Development Projects</p>
-                    <p className="text-md text-zinc-600 dark:text-zinc-400">Opportunities to contribute and grow my skills</p>
-                  </div>
-                </div>
-                
-                <div className={`flex items-start gap-3 transition-opacity duration-700 delay-1800 ${aboutVisible ? 'opacity-100' : 'opacity-0'}`}>
-                  <div className="w-2 h-2 bg-zinc-400 rounded-full mt-2 flex-shrink-0"></div>
-                  <div>
-                    <p className="font-medium text-zinc-900 dark:text-zinc-100 text-md">Ready to Add Value</p>
-                    <p className="text-md text-zinc-600 dark:text-zinc-400">Eager to work, learn, and contribute meaningfully</p>
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
           </div>
@@ -365,28 +320,28 @@ export default function Home() {
       <section id="projects" className="py-32 px-4 sm:px-6 lg:px-8 overflow-hidden relative z-10">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl font-bold text-center text-zinc-900 dark:text-zinc-100 mb-12">
-            My Projects
+            {t('projects.title')}
           </h2>
           <div className="relative grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
-                title: "Water Wise",
-                description: "Co-developed a geospatial platform for managing Portuguese reservoirs, designed to support farmers and water researchers with real-time data and soon decision-making tools.",
+                titleKey: "projects.items.0.title",
+                descriptionKey: "projects.items.0.description",
                 tech: ["React", "Next.js", "InfluxDB", "Tailwind CSS", "Mapbox", "Leaflet", "Recharts", "Clerk", "Convex"],
                 image: "/waterwisedark.png",
                 viewProject: "https://water-wise-one.vercel.app/",
                 sourceCode: "https://github.com/Acr2004/water-wise"
               },
               {
-                title: "Yoke - Fitness App",
-                description: "Co-developing a mobile fitness app as a side project with a friend to track workouts, nutrition, and progress, featuring exercise libraries and customizable meal planning.",
+                titleKey: "projects.items.1.title",
+                descriptionKey: "projects.items.1.description",
                 tech: ["React Native", "TypeScript", "Node.js"],
                 image: "/yoke.png",
                 sourceCode: "https://github.com/Acr2004/yoke-gym-app"
               },
               {
-                title: "SNS Hospitals App",
-                description: "Co-developed a mobile app to help users find and evaluate hospitals in Portugal, featuring real-time hospital data, interactive maps, and offline support.",
+                titleKey: "projects.items.2.title",
+                descriptionKey: "projects.items.2.description",
                 tech: ["Flutter", "Dart", "Google Maps", "SQLite", "Provider"],
                 image: "/flutter-sns-app.png",
                 sourceCode: "https://github.com/ric2003/flutter-App-SNS-Hospitais"
@@ -399,14 +354,14 @@ export default function Home() {
                 {project.viewProject && (
                   <a href={project.viewProject} target="_blank" rel="noopener noreferrer">
                     <InteractiveHoverButton size="sm" className="hover: hover:scale-105">
-                      View Project
+                      {t('projects.view_project')}
                     </InteractiveHoverButton>
                   </a>
                   )}
                   {project.sourceCode && (
                     <a href={project.sourceCode} target="_blank" rel="noopener noreferrer">
                       <Button size="md" className="text-zinc-600 dark:text-zinc-400 hover:underline text-sm font-medium">
-                        Source Code
+                        {t('projects.source_code')}
                       </Button>
                     </a>
                   )}
@@ -416,7 +371,7 @@ export default function Home() {
                   <div className="h-48 w-full flex items-center justify-center overflow-hidden rounded-lg mb-4">
                     <Image 
                       src={project.image} 
-                      alt={project.title} 
+                      alt={t(project.titleKey)} 
                       className="w-full h-full object-contain rounded-lg" 
                       width={500} 
                       height={500} 
@@ -425,10 +380,10 @@ export default function Home() {
                   </div>
                   <div className="flex flex-col flex-1 p-6 pt-0">
                     <h3 className="text-xl font-semibold text-zinc-900 dark:text-zinc-100 mb-3">
-                      {project.title}
+                      {t(project.titleKey)}
                     </h3>
                     <p className="text-zinc-600 dark:text-zinc-400 mb-4 flex-1">
-                      {project.description}
+                      {t(project.descriptionKey)}
                     </p>
                     <div className="flex flex-wrap gap-2 mb-16">
                       {project.tech.map((tech) => (
@@ -453,7 +408,7 @@ export default function Home() {
       <section id="contact" className="pt-32 pb-8 px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-2xl mx-auto text-center">
           <h2 className="text-3xl font-bold text-zinc-900 dark:text-zinc-100 mb-8">
-            Let&apos;s Connect
+            {t('contact.title')}
           </h2>
           <div className="flex justify-center items-center gap-12">
             {/* LinkedIn */}
@@ -465,7 +420,7 @@ export default function Home() {
               aria-label="LinkedIn"
             >
               <FaLinkedin className="text-white-600 dark:text-white-400 mb-2 group-hover:text-white-700 dark:group-hover:text-white-300 transition-colors" size={28} />
-              <span className="text-sm text-zinc-600 dark:text-zinc-400 group-hover:text-zinc-900 dark:group-hover:text-zinc-100 transition-colors">LinkedIn</span>
+              <span className="text-sm text-zinc-600 dark:text-zinc-400 group-hover:text-zinc-900 dark:group-hover:text-zinc-100 transition-colors">{t('contact.linkedin')}</span>
             </a>
             
             {/* GitHub */}
@@ -477,7 +432,7 @@ export default function Home() {
               aria-label="GitHub"
             >
               <FaGithub className="text-zinc-700 dark:text-zinc-300 mb-2 group-hover:text-zinc-900 dark:group-hover:text-zinc-100 transition-colors" size={28} />
-              <span className="text-sm text-zinc-600 dark:text-zinc-400 group-hover:text-zinc-900 dark:group-hover:text-zinc-100 transition-colors">GitHub</span>
+              <span className="text-sm text-zinc-600 dark:text-zinc-400 group-hover:text-zinc-900 dark:group-hover:text-zinc-100 transition-colors">{t('contact.github')}</span>
             </a>
             
             {/* Email */}
@@ -487,7 +442,7 @@ export default function Home() {
               aria-label="Email"
             >
               <Mail className="text-white-600 dark:text-white-400 mb-2 group-hover:text-white-700 dark:group-hover:text-white-300 transition-colors" size={28} />
-              <span className="text-sm text-zinc-600 dark:text-zinc-400 group-hover:text-zinc-900 dark:group-hover:text-zinc-100 transition-colors">Email</span>
+              <span className="text-sm text-zinc-600 dark:text-zinc-400 group-hover:text-zinc-900 dark:group-hover:text-zinc-100 transition-colors">{t('contact.email')}</span>
             </a>
           </div>
         </div>

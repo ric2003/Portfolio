@@ -92,8 +92,8 @@ export default function Home() {
         vy={0}
       />
       
-      {/* Magic UI Dock Navigation */}
-      <nav className="fixed top-0 left-1/2 transform -translate-x-1/2 z-50">
+      {/* Dock nav */}
+      <nav className="fixed top-0 left-1/2 transform -translate-x-1/2 z-50 hidden lg:block">
         <Dock 
           className="bg-white/10 dark:bg-black/10 backdrop-blur-md border border-white/20 dark:border-zinc-800/20 h-20 px-4"
           iconSize={60}
@@ -132,19 +132,84 @@ export default function Home() {
         </Dock>
       </nav>
 
+      {/* Mobile nav //TODO work on this// */}
+      <nav className="fixed top-0 right-2 transform z-50 block lg:hidden">
+      <Dock 
+          className="bg-white/10 dark:bg-black/10 backdrop-blur-md border border-white/20 dark:border-zinc-800/20 h-20 px-4"
+          iconSize={50}
+          iconMagnification={50}
+          iconDistance={0}
+        >
+          <DockIcon className="min-w-[50px] cursor-pointer group relative">
+            <LanguageToggle />
+            
+          </DockIcon>
+        </Dock>
+      </nav>
+
       {/* Hero Section */}
-      <section id="hero" className="pt-24 pb-16 px-4 sm:px-6 lg:px-8 min-h-screen flex items-center relative overflow-hidden z-10">
+      <section id="hero" className="pt-16 pb-8 px-2 sm:px-6 lg:px-8 min-h-screen flex items-center relative overflow-hidden z-10">
         <div className="max-w-7xl mx-auto w-full">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-8 order-2 lg:order-1">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+            {/* Mobile: Location, Hi, Name above image */}
+            <div className="block lg:hidden mb-6 text-center">
+              <div className="flex items-center gap-2 text-sm text-zinc-600 dark:text-zinc-400 justify-center">
+                <MapPin size={16}/>
+                {t('hero.location')}
+              </div>
+              <h1 className="text-4xl font-bold text-zinc-900 dark:text-zinc-100 leading-tight mt-2">
+                {t('hero.hi')} <br />
+                <AuroraText speed={3}>Ricardo Gonçalves</AuroraText>
+              </h1>
+            </div>
+            {/* Image Block */}
+            <div className="order-1 lg:order-2 sm:order-1 relative">
+              {/* Code Block Decoration */}
+              <div className="relative top-20 left-0 z-10 bg-zinc-900 dark:bg-zinc-800 p-4 w-45 rounded-lg shadow-lg transform rotate-12 opacity-90 lg:block hidden">
+                  <div className="flex items-center gap-2 mb-2">
+                    <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                    <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                    <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                  </div>
+                  <div className="text-green-400 text-xs font-mono">
+                    console.log(&quot;{t('hero.hello')}&quot;)
+                  </div>
+                </div>
+              <div className="relative group">
+                <div className="relative w-60 h-60 sm:w-72 sm:h-72 lg:w-[500px] lg:h-[500px] mx-auto">
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-3xl rotate-6 lg:group-hover:rotate-12 transition-transform duration-700 opacity-75"></div>
+                  
+                  <div className="relative w-full h-full bg-white dark:bg-zinc-900 rounded-3xl shadow-2xl transform -rotate-6 lg:group-hover:rotate-0 transition-transform duration-700">
+                    <Image 
+                      src="/img.png" 
+                      alt="Ricardo Gonçalves" 
+                      width={300} 
+                      height={300}
+                      className="w-full h-full object-contain"
+                    />
+                                         
+                     {/* Overlay Gradient for the imgs*/}
+                     <div className="absolute inset-0 bg-gradient-to-t from-white dark:from-zinc-950 via-transparent to-transparent" style={{
+                       background: 'linear-gradient(to top, var(--background) 0%, transparent 30%)'
+                     }}></div>
+                  </div>
+                  
+                  {/* Floating Elements */}
+                  <div className="absolute -top-4 -right-4 w-20 h-20 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-2xl rotate-12 opacity-60 animate-pulse"></div>
+                  <div className="absolute -bottom-6 -left-6 w-16 h-16 bg-gradient-to-r from-green-400 to-blue-500 rounded-xl rotate-45 opacity-70 animate-pulse"></div>
+                </div>
+              </div>
+            </div>
+            {/* Desktop: Full intro block */}
+            <div className="hidden lg:block space-y-8 order-2 lg:order-1">
               <div className="space-y-4">
                 <div className="flex items-center gap-2 text-sm text-zinc-600 dark:text-zinc-400">
                   <MapPin size={16}/>
                   {t('hero.location')}
                 </div>
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-zinc-900 dark:text-zinc-100 leading-tight">
+                <h1 className="text-2xl sm:text-4xl lg:text-6xl font-bold text-zinc-900 dark:text-zinc-100 leading-tight">
                 {t('hero.hi')} <br />
-                  <AuroraText speed={3}>{t('hero.name')}</AuroraText>
+                  <AuroraText speed={3}>Ricardo Gonçalves</AuroraText>
                 </h1>
                 <p className="text-2xl sm:text-2xl text-zinc-600 dark:text-zinc-400 font-medium">
                   {t('hero.title')}
@@ -154,10 +219,10 @@ export default function Home() {
                 </p>
               </div>
               
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="xl" className="group relative border-2 border-blue-300 dark:border-blue-600 text-blue-700 dark:text-blue-300 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-950 dark:to-indigo-950 hover:from-blue-100 hover:to-indigo-100 dark:hover:from-blue-900 dark:hover:to-indigo-900 px-8 py-3 rounded-lg font-semibold transition-all duration-300 hover:scale-110 shadow-lg shadow-blue-200/30 dark:shadow-blue-800/30 hover:shadow-xl hover:shadow-blue-300/50 dark:hover:shadow-blue-700/50 animate-pulse hover:animate-none before:absolute before:inset-0 before:rounded-lg before:bg-gradient-to-r before:from-transparent before:via-white/20 before:to-transparent before:translate-x-[-100%] hover:before:translate-x-[100%] before:transition-transform before:duration-700 overflow-hidden" onClick={() => scrollToSection("projects")}>
+              <div className="flex flex-col sm:flex-row gap-3">
+                <Button size="xl" className="group border border-zinc-300 dark:border-zinc-600 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-800 px-8 py-3 rounded-lg font-semibold transition-all duration-300 hover:scale-105" onClick={() => scrollToSection("projects")}> 
                   <span className="flex items-center gap-2 relative z-10">
-                    <Briefcase size={22} className="group-hover:animate-bounce" />
+                    <Briefcase size={22} />
                     {t('hero.view_projects')}
                   </span>
                 </Button>
@@ -199,46 +264,63 @@ export default function Home() {
                 >
                   <Mail className="text-white-600 dark:text-white-400 group-hover:text-zinc-100 dark:group-hover:text-zinc-100 transition-colors" size={32}/>
                 </a>
-
               </div>
             </div>
-            
-            <div className="order-1 lg:order-2 relative">
-              <div className="relative group">
-                <div className="relative w-96 h-96 lg:w-[500px] lg:h-[500px] mx-auto">
-                  <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-3xl rotate-6 group-hover:rotate-12 transition-transform duration-700 opacity-75"></div>
-                  
-                  <div className="relative w-full h-full bg-white dark:bg-zinc-900 rounded-3xl shadow-2xl transform -rotate-6 group-hover:rotate-0 transition-transform duration-700">
-                    <Image 
-                      src="/img.png" 
-                      alt="Ricardo Gonçalves" 
-                      width={500} 
-                      height={500}
-                      className="w-full h-full object-contain"
-                    />
-                                         
-                     {/* Overlay Gradient for the imgs*/}
-                     <div className="absolute inset-0 bg-gradient-to-t from-white dark:from-zinc-950 via-transparent to-transparent" style={{
-                       background: 'linear-gradient(to top, var(--background) 0%, transparent 30%)'
-                     }}></div>
-                  </div>
-                  
-                  {/* Floating Elements */}
-                  <div className="absolute -top-4 -right-4 w-20 h-20 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-2xl rotate-12 opacity-60 animate-pulse"></div>
-                  <div className="absolute -bottom-6 -left-6 w-16 h-16 bg-gradient-to-r from-green-400 to-blue-500 rounded-xl rotate-45 opacity-70 animate-pulse"></div>
-                </div>
+            {/* Mobile: Rest of intro block (except location, hi, name) */}
+            <div className="block lg:hidden space-y-8 order-2 text-center">
+              <div className="space-y-4">
+                <p className="text-2xl sm:text-2xl text-zinc-600 dark:text-zinc-400 font-medium">
+                  {t('hero.title')}
+                </p>
+                <p className="text-xl text-zinc-500 dark:text-zinc-500 max-w-lg leading-relaxed mx-auto">
+                  {t('hero.description')}
+                </p>
+              </div>
+              <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
+                <Button size="xl" className="group border border-zinc-300 dark:border-zinc-600 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-800 px-8 py-3 rounded-lg font-semibold transition-all duration-300 hover:scale-105" onClick={() => scrollToSection("projects")}> 
+                  <span className="flex items-center gap-2 relative z-10">
+                    <Briefcase size={22} />
+                    {t('hero.view_projects')}
+                  </span>
+                </Button>
+                <Button size="xl" className="group border border-zinc-300 dark:border-zinc-600 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-800 px-8 py-3 rounded-lg font-semibold transition-all duration-300 hover:scale-105">
+                  <span className="flex items-center gap-2">
+                    <Download size={22} />
+                    {t('hero.download_cv')}
+                  </span>
+                </Button>
+              </div>
+              <div className="flex gap-4 items-center justify-center">
+                <p className="text-zinc-600 dark:text-zinc-400">{t('hero.find_me')}</p>
+                <a
+                  href="https://www.linkedin.com/in/ricardo-gonçalves-986780267"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center"
+                >
+                  <div className="absolute inset-0 bg-gray-500 rounded-sm w-1 h-1 top-20 left-30"></div>  {/* this is an easter egg*/}
                 
-                {/* Code Block Decoration */}
-                <div className="absolute top-4 -left-4 bg-zinc-900 dark:bg-zinc-800 p-4 rounded-lg shadow-lg transform rotate-12 opacity-90">
-                  <div className="flex items-center gap-2 mb-2">
-                    <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                    <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                    <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                  </div>
-                  <div className="text-green-400 text-xs font-mono">
-                    console.log(&quot;Hello!&quot;)
-                  </div>
-                </div>
+                  <div className="absolute flex items-center justify-center w-6 h-6 bg-white ml-8"></div>
+                  
+                  <FaLinkedin className="absolute text-blue-600 ml-8 hover:text-blue-800" size={32}/>
+                </a>
+                
+                <a
+                  href="https://github.com/ric2003"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#6e5494] dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400 transition-colors pl-8"
+                >
+                  <FaGithub size={32} />
+                </a>
+                  <a
+                  href="mailto:ricgon20035@gmail.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-zinc-600 dark:text-white hover:text-zinc-900 dark:hover:text-zinc-400 transition-colors "
+                >
+                  <Mail className="text-white-600 dark:text-white-400 group-hover:text-zinc-100 dark:group-hover:text-zinc-100 transition-colors" size={32}/>
+                </a>
               </div>
             </div>
           </div>
@@ -310,7 +392,7 @@ export default function Home() {
       </section>
 
       {/* Projects Section */}
-      <section id="projects" className="py-32 px-4 sm:px-6 lg:px-8 overflow-hidden relative z-10">
+      <section id="projects" className="lg:py-32 pt-16 px-4 sm:px-6 lg:px-8 overflow-hidden relative z-10">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl font-bold text-center text-zinc-900 dark:text-zinc-100 mb-12">
             {t('projects.title')}

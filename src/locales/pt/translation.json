@@ -8,12 +8,12 @@
   "hero": {
     "hi": "Olá, sou o",
     "location": "Cascais, Lisboa",
-    "name": "Ricardo Gonçalves",
     "title": "Licenciado em Engenharia Informática",
     "description": "Estou focado no desenvolvimento web e móvel, pronto para expandir as minhas competências e dar contribuições significativas a projetos.",
     "view_projects": "Ver Os Meus Projetos",
     "download_cv": "Descarregar CV",
-    "find_me": "Encontra-me em:"
+    "find_me": "Encontra-me em:",
+    "hello": "Olá!"
   },
   "about": {
     "title": "Sobre Mim",
@@ -28,10 +28,6 @@
     "coming_soon": "A aprender",
     "looking_for_title": "O Que Procuro",
     "looking_for_points": [
-      {
-        "title": "Oportunidades de Estágio",
-        "description": "Ganhar experiência prática em projetos reais"
-      },
       {
         "title": "Posições de Entrada", 
         "description": "Funções de desenvolvimento web ou móvel para impulsionar a minha carreira"

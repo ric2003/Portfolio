@@ -8,12 +8,12 @@
   "hero": {
     "hi": "Hi, I'm",
     "location": "Cascais, Lisbon",
-    "name": "Ricardo Gonçalves",
     "title": "Computer Engineering Graduate",
     "description": "I'm focused on web and mobile development, ready to grow my skills and make meaningful contributions to projects.",
     "view_projects": "View My Projects",
     "download_cv": "Download CV",
-    "find_me": "Find me on:"
+    "find_me": "Find me on:",
+    "hello": "Hello!"
   },
   "about": {
     "title": "About Me",
@@ -28,10 +28,6 @@
     "coming_soon": "Working on",
     "looking_for_title": "What I'm Looking For",
     "looking_for_points": [
-      {
-        "title": "Internship Opportunities",
-        "description": "Gain hands-on experience in real projects"
-      },
       {
         "title": "Entry-Level Positions", 
         "description": "Web or mobile development roles to kickstart my career"

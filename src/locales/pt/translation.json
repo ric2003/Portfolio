@@ -6,6 +6,7 @@
     "projects": "Projetos"
   },
   "hero": {
+    "hi": "Olá, sou o",
     "location": "Cascais, Lisboa",
     "name": "Ricardo Gonçalves",
     "title": "Licenciado em Engenharia Informática",
@@ -20,10 +21,11 @@
     "background_description": "Comecei a programar através da minha Licenciatura em Engenharia Informática, mas o desenvolvimento web e móvel foi o que realmente me cativou.",
     "background_points": [
       "Co-desenvolvi um sistema de gestão de água para reservatórios portugueses, concebido para agricultores e investigadores de recursos hídricos, agora proposto para uma iniciativa europeia.",
-      "Estou a explorar React Native para desenvolvimento de aplicações móveis como projeto paralelo para expandir as minhas competências.",
+      "Explorando React Native para desenvolvimento de apps móveis como projeto para expandir as minhas competências.",
       "Fluente em inglês (nativo) e português, permitindo-me trabalhar em ambientes diversos."
     ],
     "tech_stack_title": "Já Trabalhei com",
+    "coming_soon": "A aprender",
     "looking_for_title": "O Que Procuro",
     "looking_for_points": [
       {
@@ -55,7 +57,7 @@
       },
       {
         "title": "Yoke - App de Fitness",
-        "description": "Estou a co-desenvolver uma aplicação móvel de fitness como projeto paralelo com um amigo para acompanhar treinos, nutrição e progresso, com bibliotecas de exercícios e planeamento de refeições personalizável."
+        "description": "Co-desenvolvendo uma aplicação móvel de fitness como projeto paralelo com um amigo para acompanhar treinos, nutrição e progresso, com bibliotecas de exercícios e planeamento de refeições personalizável."
       },
       {
         "title": "App SNS Hospitais",
@@ -64,7 +66,7 @@
     ]
   },
   "contact": {
-    "title": "Vamos Conectar",
+    "title": "Vamos conectar-nos",
     "linkedin": "LinkedIn",
     "github": "GitHub",
     "email": "Email"

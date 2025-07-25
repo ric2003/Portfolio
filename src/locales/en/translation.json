@@ -6,6 +6,7 @@
     "projects": "Projects"
   },
   "hero": {
+    "hi": "Hi, I'm",
     "location": "Cascais, Lisbon",
     "name": "Ricardo Gonçalves",
     "title": "Computer Engineering Graduate",
@@ -24,6 +25,7 @@
       "Fluent in English (native) and Portuguese, enabling me to work in diverse environments."
     ],
     "tech_stack_title": "I've Worked with",
+    "coming_soon": "Working on",
     "looking_for_title": "What I'm Looking For",
     "looking_for_points": [
       {

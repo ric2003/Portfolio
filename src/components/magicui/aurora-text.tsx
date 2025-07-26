@@ -13,30 +13,42 @@ export const AuroraText = memo(
   ({
     children,
     className = "",
-    colors = ["#305BC2", "#68d391", "#f2b54a", "#AB2B7C"],//
-    //colors = ["#2193b0", "#6dd5ed", "#96c93d"],//
-    speed = 15 ,
+    colors = ["#305BC2", "#68d391", "#f2b54a", "#AB2B7C"],
+    speed = 1,
   }: AuroraTextProps) => {
+    // Create truly seamless gradient by duplicating the first color at the end
+    const seamlessColors = [...colors, colors[0]];
+    const backgroundSize = (colors.length + 1) * 100; // e.g., 500% for 4 colors
+    const endPosition = colors.length * 100; // e.g., 400% to complete the cycle
+    
     const gradientStyle = {
-      backgroundImage: `linear-gradient(135deg, ${colors.join(", ")}, ${
-        colors[0]
-      })`,
+      background: `linear-gradient(90deg, ${seamlessColors.join(", ")})`,
+      backgroundSize: `${backgroundSize}% 100%`,
       WebkitBackgroundClip: "text",
       WebkitTextFillColor: "transparent",
-      animationDuration: `${100 / speed}s`,
+      backgroundClip: "text",
+      animation: `aurora-cycle ${100 / speed}s linear infinite`,
     };
 
     return (
-      <span className={`relative inline-block ${className}`}>
-        <span className="sr-only">{children}</span>
-        <span
-          className="relative animate-aurora bg-[length:200%_auto] bg-clip-text text-transparent"
-          style={gradientStyle}
-          aria-hidden="true"
-        >
-          {children}
+      <>
+        <style jsx>{`
+          @keyframes aurora-cycle {
+            0% {
+              background-position: 0% 0%;
+            }
+            100% {
+              background-position: ${endPosition}% 0%;
+            }
+          }
+        `}</style>
+        <span className={`relative inline-block ${className}`}>
+          <span className="sr-only">{children}</span>
+          <span className="relative" style={gradientStyle} aria-hidden="true">
+            {children}
+          </span>
         </span>
-      </span>
+      </>
     );
   },
 );

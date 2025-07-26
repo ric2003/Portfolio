@@ -12,6 +12,7 @@ import { MagicCard } from "@/components/magicui/magic-card";
 import { Particles } from "@/components/magicui/particles";
 import { useTranslation } from "react-i18next";
 import { InteractiveHoverButton } from "@/components/magicui/interactive-hover-button";
+import { VideoText } from "@/components/magicui/video-text";
 
 
 const techStack = [
@@ -126,7 +127,6 @@ export default function Home() {
           
           <DockIcon className="min-w-[80px] cursor-pointer group relative">
             <LanguageToggle />
-            
           </DockIcon>
           
         </Dock>
@@ -135,7 +135,7 @@ export default function Home() {
       {/* Mobile nav //TODO work on this// */}
       <nav className="fixed top-0 right-2 transform z-50 block lg:hidden">
       <Dock 
-          className="bg-white/10 dark:bg-black/10 backdrop-blur-md border border-white/20 dark:border-zinc-800/20 h-20 px-4"
+          className="bg-white/10 dark:bg-black/10 backdrop-blur-md border border-white/20 dark:border-zinc-800/20 h-20 px-3"
           iconSize={50}
           iconMagnification={50}
           iconDistance={0}
@@ -148,7 +148,7 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <section id="hero" className="pt-16 pb-8 px-2 sm:px-6 lg:px-8 min-h-screen flex items-center relative overflow-hidden z-10">
+      <section id="hero" className=" pt-12 lg:pt-16 pb-8 px-2 sm:px-6 lg:px-8 min-h-screen flex items-center relative overflow-hidden z-10">
         <div className="max-w-7xl mx-auto w-full">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             {/* Mobile: Location, Hi, Name above image */}
@@ -157,9 +157,11 @@ export default function Home() {
                 <MapPin size={16}/>
                 {t('hero.location')}
               </div>
-              <h1 className="text-4xl font-bold text-zinc-900 dark:text-zinc-100 leading-tight mt-2">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-zinc-900 dark:text-zinc-100 leading-tight mt-2">
                 {t('hero.hi')} <br />
-                <AuroraText speed={3}>Ricardo Gonçalves</AuroraText>
+                <div className="relative h-14 sm:h-16 md:h-24 w-full">
+                  <VideoText src="galaxy.mp4" textAnchor="middle" fontSize={9}>Ricardo Gonçalves</VideoText>
+                </div>
               </h1>
             </div>
             {/* Image Block */}
@@ -176,15 +178,15 @@ export default function Home() {
                   </div>
                 </div>
               <div className="relative group">
-                <div className="relative w-60 h-60 sm:w-72 sm:h-72 lg:w-[500px] lg:h-[500px] mx-auto">
+                <div className="relative w-60 h-60 sm:w-86 sm:h-86 md:w-[450px] md:h-[450px] lg:w-[500px] lg:h-[500px] mx-auto">
                   <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-3xl rotate-6 lg:group-hover:rotate-12 transition-transform duration-700 opacity-75"></div>
                   
                   <div className="relative w-full h-full bg-white dark:bg-zinc-900 rounded-3xl shadow-2xl transform -rotate-6 lg:group-hover:rotate-0 transition-transform duration-700">
                     <Image 
                       src="/img.png" 
                       alt="Ricardo Gonçalves" 
-                      width={300} 
-                      height={300}
+                      width={500} 
+                      height={500}
                       className="w-full h-full object-contain"
                     />
                                          
@@ -209,7 +211,9 @@ export default function Home() {
                 </div>
                 <h1 className="text-2xl sm:text-4xl lg:text-6xl font-bold text-zinc-900 dark:text-zinc-100 leading-tight">
                 {t('hero.hi')} <br />
-                  <AuroraText speed={3}>Ricardo Gonçalves</AuroraText>
+                <div className="relative h-8 sm:h-12 md:h-16 lg:h-20 xl:h-24 w-full">
+                  <VideoText src="galaxy.mp4" textAnchor="start" fontSize={11.5}>Ricardo Gonçalves</VideoText>
+                </div>
                 </h1>
                 <p className="text-2xl sm:text-2xl text-zinc-600 dark:text-zinc-400 font-medium">
                   {t('hero.title')}
@@ -328,7 +332,7 @@ export default function Home() {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-32 px-4 sm:px-6 lg:px-8 relative z-10">
+      <section id="about" className="py-32 sm:pb-0 px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-4xl mx-auto left-1/2">
         
           <h2 className={`text-3xl font-bold text-center text-zinc-900 dark:text-zinc-100 mb-12 transition-opacity duration-1000 ${aboutVisible ? 'opacity-100' : 'opacity-0'}`}>

@@ -43,6 +43,7 @@ const navigationItems = [
 export default function Home() {
   const [activeSection, setActiveSection] = useState('hero');
   const [aboutVisible, setAboutVisible] = useState(false);
+  const [codeBlockVisible, setCodeBlockVisible] = useState(true);
 
   const { t } = useTranslation();
 
@@ -79,6 +80,9 @@ export default function Home() {
     };
   }, []);
 
+  const hideCodeBlock = () => {
+    setCodeBlockVisible(false);
+  };
   return (
     <div className="min-h-screen bg-gradient-to-br from-zinc-50 to-gray-50 dark:from-zinc-950 dark:to-gray-950 relative">
       {/* Particles Background */}
@@ -167,16 +171,39 @@ export default function Home() {
             {/* Image Block */}
             <div className="order-1 lg:order-2 sm:order-1 relative">
               {/* Code Block Decoration */}
-              <div className="relative top-20 left-0 z-10 bg-zinc-900 dark:bg-zinc-800 p-4 w-45 rounded-lg shadow-lg transform rotate-12 opacity-90 lg:block hidden">
-                  <div className="flex items-center gap-2 mb-2">
-                    <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                    <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                    <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+              {codeBlockVisible && (
+                <div className="absolute top-5 left-0 z-10 bg-zinc-900 dark:bg-zinc-800 p-4 w-45 rounded-lg shadow-lg transform rotate-12 opacity-90 lg:block hidden code-block">
+                <div className="flex items-center gap-2 mb-2 group transition-all duration-50">
+                  {/* Red */}
+                  <div className="group relative flex h-3 w-3 items-center justify-center cursor-pointer rounded-full bg-[#F95E57]" onClick={() => hideCodeBlock()}>
+                    <div className="absolute h-[1px] w-2 rotate-45 bg-[#991200] rounded-full opacity-0 transition-opacity duration-200 group-hover:opacity-100"></div>
+                    <div className="absolute h-[1px] w-2 -rotate-45 bg-[#991200] rounded-full opacity-0 transition-opacity duration-200 group-hover:opacity-100"></div>
                   </div>
-                  <div className="text-green-400 text-xs font-mono">
-                    console.log(&quot;{t('hero.hello')}&quot;)
+                  {/* Yellow */}
+                  <div className="group relative flex h-3 w-3 items-center justify-center cursor-pointer rounded-full bg-[#FBBC2F]" onClick={() => hideCodeBlock()}>
+                    <div className="absolute h-[1.5px] w-2 bg-[#985600] rounded-full opacity-0 transition-opacity duration-200 group-hover:opacity-100"></div>
+                  </div>
+                  {/* Green */}
+                  <div className="group relative flex h-3 w-3 items-center justify-center cursor-pointer rounded-full bg-[#27C93F]">
+                    <svg
+                      className="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                      width="12"
+                      height="12"
+                      viewBox="0 0 12 12"
+                      fill="none"
+                    >
+                      {/* Top-left triangle */}
+                      <polygon points="2,6 6,2 5.9,5.9" fill="#006500" />
+                      {/* Bottom-right triangle */}
+                      <polygon points="10,6 6,10 6.1,6.1" fill="#006500" />
+                    </svg>
                   </div>
                 </div>
+                <div className="text-green-400 text-xs font-mono">
+                  console.log(&quot;{t('hero.hello')}&quot;)
+                </div>
+              </div>
+              )}
               <div className="relative group">
                 <div className="relative w-60 h-60 sm:w-86 sm:h-86 md:w-[450px] md:h-[450px] lg:w-[500px] lg:h-[500px] mx-auto">
                   <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-3xl rotate-6 lg:group-hover:rotate-12 transition-transform duration-700 opacity-75"></div>

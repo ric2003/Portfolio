@@ -38,6 +38,7 @@ export default function I18nProviderClient({
           }
         } catch (e) {
           // If localStorage fails, stay with 'en'
+          console.log('Error getting stored language', e);
         }
       }
 

@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Dock, DockIcon } from "@/components/magicui/dock";
-import { AuroraText } from "@/components/magicui/aurora-text";
 import { Home as HomeIcon, User, Briefcase, Mail, Download, MapPin } from "lucide-react";
 import { FaLinkedin, FaGithub } from 'react-icons/fa';
 import { LanguageToggle } from "@/components/ui/language-toggle";
@@ -13,7 +12,6 @@ import { Particles } from "@/components/magicui/particles";
 import { useTranslation } from "react-i18next";
 import { InteractiveHoverButton } from "@/components/magicui/interactive-hover-button";
 import { VideoText } from "@/components/magicui/video-text";
-
 
 const techStack = [
   { name: 'React' },

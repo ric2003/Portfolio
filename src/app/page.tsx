@@ -320,7 +320,7 @@ export default function Home() {
                     {t('hero.view_projects')}
                   </span>
                 </Button>
-                <Button size="xl" className="group border border-zinc-300 dark:border-zinc-600 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-800 px-8 py-3 rounded-lg font-semibold transition-all duration-300 hover:scale-105">
+                <Button size="xl" className="group border border-zinc-300 dark:border-zinc-600 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-800 px-8 py-3 rounded-lg font-semibold transition-all duration-300 hover:scale-105" onClick={() => downloadFile("Ricardo-Goncalves-CV.pdf")}>
                   <span className="flex items-center gap-2">
                     <Download size={22} />
                     {t('hero.download_cv')}

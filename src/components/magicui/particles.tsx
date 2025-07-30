@@ -3,6 +3,7 @@
 import { cn } from "@/lib/utils";
 import React, {
   ComponentPropsWithoutRef,
+  useCallback,
   useEffect,
   useRef,
   useState,
@@ -11,6 +12,29 @@ import React, {
 interface MousePosition {
   x: number;
   y: number;
+}
+
+// Hook to detect if device is mobile
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkIfMobile = () => {
+      const userAgent = navigator.userAgent || navigator.vendor;
+      const isMobileUA = /android|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent.toLowerCase());
+      const hasTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+      const isSmallScreen = window.innerWidth <= 768;
+
+      setIsMobile(isMobileUA || (hasTouch && isSmallScreen));
+    };
+
+    checkIfMobile();
+    window.addEventListener('resize', checkIfMobile);
+
+    return () => window.removeEventListener('resize', checkIfMobile);
+  }, []);
+
+  return isMobile;
 }
 
 function MousePosition(): MousePosition {
@@ -32,6 +56,45 @@ function MousePosition(): MousePosition {
   }, []);
 
   return mousePosition;
+}
+
+// Hook for scroll-based movement
+function useScrollPosition() {
+  const [scrollPosition, setScrollPosition] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    let ticking = false;
+
+    const handleScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const scrollX = window.scrollX || window.pageXOffset;
+          const scrollY = window.scrollY || window.pageYOffset;
+
+          // Convert scroll position to relative canvas position
+          const maxScrollX = Math.max(0, document.documentElement.scrollWidth - window.innerWidth);
+          const maxScrollY = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+
+          // Normalize scroll position to -150 to 150 range for smoother movement
+          const normalizedX = maxScrollX > 0 ? ((scrollX / maxScrollX) - 0.5) * 300 : 0;
+          const normalizedY = maxScrollY > 0 ? ((scrollY / maxScrollY) - 0.5) * 300 : 0;
+
+          setScrollPosition({ x: normalizedX, y: normalizedY });
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    // Set initial position
+    handleScroll();
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  return scrollPosition;
 }
 
 interface ParticlesProps extends ComponentPropsWithoutRef<"div"> {
@@ -93,58 +156,19 @@ export const Particles: React.FC<ParticlesProps> = ({
   const context = useRef<CanvasRenderingContext2D | null>(null);
   const circles = useRef<Circle[]>([]);
   const mousePosition = MousePosition();
-  const mouse = useRef<{ x: number; y: number }>({ 
-    x: typeof window !== "undefined" ? window.innerWidth / 2 : 0, 
-    y: typeof window !== "undefined" ? window.innerHeight / 2 : 0 
+  const scrollPosition = useScrollPosition();
+  const isMobile = useIsMobile();
+  const mouse = useRef<{ x: number; y: number; lastMouseTime?: number }>({
+    x: typeof window !== "undefined" ? window.innerWidth / 2 : 0,
+    y: typeof window !== "undefined" ? window.innerHeight / 2 : 0,
+    lastMouseTime: 0
   });
   const canvasSize = useRef<{ w: number; h: number }>({ w: 0, h: 0 });
   const dpr = typeof window !== "undefined" ? window.devicePixelRatio : 1;
   const rafID = useRef<number | null>(null);
   const resizeTimeout = useRef<NodeJS.Timeout | null>(null);
 
-  useEffect(() => {
-    if (canvasRef.current) {
-      context.current = canvasRef.current.getContext("2d");
-    }
-    initCanvas();
-    animate();
-
-    const handleResize = () => {
-      if (resizeTimeout.current) {
-        clearTimeout(resizeTimeout.current);
-      }
-      resizeTimeout.current = setTimeout(() => {
-        initCanvas();
-      }, 200);
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      if (rafID.current != null) {
-        window.cancelAnimationFrame(rafID.current);
-      }
-      if (resizeTimeout.current) {
-        clearTimeout(resizeTimeout.current);
-      }
-      window.removeEventListener("resize", handleResize);
-    };
-  }, [color]);
-
-  useEffect(() => {
-    onMouseMove();
-  }, [mousePosition.x, mousePosition.y]);
-
-  useEffect(() => {
-    initCanvas();
-  }, [refresh]);
-
-  const initCanvas = () => {
-    resizeCanvas();
-    drawParticles();
-  };
-
-  const onMouseMove = () => {
+  const onMouseMove = useCallback(() => {
     if (canvasRef.current) {
       const rect = canvasRef.current.getBoundingClientRect();
       const { w, h } = canvasSize.current;
@@ -152,13 +176,35 @@ export const Particles: React.FC<ParticlesProps> = ({
       const y = mousePosition.y - rect.top - h / 2;
       const inside = x < w / 2 && x > -w / 2 && y < h / 2 && y > -h / 2;
       if (inside) {
-        mouse.current.x = x;
-        mouse.current.y = y;
+        // Blend mouse position with scroll position for smoother movement
+        const scrollInfluence = 0.3; // How much scroll affects the position
+        const mouseInfluence = 0.7; // How much mouse affects the position
+
+        mouse.current.x = (scrollPosition.x * scrollInfluence) + (x * mouseInfluence);
+        mouse.current.y = (scrollPosition.y * scrollInfluence) + (y * mouseInfluence);
+        mouse.current.lastMouseTime = Date.now();
       }
     }
-  };
+  }, [mousePosition.x, mousePosition.y, scrollPosition.x, scrollPosition.y]);
 
-  const resizeCanvas = () => {
+  const onScrollMove = useCallback(() => {
+    // Set base scroll position - will be blended with mouse on desktop
+    if (isMobile) {
+      // Mobile: use scroll position directly
+      mouse.current.x = scrollPosition.x;
+      mouse.current.y = scrollPosition.y;
+    } else {
+      // Desktop: set as base position (will be blended with mouse in onMouseMove)
+      // Only update if mouse is not actively moving to avoid conflicts
+      const timeSinceLastMouseMove = Date.now() - (mouse.current.lastMouseTime || 0);
+      if (timeSinceLastMouseMove > 100) { // 100ms threshold
+        mouse.current.x = scrollPosition.x;
+        mouse.current.y = scrollPosition.y;
+      }
+    }
+  }, [scrollPosition.x, scrollPosition.y, isMobile]);
+
+  const resizeCanvas = useCallback(() => {
     if (canvasContainerRef.current && canvasRef.current && context.current) {
       canvasSize.current.w = canvasContainerRef.current.offsetWidth;
       canvasSize.current.h = canvasContainerRef.current.offsetHeight;
@@ -176,9 +222,10 @@ export const Particles: React.FC<ParticlesProps> = ({
         drawCircle(circle);
       }
     }
-  };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dpr, quantity]);
 
-  const circleParams = (): Circle => {
+  const circleParams = useCallback((): Circle => {
     const x = Math.floor(Math.random() * canvasSize.current.w);
     const y = Math.floor(Math.random() * canvasSize.current.h);
     const translateX = 0;
@@ -201,11 +248,11 @@ export const Particles: React.FC<ParticlesProps> = ({
       dy,
       magnetism,
     };
-  };
+  }, [size]);
 
   const rgb = hexToRgb(color);
 
-  const drawCircle = (circle: Circle, update = false) => {
+  const drawCircle = useCallback((circle: Circle, update = false) => {
     if (context.current) {
       const { x, y, translateX, translateY, size, alpha } = circle;
       context.current.translate(translateX, translateY);
@@ -219,9 +266,9 @@ export const Particles: React.FC<ParticlesProps> = ({
         circles.current.push(circle);
       }
     }
-  };
+  }, [rgb, dpr]);
 
-  const clearContext = () => {
+  const clearContext = useCallback(() => {
     if (context.current) {
       context.current.clearRect(
         0,
@@ -230,18 +277,19 @@ export const Particles: React.FC<ParticlesProps> = ({
         canvasSize.current.h,
       );
     }
-  };
+  }, []);
 
-  const drawParticles = () => {
+  const drawParticles = useCallback(() => {
     clearContext();
     const particleCount = quantity;
     for (let i = 0; i < particleCount; i++) {
       const circle = circleParams();
       drawCircle(circle);
     }
-  };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [quantity, clearContext]);
 
-  const remapValue = (
+  const remapValue = useCallback((
     value: number,
     start1: number,
     end1: number,
@@ -251,9 +299,9 @@ export const Particles: React.FC<ParticlesProps> = ({
     const remapped =
       ((value - start1) * (end2 - start2)) / (end1 - start1) + start2;
     return remapped > 0 ? remapped : 0;
-  };
+  }, []);
 
-  const animate = () => {
+  const animate = useCallback(() => {
     clearContext();
     circles.current.forEach((circle: Circle, i: number) => {
       // Handle the alpha value
@@ -301,7 +349,58 @@ export const Particles: React.FC<ParticlesProps> = ({
       }
     });
     rafID.current = window.requestAnimationFrame(animate);
-  };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [vx, vy, staticity, ease, remapValue, clearContext]);
+
+  const initCanvas = useCallback(() => {
+    resizeCanvas();
+    drawParticles();
+  }, [drawParticles, resizeCanvas]);
+
+  useEffect(() => {
+    if (canvasRef.current) {
+      context.current = canvasRef.current.getContext("2d");
+    }
+    initCanvas();
+    animate();
+
+    const handleResize = () => {
+      if (resizeTimeout.current) {
+        clearTimeout(resizeTimeout.current);
+      }
+      resizeTimeout.current = setTimeout(() => {
+        initCanvas();
+      }, 200);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      if (rafID.current != null) {
+        window.cancelAnimationFrame(rafID.current);
+      }
+      if (resizeTimeout.current) {
+        clearTimeout(resizeTimeout.current);
+      }
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [color, quantity, staticity, ease, size, vx, vy, initCanvas, animate]);
+
+  useEffect(() => {
+    // Always use scroll position for movement
+    onScrollMove();
+  }, [scrollPosition.x, scrollPosition.y, onScrollMove]);
+
+  useEffect(() => {
+    // On desktop, also factor in mouse position relative to scroll
+    if (!isMobile) {
+      onMouseMove();
+    }
+  }, [mousePosition.x, mousePosition.y, isMobile, onMouseMove]);
+
+  useEffect(() => {
+    initCanvas();
+  }, [refresh, initCanvas]);
 
   return (
     <div

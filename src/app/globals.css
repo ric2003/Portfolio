@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --border: #e4e4e7;
+  --background: #09090b;
+  --foreground: #ededed;
+  --border: #27272a;
   
   /* Rainbow button colors */
   --color-1: #ff6b6b;
@@ -19,15 +19,6 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #09090b;
-    --foreground: #ededed;
-    --border: #27272a;
-  }
-}
-
 
 body {
   background: var(--background);

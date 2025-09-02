@@ -58,6 +58,10 @@
       {
         "title": "App SNS Hospitais",
         "description": "Co-desenvolvi uma aplicação móvel para ajudar utilizadores a encontrar e avaliar hospitais em Portugal, com dados hospitalares em tempo real, mapas interativos e suporte offline."
+      },
+      {
+        "title": "Live Notes",
+        "description": "App de notas colaborativa em tempo real com canvas com zoom para criar, mover e editar notas; inclui presenças em direto e sessões autenticadas. Construída com Next.js e Firebase."
       }
     ]
   },

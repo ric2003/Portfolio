@@ -11,6 +11,8 @@ import {
   Mail,
   Download,
   MapPin,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 import { FaLinkedin, FaGithub } from "react-icons/fa";
 import { LanguageToggle } from "@/components/ui/language-toggle";
@@ -45,10 +47,64 @@ const navigationItems = [
   { id: "projects", label: "navigation.projects", icon: Briefcase },
 ];
 
+type Project = {
+  titleKey: string;
+  descriptionKey: string;
+  tech: string[];
+  image: string;
+  viewProject?: string;
+  sourceCode?: string;
+};
+
+const projects: Project[] = [
+  {
+    titleKey: "projects.items.0.title",
+    descriptionKey: "projects.items.0.description",
+    tech: [
+      "React",
+      "Next.js",
+      "InfluxDB",
+      "Tailwind CSS",
+      "Mapbox",
+      "Leaflet",
+      "Recharts",
+      "Clerk",
+      "Convex",
+    ],
+    image: "/waterwisedark.webp",
+    viewProject: "https://water-wise-one.vercel.app/",
+    sourceCode: "https://github.com/Acr2004/water-wise",
+  },
+  {
+    titleKey: "projects.items.1.title",
+    descriptionKey: "projects.items.1.description",
+    tech: ["React Native", "TypeScript", "Node.js"],
+    image: "/yoke.webp",
+    sourceCode: "https://github.com/Acr2004/yoke-gym-app",
+  },
+  {
+    titleKey: "projects.items.2.title",
+    descriptionKey: "projects.items.2.description",
+    tech: ["Flutter", "Dart", "Google Maps", "SQLite", "Provider"],
+    image: "/flutter-sns-app.webp",
+    sourceCode: "https://github.com/ric2003/flutter-App-SNS-Hospitais",
+  },
+  {
+    titleKey: "projects.items.3.title",
+    descriptionKey: "projects.items.3.description",
+    tech: ["Next.js", "Firebase Realtime DB", "Firebase Auth"],
+    image: "/noteApp.webp",
+    viewProject: "https://live-update-notes.netlify.app/",
+    sourceCode: "https://github.com/ric2003/notes-app",
+  },
+];
+
 export default function Home() {
   const [activeSection, setActiveSection] = useState("hero");
   const [aboutVisible, setAboutVisible] = useState(false);
   const [codeBlockVisible, setCodeBlockVisible] = useState(true);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [navDirection, setNavDirection] = useState<"left" | "right">("right");
 
   const { t } = useTranslation();
 
@@ -97,6 +153,22 @@ export default function Home() {
     link.href = `/${filename}`;
     link.download = filename;
     link.click();
+  };
+
+  // Build slides of 2 projects each
+  const slides: Project[][] = [];
+  for (let i = 0; i < projects.length; i += 2) {
+    slides.push(projects.slice(i, i + 2));
+  }
+
+  const handleNext = () => {
+    setNavDirection("right");
+    setCurrentSlide((prev) => (prev + 1) % slides.length);
+  };
+
+  const handlePrev = () => {
+    setNavDirection("left");
+    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
   };
 
   return (
@@ -546,114 +618,182 @@ export default function Home() {
           <h2 className="text-3xl font-bold text-center text-zinc-100 mb-12">
             {t("projects.title")}
           </h2>
-          <div className="relative grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                titleKey: "projects.items.0.title",
-                descriptionKey: "projects.items.0.description",
-                tech: [
-                  "React",
-                  "Next.js",
-                  "InfluxDB",
-                  "Tailwind CSS",
-                  "Mapbox",
-                  "Leaflet",
-                  "Recharts",
-                  "Clerk",
-                  "Convex",
-                ],
-                image: "/waterwisedark.webp",
-                viewProject: "https://water-wise-one.vercel.app/",
-                sourceCode: "https://github.com/Acr2004/water-wise",
-              },
-              {
-                titleKey: "projects.items.1.title",
-                descriptionKey: "projects.items.1.description",
-                tech: ["React Native", "TypeScript", "Node.js"],
-                image: "/yoke.webp",
-                sourceCode: "https://github.com/Acr2004/yoke-gym-app",
-              },
-              {
-                titleKey: "projects.items.2.title",
-                descriptionKey: "projects.items.2.description",
-                tech: ["Flutter", "Dart", "Google Maps", "SQLite", "Provider"],
-                image: "/flutter-sns-app.webp",
-                sourceCode:
-                  "https://github.com/ric2003/flutter-App-SNS-Hospitais",
-              },
-            ].map((project, index) => (
-              <div
-                key={index}
-                className="flex flex-col h-full bg-zinc-900 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-zinc-800 relative"
-              >
-                {/* Red circle at bottom left corner of card */}
-
-                <div className="flex mt-auto w-full justify-around items-center absolute bottom-4 left-1/2 -translate-x-1/2 z-20">
-                  {project.viewProject && (
-                    <a
-                      href={project.viewProject}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <InteractiveHoverButton
-                        size="sm"
-                        className=" text-zinc-400 hover: hover:scale-105"
-                      >
-                        {t("projects.view_project")}
-                      </InteractiveHoverButton>
-                    </a>
-                  )}
-                  {project.sourceCode && (
-                    <a
-                      href={project.sourceCode}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <Button
-                        size="md"
-                        className="text-zinc-400 hover:underline text-sm font-medium"
-                      >
-                        {t("projects.source_code")}
-                      </Button>
-                    </a>
-                  )}
-                </div>
-
-                <MagicCard
-                  gradientColor="#262626"
-                  className="p-2 flex flex-col h-full"
-                >
-                  <div className="h-48 w-full flex items-center justify-center overflow-hidden rounded-lg mb-4">
-                    <Image
-                      src={project.image}
-                      alt={t(project.titleKey)}
-                      className="w-full h-full object-contain rounded-lg"
-                      width={500}
-                      height={500}
-                      quality={100}
-                    />
-                  </div>
-                  <div className="flex flex-col flex-1 p-6 pt-0">
-                    <h3 className="text-xl font-semibold text-zinc-100 mb-3">
-                      {t(project.titleKey)}
-                    </h3>
-                    <p className="text-zinc-400 mb-4 flex-1">
-                      {t(project.descriptionKey)}
-                    </p>
-                    <div className="flex flex-wrap gap-2 mb-16">
-                      {project.tech.map((tech) => (
-                        <span
-                          key={tech}
-                          className="px-3 py-1 bg-zinc-800 text-zinc-300 text-sm rounded-full border border-zinc-700"
+          <div className="block md:hidden">
+            <div className="grid grid-cols-1 gap-8">
+              {projects.map((project) => (
+                <div key={project.titleKey} className="w-full">
+                  <div className="flex flex-col bg-zinc-900 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-zinc-800 relative">
+                    <div className="flex mt-auto w-full justify-around items-center absolute bottom-4 left-1/2 -translate-x-1/2 z-20">
+                      {project.viewProject && (
+                        <a
+                          href={project.viewProject}
+                          target="_blank"
+                          rel="noopener noreferrer"
                         >
-                          {tech}
-                        </span>
-                      ))}
+                          <InteractiveHoverButton
+                            size="sm"
+                            className=" text-zinc-400 hover: hover:scale-105"
+                          >
+                            {t("projects.view_project")}
+                          </InteractiveHoverButton>
+                        </a>
+                      )}
+                      {project.sourceCode && (
+                        <a
+                          href={project.sourceCode}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <Button
+                            size="md"
+                            className="text-zinc-400 hover:underline text-sm font-medium"
+                          >
+                            {t("projects.source_code")}
+                          </Button>
+                        </a>
+                      )}
                     </div>
+                    <MagicCard
+                      gradientColor="#262626"
+                      className="p-2 flex flex-col"
+                    >
+                      <div className="h-48 w-full flex items-center justify-center overflow-hidden rounded-lg mb-4">
+                        <Image
+                          src={project.image}
+                          alt={t(project.titleKey)}
+                          className="w-full h-full object-contain rounded-lg"
+                          width={500}
+                          height={500}
+                          quality={100}
+                        />
+                      </div>
+                      <div className="flex flex-col flex-1 p-6 pt-0">
+                        <h3 className="text-xl font-semibold text-zinc-100 mb-3">
+                          {t(project.titleKey)}
+                        </h3>
+                        <p className="text-zinc-400 mb-4">
+                          {t(project.descriptionKey)}
+                        </p>
+                        <div className="flex flex-wrap gap-2 mb-16">
+                          {project.tech.map((tech) => (
+                            <span
+                              key={tech}
+                              className="px-3 py-1 bg-zinc-800 text-zinc-300 text-sm rounded-full border border-zinc-700"
+                            >
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </MagicCard>
                   </div>
-                </MagicCard>
-              </div>
-            ))}
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="relative px-4 sm:px-8 md:px-12 lg:px-16 hidden md:block">
+            {/* Prev Arrow */}
+            <button
+              type="button"
+              aria-label="Previous projects"
+              onClick={handlePrev}
+              className="hidden md:flex items-center justify-center absolute left-0 top-1/2 -translate-y-1/2 z-30 h-10 w-10 rounded-full bg-zinc-800/70 hover:bg-zinc-700 text-zinc-200 border border-zinc-700"
+            >
+              <ChevronLeft size={20} />
+            </button>
+
+            {/* Next Arrow */}
+            <button
+              type="button"
+              aria-label="Next projects"
+              onClick={handleNext}
+              className="hidden md:flex items-center justify-center absolute right-0 top-1/2 -translate-y-1/2 z-30 h-10 w-10 rounded-full bg-zinc-800/70 hover:bg-zinc-700 text-zinc-200 border border-zinc-700"
+            >
+              <ChevronRight size={20} />
+            </button>
+
+            <div
+              key={currentSlide}
+              className={`grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch md:justify-items-center overflow-hidden ${
+                navDirection === "right"
+                  ? "animate-slide-in-right"
+                  : "animate-slide-in-left"
+              }`}
+            >
+              {slides[currentSlide]?.map((project) => (
+                <div
+                  key={project.titleKey}
+                  className="w-full max-w-[520px] h-full"
+                >
+                  <div className="flex flex-col h-[550px] bg-zinc-900 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-zinc-800 relative">
+                    <div className="flex mt-auto w-full justify-around items-center absolute bottom-4 left-1/2 -translate-x-1/2 z-20">
+                      {project.viewProject && (
+                        <a
+                          href={project.viewProject}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <InteractiveHoverButton
+                            size="sm"
+                            className=" text-zinc-400 hover: hover:scale-105"
+                          >
+                            {t("projects.view_project")}
+                          </InteractiveHoverButton>
+                        </a>
+                      )}
+                      {project.sourceCode && (
+                        <a
+                          href={project.sourceCode}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <Button
+                            size="md"
+                            className="text-zinc-400 hover:underline text-sm font-medium"
+                          >
+                            {t("projects.source_code")}
+                          </Button>
+                        </a>
+                      )}
+                    </div>
+
+                    <MagicCard
+                      gradientColor="#262626"
+                      className="p-2 flex flex-col h-full"
+                    >
+                      <div className="h-48 w-full flex items-center justify-center overflow-hidden rounded-lg mb-4">
+                        <Image
+                          src={project.image}
+                          alt={t(project.titleKey)}
+                          className="w-full h-full object-contain rounded-lg"
+                          width={500}
+                          height={500}
+                          quality={100}
+                        />
+                      </div>
+                      <div className="flex flex-col flex-1 p-6 pt-0">
+                        <h3 className="text-xl font-semibold text-zinc-100 mb-3">
+                          {t(project.titleKey)}
+                        </h3>
+                        <p className="text-zinc-400 mb-4 flex-1 whitespace-pre-line">
+                          {t(project.descriptionKey)}
+                        </p>
+                        <div className="flex flex-wrap gap-2 mb-16">
+                          {project.tech.map((tech) => (
+                            <span
+                              key={tech}
+                              className="px-3 py-1 bg-zinc-800 text-zinc-300 text-sm rounded-full border border-zinc-700"
+                            >
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </MagicCard>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>

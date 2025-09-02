@@ -47,6 +47,37 @@ body {
   }
 }
 
+/* Horizontal slide-in animations for project carousel */
+@keyframes slide-in-right {
+  0% {
+    opacity: 0.4;
+    transform: translateX(24px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-in-left {
+  0% {
+    opacity: 0.4;
+    transform: translateX(-24px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-slide-in-right {
+  animation: slide-in-right 350ms ease-out both;
+}
+
+.animate-slide-in-left {
+  animation: slide-in-left 350ms ease-out both;
+}
+
 @keyframes aurora {
   0% {
     background-position: 0% 50%;

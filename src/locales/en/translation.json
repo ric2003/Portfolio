@@ -58,6 +58,10 @@
       {
         "title": "SNS Hospitals App",
         "description": "Co-developed a mobile app to help users find and evaluate hospitals in Portugal, featuring real-time hospital data, interactive maps, and offline support."
+      },
+      {
+        "title": "Live Notes App",
+        "description": "Real-time collaborative notes app with a zoomable canvas to create, move, and edit notes; includes live presence and authenticated sessions. Built with Next.js and Firebase."
       }
     ]
   },

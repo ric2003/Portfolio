@@ -20,7 +20,6 @@ import { MagicCard } from "@/components/magicui/magic-card";
 import { Particles } from "@/components/magicui/particles";
 import { useTranslation } from "react-i18next";
 import { InteractiveHoverButton } from "@/components/magicui/interactive-hover-button";
-import { VideoText } from "@/components/magicui/video-text";
 
 const techStack = [
   { name: "React" },
@@ -174,16 +173,31 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-zinc-950 to-gray-950 relative">
       {/* Particles Background */}
-      <Particles
-        className="absolute inset-0 z-0"
-        quantity={100}
-        staticity={50}
-        ease={50}
-        size={2}
-        color="#ffffff"
-        vx={0}
-        vy={0}
-      />
+      <div className="absolute inset-0 z-0">
+        <div className="hidden sm:block size-full">
+          <Particles
+            className="size-full"
+            quantity={100}
+            staticity={50}
+            ease={50}
+            size={2}
+            color="#CCCCCC"
+            vx={0}
+            vy={0}
+          />
+        </div>
+        <div className="block sm:hidden size-full">
+          {/* Fixed viewport anchor to avoid section-based layout shifts on mobile */}
+          <div className="fixed inset-0 -z-20">
+            <Particles
+              className="size-full"
+              quantity={50}
+              size={1}
+              color="#666666"
+            />
+          </div>
+        </div>
+      </div>
 
       {/* Dock nav */}
       <nav className="fixed top-0 left-1/2 transform -translate-x-1/2 z-50 hidden lg:block">
@@ -242,7 +256,7 @@ export default function Home() {
       {/* Hero Section */}
       <section
         id="hero"
-        className=" pt-12 lg:pt-16 pb-8 px-2 sm:px-6 lg:px-8 min-h-screen flex items-center relative overflow-hidden z-10"
+        className=" pt-12 lg:pt-20 pb-8 px-2 sm:px-6 lg:px-8 min-h-screen flex items-center relative overflow-hidden z-10"
       >
         <div className="max-w-7xl mx-auto w-full">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
@@ -252,13 +266,11 @@ export default function Home() {
                 <MapPin size={16} />
                 {t("hero.location")}
               </div>
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-zinc-100 leading-tight mt-2">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-zinc-100 leading-tight mt-2">
                 {t("hero.hi")} <br />
-                <div className="relative h-14 sm:h-16 md:h-24 w-full">
-                  <VideoText src="galaxy.mp4" textAnchor="middle" fontSize={9}>
-                    Ricardo Gonçalves
-                  </VideoText>
-                </div>
+              </h1>
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-zinc-100 leading-tight mt-2">
+                Ricardo Gonçalves
               </h1>
             </div>
             {/* Image Block */}
@@ -339,22 +351,16 @@ export default function Home() {
                   <MapPin size={16} />
                   {t("hero.location")}
                 </div>
-                <h1 className="text-2xl sm:text-4xl lg:text-6xl font-bold text-zinc-100 leading-tight">
+                <h1 className="text-2xl lg:text-5xl text-zinc-100">
                   {t("hero.hi")} <br />
-                  <div className="relative h-8 sm:h-12 md:h-16 lg:h-20 xl:h-24 w-full">
-                    <VideoText
-                      src="galaxy.mp4"
-                      textAnchor="start"
-                      fontSize={11.5}
-                    >
-                      Ricardo Gonçalves
-                    </VideoText>
-                  </div>
                 </h1>
-                <p className="text-2xl sm:text-2xl text-zinc-400 font-medium">
+                <h1 className="text-6xl font-bold text-zinc-50">
+                  Ricardo Gonçalves
+                </h1>
+                <p className="text-2xl text-zinc-200 font-medium pt-2">
                   {t("hero.title")}
                 </p>
-                <p className="text-xl text-zinc-500 max-w-lg leading-relaxed">
+                <p className="text-xl text-zinc-400 max-w-lg leading-relaxed">
                   {t("hero.description")}
                 </p>
               </div>
@@ -619,6 +625,7 @@ export default function Home() {
             {t("projects.title")}
           </h2>
           <div className="block md:hidden">
+            {/* Mobile: Projects Grid */}
             <div className="grid grid-cols-1 gap-8">
               {projects.map((project) => (
                 <div key={project.titleKey} className="w-full">
@@ -691,6 +698,7 @@ export default function Home() {
               ))}
             </div>
           </div>
+          {/* Desktop: Projects Grid */}
           <div className="relative px-4 sm:px-8 md:px-12 lg:px-16 hidden md:block">
             {/* Prev Arrow */}
             <button
@@ -721,11 +729,8 @@ export default function Home() {
               }`}
             >
               {slides[currentSlide]?.map((project) => (
-                <div
-                  key={project.titleKey}
-                  className="w-full max-w-[520px] h-full"
-                >
-                  <div className="flex flex-col h-[550px] bg-zinc-900 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-zinc-800 relative">
+                <div key={project.titleKey} className="w-full max-w-md h-full">
+                  <div className="flex flex-col h-[580px] bg-zinc-900 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-zinc-800 relative">
                     <div className="flex mt-auto w-full justify-around items-center absolute bottom-4 left-1/2 -translate-x-1/2 z-20">
                       {project.viewProject && (
                         <a

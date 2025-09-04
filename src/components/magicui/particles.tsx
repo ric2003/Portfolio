@@ -14,30 +14,25 @@ interface MousePosition {
   y: number;
 }
 
-// Hook to detect if device is mobile
-function useIsMobile() {
-  const [isMobile, setIsMobile] = useState(false);
+// Hook to detect presence of a mouse cursor (fine pointer + hover)
+function useHasMouseCursor() {
+  const [hasCursor, setHasCursor] = useState(false);
 
   useEffect(() => {
-    const checkIfMobile = () => {
-      const userAgent = navigator.userAgent || navigator.vendor;
-      const isMobileUA =
-        /android|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(
-          userAgent.toLowerCase()
-        );
-      const hasTouch = "ontouchstart" in window || navigator.maxTouchPoints > 0;
-      const isSmallScreen = window.innerWidth <= 768;
+    if (typeof window === "undefined" || !("matchMedia" in window)) {
+      setHasCursor(false);
+      return;
+    }
 
-      setIsMobile(isMobileUA || (hasTouch && isSmallScreen));
-    };
+    const mql = window.matchMedia("(hover: hover) and (pointer: fine)");
+    const update = () => setHasCursor(!!mql.matches);
 
-    checkIfMobile();
-    window.addEventListener("resize", checkIfMobile);
-
-    return () => window.removeEventListener("resize", checkIfMobile);
+    update();
+    mql.addEventListener?.("change", update);
+    return () => mql.removeEventListener?.("change", update);
   }, []);
 
-  return isMobile;
+  return hasCursor;
 }
 
 function MousePosition(): MousePosition {
@@ -47,14 +42,16 @@ function MousePosition(): MousePosition {
   });
 
   useEffect(() => {
-    const handleMouseMove = (event: MouseEvent) => {
-      setMousePosition({ x: event.clientX, y: event.clientY });
+    const handlePointerMove = (event: PointerEvent) => {
+      if ((event as PointerEvent).pointerType === "mouse") {
+        setMousePosition({ x: event.clientX, y: event.clientY });
+      }
     };
 
-    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("pointermove", handlePointerMove as any);
 
     return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("pointermove", handlePointerMove as any);
     };
   }, []);
 
@@ -122,10 +119,11 @@ export const Particles: React.FC<ParticlesProps> = ({
   const context = useRef<CanvasRenderingContext2D | null>(null);
   const circles = useRef<Circle[]>([]);
   const mousePosition = MousePosition();
-  const isMobile = useIsMobile();
-  const isMobileRef = useRef<boolean>(false);
+  const hasCursor = useHasMouseCursor();
+  const hasCursorRef = useRef<boolean>(false);
   const flow = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
   const lastScroll = useRef<{ left: number; top: number }>({ left: 0, top: 0 });
+  const lastScrollTimeRef = useRef<number>(0);
   const scrollPush = 0.35; // how strongly scroll pushes particles per pixel
   const scrollFriction = 0.9; // how quickly the push decays per frame
   const mouse = useRef<{ x: number; y: number; lastMouseTime?: number }>({
@@ -152,6 +150,12 @@ export const Particles: React.FC<ParticlesProps> = ({
       }
     }
   }, [mousePosition.x, mousePosition.y]);
+
+  // Keep a stable reference to onMouseMove for use in animate without causing re-subscription
+  const onMouseMoveRef = useRef<() => void>(() => {});
+  useEffect(() => {
+    onMouseMoveRef.current = onMouseMove;
+  }, [onMouseMove]);
 
   // Initialize last scroll; delta will be computed each animation frame
   useEffect(() => {
@@ -243,21 +247,6 @@ export const Particles: React.FC<ParticlesProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [quantity, clearContext]);
 
-  const remapValue = useCallback(
-    (
-      value: number,
-      start1: number,
-      end1: number,
-      start2: number,
-      end2: number
-    ): number => {
-      const remapped =
-        ((value - start1) * (end2 - start2)) / (end1 - start1) + start2;
-      return remapped > 0 ? remapped : 0;
-    },
-    []
-  );
-
   const animate = useCallback(() => {
     clearContext();
     // Per-frame scroll delta detection (also covers momentum scrolling)
@@ -276,33 +265,43 @@ export const Particles: React.FC<ParticlesProps> = ({
       flow.current.x += adjX * scrollPush;
       flow.current.y += -adjY * scrollPush; // invert Y: scroll down pushes up
       lastScroll.current = { left, top };
+      // Recalibrate mouse baseline immediately on scroll to avoid jumps
+      lastScrollTimeRef.current = Date.now();
+      onMouseMoveRef.current();
     }
     // Decay scroll flow each frame
     flow.current.x *= scrollFriction;
     flow.current.y *= scrollFriction;
+
+    // Temporarily dampen mouse influence right after scrolling
+    const now = Date.now();
+    const timeSinceScroll = now - lastScrollTimeRef.current;
+    const pointerDamp = Math.min(Math.max(timeSinceScroll / 300, 0), 1);
     circles.current.forEach((circle: Circle, i: number) => {
       // Smoothly approach target alpha, independent of edges
       circle.alpha += (circle.targetAlpha - circle.alpha) * 0.05;
       circle.x += circle.dx + vx;
       circle.y += circle.dy + vy;
-      const pointerX = isMobileRef.current ? 0 : mouse.current.x;
-      const pointerY = isMobileRef.current ? 0 : mouse.current.y;
-      if (isMobileRef.current) {
-        // On mobile: no pull-back to origin; only scroll flow influences translation
+      const pointerX = hasCursorRef.current ? mouse.current.x : 0;
+      const pointerY = hasCursorRef.current ? mouse.current.y : 0;
+      if (!hasCursorRef.current) {
+        // On touch-primary: no pull-back to origin; only scroll flow influences translation
         const flowWeightMobile = 0.04 * (0.5 + circle.magnetism * 0.1);
         circle.translateX += flow.current.x * flowWeightMobile;
         circle.translateY += flow.current.y * flowWeightMobile;
       } else {
-        // On desktop: blend pointer follow with a smaller scroll flow
+        // With a mouse cursor: blend pointer follow with a smaller scroll flow
         const baseX = pointerX / (staticity / circle.magnetism);
         const baseY = pointerY / (staticity / circle.magnetism);
         const flowWeightDesktop = 0.03 * (0.5 + circle.magnetism * 0.1);
+        const pointerInfluenceX =
+          ((baseX - circle.translateX) / ease) * pointerDamp;
+        const pointerInfluenceY =
+          ((baseY - circle.translateY) / ease) * pointerDamp;
         circle.translateX +=
-          (baseX - circle.translateX) / ease +
-          flow.current.x * flowWeightDesktop;
+          pointerInfluenceX + flow.current.x * flowWeightDesktop;
         circle.translateY +=
-          (baseY - circle.translateY) / ease +
-          flow.current.y * flowWeightDesktop;
+          pointerInfluenceY + flow.current.y * flowWeightDesktop;
       }
 
       drawCircle(circle, true);
@@ -346,7 +345,25 @@ export const Particles: React.FC<ParticlesProps> = ({
         clearTimeout(resizeTimeout.current);
       }
       resizeTimeout.current = setTimeout(() => {
-        initCanvas();
+        // Smoothly handle canvas resize without full reinitialization to prevent flicker
+        const prevW = canvasSize.current.w;
+        const prevH = canvasSize.current.h;
+        resizeCanvas();
+        const newW = canvasSize.current.w;
+        const newH = canvasSize.current.h;
+        if (prevW > 0 && prevH > 0 && circles.current.length) {
+          const scaleX = newW / prevW;
+          const scaleY = newH / prevH;
+          circles.current.forEach((c) => {
+            c.x *= scaleX;
+            c.y *= scaleY;
+            // Clamp inside bounds to avoid long off-screen waits
+            if (c.x < c.size) c.x = c.size;
+            if (c.y < c.size) c.y = c.size;
+            if (c.x > newW - c.size) c.x = newW - c.size;
+            if (c.y > newH - c.size) c.y = newH - c.size;
+          });
+        }
       }, 200);
     };
 
@@ -364,15 +381,15 @@ export const Particles: React.FC<ParticlesProps> = ({
   }, [color, quantity, staticity, ease, size, vx, vy, initCanvas, animate]);
 
   useEffect(() => {
-    // On desktop, also factor in mouse position relative to scroll
-    if (!isMobile) {
+    // With a mouse cursor, also factor in mouse position relative to scroll
+    if (hasCursor) {
       onMouseMove();
     }
-  }, [mousePosition.x, mousePosition.y, isMobile, onMouseMove]);
+  }, [mousePosition.x, mousePosition.y, hasCursor, onMouseMove]);
 
   useEffect(() => {
-    isMobileRef.current = isMobile;
-  }, [isMobile]);
+    hasCursorRef.current = hasCursor;
+  }, [hasCursor]);
 
   useEffect(() => {
     initCanvas();

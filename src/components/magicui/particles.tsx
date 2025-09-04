@@ -48,10 +48,10 @@ function MousePosition(): MousePosition {
       }
     };
 
-    window.addEventListener("pointermove", handlePointerMove as any);
+    window.addEventListener("pointermove", handlePointerMove);
 
     return () => {
-      window.removeEventListener("pointermove", handlePointerMove as any);
+      window.removeEventListener("pointermove", handlePointerMove);
     };
   }, []);
 

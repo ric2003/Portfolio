@@ -91,7 +91,7 @@ const projects: Project[] = [
     titleKey: "projects.items.3.title",
     descriptionKey: "projects.items.3.description",
     tech: ["Next.js", "Firebase Realtime DB", "Firebase Auth"],
-    image: "/noteApp.webp",
+    image: "/yoke.webp",
     viewProject: "https://live-update-notes.netlify.app/",
     sourceCode: "https://github.com/ric2003/notes-app",
   },

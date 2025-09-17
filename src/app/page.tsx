@@ -16,7 +16,6 @@ import {
 } from "lucide-react";
 import { FaLinkedin, FaGithub } from "react-icons/fa";
 import { LanguageToggle } from "@/components/ui/language-toggle";
-import { MagicCard } from "@/components/magicui/magic-card";
 import { Particles } from "@/components/magicui/particles";
 import { useTranslation } from "react-i18next";
 import { InteractiveHoverButton } from "@/components/magicui/interactive-hover-button";
@@ -660,39 +659,40 @@ export default function Home() {
                         </a>
                       )}
                     </div>
-                    <MagicCard
-                      gradientColor="#262626"
-                      className="p-2 flex flex-col"
-                    >
-                      <div className="h-48 w-full flex items-center justify-center overflow-hidden rounded-lg mb-4">
-                        <Image
-                          src={project.image}
-                          alt={t(project.titleKey)}
-                          className="w-full h-full object-contain rounded-lg"
-                          width={500}
-                          height={500}
-                          quality={100}
-                        />
-                      </div>
-                      <div className="flex flex-col flex-1 p-6 pt-0">
-                        <h3 className="text-xl font-semibold text-zinc-100 mb-3">
-                          {t(project.titleKey)}
-                        </h3>
-                        <p className="text-zinc-400 mb-4">
-                          {t(project.descriptionKey)}
-                        </p>
-                        <div className="flex flex-wrap gap-2 mb-16">
-                          {project.tech.map((tech) => (
-                            <span
-                              key={tech}
-                              className="px-3 py-1 bg-zinc-800 text-zinc-300 text-sm rounded-full border border-zinc-700"
-                            >
-                              {tech}
-                            </span>
-                          ))}
+                    <div className="relative rounded-[inherit] p-2 flex flex-col">
+                      <div className="absolute inset-0 rounded-[inherit] bg-border" />
+                      <div className="absolute inset-px rounded-[inherit] bg-background" />
+                      <div className="relative">
+                        <div className="h-48 w-full flex items-center justify-center overflow-hidden rounded-lg mb-4">
+                          <Image
+                            src={project.image}
+                            alt={t(project.titleKey)}
+                            className="w-full h-full object-contain rounded-lg"
+                            width={500}
+                            height={500}
+                            quality={100}
+                          />
+                        </div>
+                        <div className="flex flex-col flex-1 p-6 pt-0">
+                          <h3 className="text-xl font-semibold text-zinc-100 mb-3">
+                            {t(project.titleKey)}
+                          </h3>
+                          <p className="text-zinc-400 mb-4">
+                            {t(project.descriptionKey)}
+                          </p>
+                          <div className="flex flex-wrap gap-2 mb-16">
+                            {project.tech.map((tech) => (
+                              <span
+                                key={tech}
+                                className="px-3 py-1 bg-zinc-800 text-zinc-300 text-sm rounded-full border border-zinc-700"
+                              >
+                                {tech}
+                              </span>
+                            ))}
+                          </div>
                         </div>
                       </div>
-                    </MagicCard>
+                    </div>
                   </div>
                 </div>
               ))}
@@ -762,39 +762,40 @@ export default function Home() {
                       )}
                     </div>
 
-                    <MagicCard
-                      gradientColor="#262626"
-                      className="p-2 flex flex-col h-full"
-                    >
-                      <div className="h-48 w-full flex items-center justify-center overflow-hidden rounded-lg mb-4">
-                        <Image
-                          src={project.image}
-                          alt={t(project.titleKey)}
-                          className="w-full h-full object-contain rounded-lg"
-                          width={500}
-                          height={500}
-                          quality={100}
-                        />
-                      </div>
-                      <div className="flex flex-col flex-1 p-6 pt-0">
-                        <h3 className="text-xl font-semibold text-zinc-100 mb-3">
-                          {t(project.titleKey)}
-                        </h3>
-                        <p className="text-zinc-400 mb-4 flex-1 whitespace-pre-line">
-                          {t(project.descriptionKey)}
-                        </p>
-                        <div className="flex flex-wrap gap-2 mb-16">
-                          {project.tech.map((tech) => (
-                            <span
-                              key={tech}
-                              className="px-3 py-1 bg-zinc-800 text-zinc-300 text-sm rounded-full border border-zinc-700"
-                            >
-                              {tech}
-                            </span>
-                          ))}
+                    <div className="relative rounded-[inherit] p-2 flex flex-col h-full">
+                      <div className="absolute inset-0 rounded-[inherit] bg-border" />
+                      <div className="absolute inset-px rounded-[inherit] bg-background" />
+                      <div className="relative">
+                        <div className="h-48 w-full flex items-center justify-center overflow-hidden rounded-lg mb-4">
+                          <Image
+                            src={project.image}
+                            alt={t(project.titleKey)}
+                            className="w-full h-full object-contain rounded-lg"
+                            width={500}
+                            height={500}
+                            quality={100}
+                          />
+                        </div>
+                        <div className="flex flex-col flex-1 p-6 pt-0">
+                          <h3 className="text-xl font-semibold text-zinc-100 mb-3">
+                            {t(project.titleKey)}
+                          </h3>
+                          <p className="text-zinc-400 mb-4 flex-1 whitespace-pre-line">
+                            {t(project.descriptionKey)}
+                          </p>
+                          <div className="flex flex-wrap gap-2 mb-16">
+                            {project.tech.map((tech) => (
+                              <span
+                                key={tech}
+                                className="px-3 py-1 bg-zinc-800 text-zinc-300 text-sm rounded-full border border-zinc-700"
+                              >
+                                {tech}
+                              </span>
+                            ))}
+                          </div>
                         </div>
                       </div>
-                    </MagicCard>
+                    </div>
                   </div>
                 </div>
               ))}

@@ -91,7 +91,7 @@ const projects: Project[] = [
     titleKey: "projects.items.3.title",
     descriptionKey: "projects.items.3.description",
     tech: ["Next.js", "Firebase Realtime DB", "Firebase Auth"],
-    image: "/yoke.webp",
+    image: "/noteApp.webp",
     viewProject: "https://live-update-notes.netlify.app/",
     sourceCode: "https://github.com/ric2003/notes-app",
   },
@@ -316,30 +316,41 @@ export default function Home() {
               )}
               <div className="relative group">
                 <div className="relative w-60 h-60 sm:w-86 sm:h-86 md:w-[450px] md:h-[450px] lg:w-[500px] lg:h-[500px] mx-auto">
-                  <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-3xl rotate-6 lg:group-hover:rotate-12 transition-transform duration-700 opacity-75"></div>
-
-                  <div className="relative w-full h-full bg-zinc-900 rounded-3xl shadow-2xl transform -rotate-6 lg:group-hover:rotate-0 transition-transform duration-700">
-                    <Image
-                      src="/img.webp"
-                      alt="Ricardo Gonçalves"
-                      width={500}
-                      height={500}
-                      className="w-full h-full object-contain"
-                    />
-
-                    {/* Overlay Gradient for the imgs*/}
-                    <div
-                      className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent"
-                      style={{
-                        background:
-                          "linear-gradient(to top, var(--background) 0%, transparent 30%)",
-                      }}
-                    ></div>
+                  <div
+                    aria-hidden
+                    className="pointer-events-none absolute -inset-6 -z-10 rounded-[32px] bg-[radial-gradient(50%_50%_at_25%_20%,rgba(0,122,255,0.25)_0%,transparent_60%),radial-gradient(50%_50%_at_75%_70%,rgba(77,163,255,0.25)_0%,transparent_60%)] blur-2xl opacity-60 group-hover:opacity-90 transition-opacity duration-700"
+                  ></div>
+                  <div className="relative w-full h-full rounded-3xl p-[1px] bg-[linear-gradient(135deg,rgba(0,122,255,0.4),rgba(77,163,255,0.28),rgba(0,102,204,0.4))] [background-size:200%_200%] animate-shine-border shadow-[0_10px_30px_rgba(0,0,0,0.35),0_0_36px_rgba(0,122,255,0.12)] backdrop-blur-lg backdrop-saturate-150">
+                    <div className="relative w-full h-full bg-zinc-900 rounded-[inherit] overflow-hidden ring-1 ring-white/5 transform transition-transform duration-700 lg:group-hover:-rotate-6 lg:group-hover:scale-[1.02]">
+                      <Image
+                        src="/img.webp"
+                        alt="Ricardo Gonçalves"
+                        width={500}
+                        height={500}
+                        className="w-full h-full object-contain"
+                        priority
+                        quality={95}
+                        draggable={false}
+                      />
+                      <div
+                        className="absolute inset-0"
+                        style={{
+                          background:
+                            "linear-gradient(to top, var(--background) 0%, transparent 30%)",
+                        }}
+                      ></div>
+                      <div
+                        aria-hidden
+                        className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/10 to-transparent"
+                        style={{
+                          WebkitMaskImage:
+                            "linear-gradient(to bottom, black, transparent 60%)",
+                          maskImage:
+                            "linear-gradient(to bottom, black, transparent 60%)",
+                        }}
+                      ></div>
+                    </div>
                   </div>
-
-                  {/* Floating Elements */}
-                  <div className="absolute -top-4 -right-4 w-20 h-20 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-2xl rotate-12 opacity-60 animate-pulse"></div>
-                  <div className="absolute -bottom-6 -left-6 w-16 h-16 bg-gradient-to-r from-green-400 to-blue-500 rounded-xl rotate-45 opacity-70 animate-pulse"></div>
                 </div>
               </div>
             </div>

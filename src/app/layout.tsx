@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import I18nProviderClient from "@/components/I18nProviderClient";
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -37,6 +38,7 @@ export default function RootLayout({
         >
           <I18nProviderClient>{children}</I18nProviderClient>
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );

@@ -61,7 +61,7 @@
       },
       {
         "title": "Live Notes App",
-        "description": "Real-time collaborative notes app with a zoomable canvas to create, move, and edit notes; includes live presence and authenticated sessions. Built with Next.js and Firebase."
+        "description": "Real-time collaborative notes app with a zoomable canvas to create, move, and edit notes. Includes live presence and authenticated sessions. Built with Next.js and Firebase."
       }
     ]
   },

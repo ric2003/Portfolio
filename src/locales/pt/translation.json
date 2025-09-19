@@ -61,7 +61,7 @@
       },
       {
         "title": "Live Notes",
-        "description": "App de notas colaborativa em tempo real com canvas com zoom para criar, mover e editar notas; inclui presenças em direto e sessões autenticadas. Construída com Next.js e Firebase."
+        "description": "App de notas colaborativa em tempo real com canvas com zoom para criar, mover e editar notas. Inclui presenças em direto e sessões autenticadas. Construída com Next.js e Firebase."
       }
     ]
   },

@@ -29,7 +29,7 @@
     "looking_for_title": "What I'm Looking For",
     "looking_for_points": [
       {
-        "title": "Entry-Level Positions", 
+        "title": "Entry-Level Positions",
         "description": "Web or mobile development roles to kickstart my career"
       },
       {
@@ -62,6 +62,10 @@
       {
         "title": "Live Notes App",
         "description": "Real-time collaborative notes app with a zoomable canvas to create, move, and edit notes. Includes live presence and authenticated sessions. Built with Next.js and Firebase."
+      },
+      {
+        "title": "Emoji Puzzle App",
+        "description": "Game to guess the title from emoji combinations. Features categories like Games, Movies, and Music, difficulty levels, progressive hints, feedback, and option to skip to another puzzle."
       }
     ]
   },

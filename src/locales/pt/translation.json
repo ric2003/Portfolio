@@ -29,7 +29,7 @@
     "looking_for_title": "O Que Procuro",
     "looking_for_points": [
       {
-        "title": "Posições de Entrada", 
+        "title": "Posições de Entrada",
         "description": "Funções de desenvolvimento web ou móvel para impulsionar a minha carreira"
       },
       {
@@ -62,6 +62,10 @@
       {
         "title": "Live Notes",
         "description": "App de notas colaborativa em tempo real com canvas com zoom para criar, mover e editar notas. Inclui presenças em direto e sessões autenticadas. Construída com Next.js e Firebase."
+      },
+      {
+        "title": "App de puzzles com emojis",
+        "description": "Jogo para adivinhar o título a partir de combinações de emojis. Inclui categorias como Jogos, Filmes e Músicas, níveis de dificuldade, dicas progressivas, feedback e opção para saltar para outro enigma."
       }
     ]
   },

@@ -95,6 +95,13 @@ const projects: Project[] = [
     viewProject: "https://live-update-notes.netlify.app/",
     sourceCode: "https://github.com/ric2003/notes-app",
   },
+  {
+    titleKey: "projects.items.4.title",
+    descriptionKey: "projects.items.4.description",
+    tech: ["React Native", "Expo"],
+    image: "/emojiPuzzle.webp",
+    sourceCode: "https://github.com/ric2003/emoji-word-puzzle",
+  },
 ];
 
 export default function Home() {
@@ -733,7 +740,11 @@ export default function Home() {
 
             <div
               key={currentSlide}
-              className={`grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch md:justify-items-center overflow-hidden ${
+              className={`grid grid-cols-1 ${
+                slides[currentSlide]?.length === 1
+                  ? "md:grid-cols-1"
+                  : "md:grid-cols-2"
+              } gap-8 items-stretch md:justify-items-center overflow-hidden ${
                 navDirection === "right"
                   ? "animate-slide-in-right"
                   : "animate-slide-in-left"

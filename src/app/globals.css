@@ -4,7 +4,7 @@
   --background: #09090b;
   --foreground: #ededed;
   --border: #27272a;
-  
+
   /* Rainbow button colors */
   --color-1: #ff6b6b;
   --color-2: #4ecdc4;
@@ -20,10 +20,19 @@
   --font-mono: var(--font-geist-mono);
 }
 
+* {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
 
 /* Clean animations for About section */
@@ -123,4 +132,3 @@ body {
 .animate-slide-up {
   animation: slide-up 0.8s ease-out forwards;
 }
-

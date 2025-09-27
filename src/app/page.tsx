@@ -81,11 +81,11 @@ const projects: Project[] = [
     sourceCode: "https://github.com/Acr2004/yoke-gym-app",
   },
   {
-    titleKey: "projects.items.2.title",
-    descriptionKey: "projects.items.2.description",
-    tech: ["Flutter", "Dart", "Google Maps", "SQLite", "Provider"],
-    image: "/flutter-sns-app.webp",
-    sourceCode: "https://github.com/ric2003/flutter-App-SNS-Hospitais",
+    titleKey: "projects.items.4.title",
+    descriptionKey: "projects.items.4.description",
+    tech: ["React Native", "Expo"],
+    image: "/emojiPuzzle.webp",
+    sourceCode: "https://github.com/ric2003/emoji-word-puzzle",
   },
   {
     titleKey: "projects.items.3.title",
@@ -96,11 +96,11 @@ const projects: Project[] = [
     sourceCode: "https://github.com/ric2003/notes-app",
   },
   {
-    titleKey: "projects.items.4.title",
-    descriptionKey: "projects.items.4.description",
-    tech: ["React Native", "Expo"],
-    image: "/emojiPuzzle.webp",
-    sourceCode: "https://github.com/ric2003/emoji-word-puzzle",
+    titleKey: "projects.items.2.title",
+    descriptionKey: "projects.items.2.description",
+    tech: ["Flutter", "Dart", "Google Maps", "SQLite", "Provider"],
+    image: "/flutter-sns-app.webp",
+    sourceCode: "https://github.com/ric2003/flutter-App-SNS-Hospitais",
   },
 ];
 

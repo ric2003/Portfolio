@@ -55,7 +55,7 @@ type Project = {
   titleKey: string;
   descriptionKey: string;
   tech: string[];
-  image: string;
+  image: string | { light: string; dark: string };
   viewProject?: string;
   sourceCode?: string;
 };
@@ -65,7 +65,10 @@ const projects: Project[] = [
     titleKey: "projects.items.0.title",
     descriptionKey: "projects.items.0.description",
     tech: ["React", "Next.js", "Tailwind CSS", "Convex"],
-    image: "/waterwisedark.webp",
+    image: {
+      light: "/waterwise_lightMode.webp",
+      dark: "/waterwise_darkMode.webp",
+    },
     viewProject: "https://water-wise-one.vercel.app/",
     sourceCode: "https://github.com/Acr2004/water-wise",
   },
@@ -80,7 +83,10 @@ const projects: Project[] = [
     titleKey: "projects.items.4.title",
     descriptionKey: "projects.items.4.description",
     tech: ["React Native", "Expo"],
-    image: "/emojiPuzzle.webp",
+    image: {
+      light: "/emojiPuzzle_lightMode.webp",
+      dark: "/emojiPuzzle_darkMode.webp",
+    },
     sourceCode: "https://github.com/ric2003/emoji-word-puzzle",
   },
   {
@@ -232,12 +238,29 @@ export default function Home() {
                     className="group flex flex-col bg-muted/50 border border-border rounded-xl overflow-hidden hover:border-foreground/20 transition-colors cursor-pointer text-left h-full"
                   >
                     <div className="aspect-video relative bg-muted overflow-hidden">
-                      <Image
-                        src={project.image}
-                        alt={t(project.titleKey)}
-                        fill
-                        className="object-contain p-2 transition-transform duration-500 group-hover:scale-105"
-                      />
+                      {typeof project.image === "string" ? (
+                        <Image
+                          src={project.image}
+                          alt={t(project.titleKey)}
+                          fill
+                          className="object-contain p-2 transition-transform duration-500 group-hover:scale-105"
+                        />
+                      ) : (
+                        <>
+                          <Image
+                            src={project.image.light}
+                            alt={t(project.titleKey)}
+                            fill
+                            className="object-contain p-2 transition-transform duration-500 group-hover:scale-105 dark:hidden"
+                          />
+                          <Image
+                            src={project.image.dark}
+                            alt={t(project.titleKey)}
+                            fill
+                            className="object-contain p-2 transition-transform duration-500 group-hover:scale-105 hidden dark:block"
+                          />
+                        </>
+                      )}
                     </div>
                     <div className="p-4 flex flex-col flex-1">
                       <h3 className="font-semibold text-foreground mb-1">
@@ -285,12 +308,29 @@ export default function Home() {
                     </DialogDescription>
                   </DialogHeader>
                   <div className="aspect-video relative bg-muted rounded-lg overflow-hidden my-4">
-                    <Image
-                      src={project.image}
-                      alt={t(project.titleKey)}
-                      fill
-                      className="object-contain p-2"
-                    />
+                    {typeof project.image === "string" ? (
+                      <Image
+                        src={project.image}
+                        alt={t(project.titleKey)}
+                        fill
+                        className="object-contain p-2"
+                      />
+                    ) : (
+                      <>
+                        <Image
+                          src={project.image.light}
+                          alt={t(project.titleKey)}
+                          fill
+                          className="object-contain p-2 dark:hidden"
+                        />
+                        <Image
+                          src={project.image.dark}
+                          alt={t(project.titleKey)}
+                          fill
+                          className="object-contain p-2 hidden dark:block"
+                        />
+                      </>
+                    )}
                   </div>
                   <div className="flex flex-wrap gap-2 mb-4">
                     {project.tech.map((tech) => (

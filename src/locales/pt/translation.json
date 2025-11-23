@@ -32,6 +32,16 @@
       }
     ]
   },
+  "education": {
+    "title": "Educação",
+    "items": [
+      {
+        "degree": "Licenciatura em Engenharia Informática",
+        "institution": "Universidade Lusófona",
+        "period": "Set 2022 - Jul 2025"
+      }
+    ]
+  },
   "projects": {
     "title": "Os Meus Projetos",
     "view_project": "Ver Projeto",

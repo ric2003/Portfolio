@@ -20,6 +20,7 @@ import {
 import { LanguageToggle } from "@/components/ui/language-toggle";
 import { useTranslation } from "react-i18next";
 import { Experience } from "@/components/experience";
+import { Education } from "@/components/education";
 import Link from "next/link";
 import { useTheme } from "next-themes";
 import {
@@ -210,6 +211,9 @@ export default function Home() {
 
         {/* Experience */}
         <Experience />
+
+        {/* Education */}
+        <Education />
 
         {/* Projects */}
         <section id="projects" className="mb-16">

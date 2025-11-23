@@ -32,6 +32,16 @@
       }
     ]
   },
+  "education": {
+    "title": "Education",
+    "items": [
+      {
+        "degree": "Bachelor's degree in Computer Engineering",
+        "institution": "Universidade Lusófona",
+        "period": "Sep 2022 - Jul 2025"
+      }
+    ]
+  },
   "projects": {
     "title": "My Projects",
     "view_project": "View Project",

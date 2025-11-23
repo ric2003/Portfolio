@@ -74,6 +74,15 @@
   --font-mono: var(--font-geist-mono);
 }
 
+* {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
 body {
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;

@@ -4,6 +4,7 @@ import { ThemeProvider } from "next-themes";
 import I18nProviderClient from "@/components/I18nProviderClient";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
+import { LanguageToggle } from "@/components/ui/language-toggle";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -43,7 +44,14 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <I18nProviderClient>{children}</I18nProviderClient>
+          <I18nProviderClient>
+            {children}
+            <div className="fixed top-8 right-6 z-50 md:hidden">
+              <div className="bg-background/80 backdrop-blur-md border border-border rounded-full shadow-lg">
+                <LanguageToggle />
+              </div>
+            </div>
+          </I18nProviderClient>
         </ThemeProvider>
         <Analytics />
       </body>

@@ -10,7 +10,7 @@
     "hi": "Hi, I'm",
     "location": "Cascais, Lisbon",
     "title": "Junior Software Engineer",
-    "description": "Currently at Critical TechWorks as a Android Developer. Love building web and mobile applications.",
+    "description": "Currently at Critical TechWorks as an Android Developer. Love building web and mobile applications.",
     "view_projects": "View My Projects",
     "download_cv": "Download CV",
     "find_me": "Find me on:",
@@ -28,7 +28,7 @@
         "role": "Junior Android Developer",
         "company": "Critical TechWorks",
         "period": "Nov 2025 - Present",
-        "description": "Developing automotive software solutions, focusing on engineering excellence and product quality. Working in a feedback-driven environment to deliver reliable code."
+        "description": "Currently working on Android development as part of the automotive projects at Critical TechWorks. Learning the internal tooling, workflows and contributing to development tasks as I onboard into the team."
       }
     ]
   },

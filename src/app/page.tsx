@@ -35,19 +35,15 @@ const techStack = [
   "React",
   "Next.js",
   "TypeScript",
-  "JavaScript",
-  "Tailwind CSS",
   "Java",
   "Kotlin",
   "React Native",
   "Flutter",
-  "Dart",
-  "Node.js",
+  "Tailwind CSS",
   "Git",
   "PostgreSQL",
-  "Convex",
-  "Expo",
 ];
+
 
 const navigationItems = [
   { id: "hero", label: "navigation.home", icon: HomeIcon },
@@ -175,7 +171,7 @@ export default function Home() {
 
             </div>
           </div>
-          <div>
+          <div className="flex flex-col items-center justify-center">
             <div className="relative w-32 h-32 sm:w-40 sm:h-40 shrink-0 rounded-full overflow-hidden border-2 border-border bg-muted">
               <Image
                 src="/img.webp"

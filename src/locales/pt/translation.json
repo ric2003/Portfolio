@@ -3,13 +3,14 @@
   "navigation": {
     "home": "Início",
     "about": "Sobre",
+    "experience": "Experiência",
     "projects": "Projetos"
   },
   "hero": {
     "hi": "Olá, sou o",
     "location": "Cascais, Lisboa",
     "title": "Licenciado em Engenharia Informática",
-    "description": "Estou focado no desenvolvimento web e móvel, pronto para expandir as minhas competências e dar contribuições significativas a projetos.",
+    "description": "Atualmente na Critical TechWorks como Desenvolvedor Android. Adoro criar aplicações web e móveis.",
     "view_projects": "Ver Os Meus Projetos",
     "download_cv": "Descarregar CV",
     "find_me": "Encontra-me em:",
@@ -17,28 +18,17 @@
   },
   "about": {
     "title": "Sobre Mim",
-    "background_title": "Percurso",
-    "background_description": "Comecei a programar através da minha Licenciatura em Engenharia Informática, mas o desenvolvimento web e móvel foi o que realmente me cativou.",
-    "background_points": [
-      "Co-desenvolvi um sistema de gestão de água para reservatórios portugueses, concebido para agricultores e investigadores de recursos hídricos, agora proposto para uma iniciativa europeia.",
-      "Explorando React Native para desenvolvimento de apps móveis como projeto para expandir as minhas competências.",
-      "Fluente em inglês (nativo) e português, permitindo-me trabalhar em ambientes diversos."
-    ],
-    "tech_stack_title": "Já Trabalhei com",
-    "coming_soon": "A aprender",
-    "looking_for_title": "O Que Procuro",
-    "looking_for_points": [
+    "description": "Comecei a programar na licenciatura mas o desenvolvimento web e móvel foi o que me cativou. Gosto de criar produtos funcionais com uma excelente experiência de utilizador.",
+    "tech_stack_title": "Trabalhei com"
+  },
+  "experience": {
+    "title": "Experiência",
+    "items": [
       {
-        "title": "Posições de Entrada",
-        "description": "Funções de desenvolvimento web ou móvel para impulsionar a minha carreira"
-      },
-      {
-        "title": "Projetos de Desenvolvimento",
-        "description": "Oportunidades para contribuir e desenvolver as minhas competências"
-      },
-      {
-        "title": "Pronto para Acrescentar Valor",
-        "description": "Ansioso por trabalhar, aprender e contribuir de forma significativa"
+        "role": "Desenvolvedor Android Júnior",
+        "company": "Critical TechWorks",
+        "period": "Nov 2025 - Presente",
+        "description": "Desenvolvimento de software para automóveis, focado em excelência de engenharia e qualidade. Ambiente de feedback para entregar código confiável."
       }
     ]
   },
@@ -46,6 +36,8 @@
     "title": "Os Meus Projetos",
     "view_project": "Ver Projeto",
     "source_code": "Código Fonte",
+    "website": "Website",
+    "source": "Código",
     "items": [
       {
         "title": "Water Wise",
@@ -73,6 +65,14 @@
     "title": "Vamos conectar-nos",
     "linkedin": "LinkedIn",
     "github": "GitHub",
-    "email": "Email"
+    "email": "Email",
+    "description": "Sente-te à vontade para entrar em contacto se quiseres conectar-te ou discutir um projeto."
+  },
+  "footer": {
+    "rights": "Todos os direitos reservados."
+  },
+  "buttons": {
+    "show_more": "Ver Mais",
+    "show_less": "Ver Menos"
   }
 }

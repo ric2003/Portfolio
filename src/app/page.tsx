@@ -162,6 +162,18 @@ export default function Home() {
                   <Mail size={20} />
                 </Link>
               </div>
+              <div className="md:hidden flex items-center justify-center ml-2">
+                <Button
+                  onClick={() => downloadFile("Ricardo-Goncalves-CV.pdf")}
+                  variant="outline"
+                  size="sm"
+                  className="gap-2 text-muted-foreground "
+                >
+                  <Download size={14} />
+                  {t("hero.download_cv")}
+                </Button>
+              </div>
+
             </div>
           </div>
           <div>
@@ -173,9 +185,8 @@ export default function Home() {
                 className="object-contain"
                 priority
               />
-
             </div>
-            <div className="flex items-center justify-center mt-4">
+            <div className="hidden md:block flex items-center justify-center mt-4">
               <Button
                 onClick={() => downloadFile("Ricardo-Goncalves-CV.pdf")}
                 variant="outline"
@@ -360,8 +371,8 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Dock Navigation */}
-        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
+        {/* Dock Navigation */}// TODO: add mini doc on mobile
+        <div className="hidden md:block fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
           <Dock className="bg-background/80 backdrop-blur-md border border-border rounded-full px-3 h-14 shadow-lg">
             {navigationItems.map((item) => {
               const Icon = item.icon;
@@ -384,6 +395,7 @@ export default function Home() {
             </DockIcon>
           </Dock>
         </div>
+
 
       </div >
     </main >

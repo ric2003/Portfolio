@@ -406,7 +406,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Dock Navigation | TODO: add mini doc on mobile */}
+        {/* Dock Navigation */}
         <div className="hidden md:block fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
           <Dock className="bg-background/80 backdrop-blur-md border border-border rounded-full px-3 h-14 shadow-lg">
             {navigationItems.map((item) => {

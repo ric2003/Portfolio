@@ -109,7 +109,7 @@ const projects: Project[] = [
 export default function Home() {
   const { t } = useTranslation();
   const [isExpanded, setIsExpanded] = useState(false);
-  const { theme, setTheme } = useTheme();
+  const { theme, setTheme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -132,7 +132,7 @@ export default function Home() {
   };
 
   const toggleTheme = () => {
-    setTheme(theme === "dark" ? "light" : "dark");
+    setTheme(resolvedTheme === "dark" ? "light" : "dark");
   };
 
   return (
@@ -425,7 +425,7 @@ export default function Home() {
             </DockIcon>
             <DockIcon className="mx-1" onClick={toggleTheme}>
               <div className="p-2 rounded-full hover:bg-muted text-muted-foreground hover:text-foreground transition-colors cursor-pointer">
-                {mounted && theme === 'dark' ? <Moon size={20} /> : <Sun size={20} />}
+                {mounted && resolvedTheme === 'dark' ? <Moon size={20} /> : <Sun size={20} />}
               </div>
             </DockIcon>
           </Dock>

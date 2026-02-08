@@ -156,7 +156,7 @@ export default function Home() {
                 <Link href="https://github.com/ric2003" target="_blank" className="text-muted-foreground hover:text-[#6e5494] transition-colors">
                   <Github size={20} />
                 </Link>
-                <Link href="https://www.linkedin.com/in/ricardo-gonçalves-986780267" target="_blank" className="text-muted-foreground hover:text-[#0077B5] transition-colors">
+                <Link href="https://www.linkedin.com/in/ricardogoncalves03" target="_blank" className="text-muted-foreground hover:text-[#0077B5] transition-colors">
                   <Linkedin size={20} />
                 </Link>
                 <Link href="mailto:ricgon20035@gmail.com" className="text-muted-foreground hover:text-foreground transition-colors">
@@ -393,7 +393,7 @@ export default function Home() {
             <Link href="https://github.com/ric2003" target="_blank" className="text-muted-foreground hover:text-[#6e5494] transition-colors">
               <Github size={24} />
             </Link>
-            <Link href="https://www.linkedin.com/in/ricardo-gonçalves-986780267" target="_blank" className="text-muted-foreground hover:text-[#0077B5] transition-colors">
+            <Link href="https://www.linkedin.com/in/ricardogoncalves03" target="_blank" className="text-muted-foreground hover:text-[#0077B5] transition-colors">
               <Linkedin size={24} />
             </Link>
             <Link href="mailto:ricgon20035@gmail.com" className="text-muted-foreground hover:text-foreground transition-colors">

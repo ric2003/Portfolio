@@ -107,7 +107,8 @@ const projects: Project[] = [
 ];
 
 export default function Home() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const currentCV = i18n.language === "pt" ? "Ricardo-Goncalves-CV-pt.pdf" : "Ricardo-Goncalves-CV-en.pdf";
   const [isExpanded, setIsExpanded] = useState(false);
   const { theme, setTheme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
@@ -165,7 +166,7 @@ export default function Home() {
               </div>
               <div className="md:hidden flex items-center justify-center ml-2">
                 <Button
-                  onClick={() => downloadFile("Ricardo-Goncalves-CV.pdf")}
+                  onClick={() => downloadFile(currentCV)}
                   variant="outline"
                   size="sm"
                   className="gap-2 text-muted-foreground "
@@ -189,7 +190,7 @@ export default function Home() {
             </div>
             <div className="hidden md:block flex items-center justify-center mt-4">
               <Button
-                onClick={() => downloadFile("Ricardo-Goncalves-CV.pdf")}
+                onClick={() => downloadFile(currentCV)}
                 variant="outline"
                 size="sm"
                 className="gap-2 text-muted-foreground "

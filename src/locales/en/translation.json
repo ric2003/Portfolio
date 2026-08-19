@@ -4,13 +4,15 @@
     "home": "Home",
     "about": "About",
     "experience": "Work Experience",
-    "projects": "Projects"
+    "projects": "Projects",
+    "contact": "Contact",
+    "label": "Main navigation"
   },
   "hero": {
     "hi": "Hi, I'm",
     "location": "Cascais, Lisbon",
-    "title": "Junior Software Engineer",
-    "description": "Currently at Critical TechWorks as an Android Developer. Love building web and mobile applications.",
+    "title": "Software Engineer",
+    "description": "I work at Critical TechWorks on an automotive Android project.",
     "view_projects": "View My Projects",
     "download_cv": "Download CV",
     "find_me": "Find me on:",
@@ -18,8 +20,11 @@
   },
   "about": {
     "title": "About Me",
-    "description": "I got into programming through my Bachelor in Computer Engineering but web and mobile development is what really stuck with me. I enjoy building products that are not only functional but also have a great user experience.",
-    "tech_stack_title": "Worked with"
+    "description": "I studied Computer Engineering and now work as a software engineer at Critical TechWorks. Most of the projects below come from my time at university, when I was exploring web and mobile development and learning how to turn an idea into a working product.",
+    "tech_stack_title": "Technologies",
+    "work_tab": "I work with",
+    "projects_tab": "I've built with",
+    "android_tooling": "Android tooling"
   },
   "experience": {
     "title": "Experience",
@@ -28,7 +33,7 @@
         "role": "Junior Android Fullstack Developer",
         "company": "Critical TechWorks",
         "period": "Nov 2025 - Present",
-        "description": "Working in an automotive project team at Critical TechWorks. Currently developing features and building internal tools to test and improve our software."
+        "description": "I contribute to an automotive Android project as part of a software engineering team."
       }
     ]
   },
@@ -48,6 +53,7 @@
     "source_code": "Source Code",
     "website": "Website",
     "source": "Source",
+    "collaborator_repository": "This was a collaborative project. The repository is hosted on my university friend's GitHub account.",
     "items": [
       {
         "title": "Water Wise",
@@ -76,6 +82,7 @@
     "linkedin": "LinkedIn",
     "github": "GitHub",
     "email": "Email",
+    "email_me": "Email me",
     "description": "Feel free to reach out if you want to connect or discuss a project."
   },
   "footer": {
@@ -83,6 +90,10 @@
   },
   "buttons": {
     "show_more": "Show More",
-    "show_less": "Show Less"
+    "show_less": "Show Less",
+    "view_details": "View details"
+  },
+  "theme": {
+    "toggle": "Toggle color theme"
   }
 }

@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { Globe } from "lucide-react";
 
 export function LanguageToggle() {
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
 
   const currentLocale = i18n.language as "en" | "pt";
   const nextLocale = currentLocale === "en" ? "pt" : "en";
@@ -18,9 +18,12 @@ export function LanguageToggle() {
   };
 
   return (
-    <div
+    <button
+      type="button"
       className="p-2 rounded-full hover:bg-muted text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
       onClick={handleToggleLanguage}
+      aria-label={`${t("language_label")}: ${nextLocale.toUpperCase()}`}
+      title={`${t("language_label")}: ${nextLocale.toUpperCase()}`}
     >
       <div className="relative flex items-center justify-center w-5 h-5">
         <Globe className="w-5 h-5" />
@@ -28,6 +31,6 @@ export function LanguageToggle() {
           {currentLocale.toUpperCase()}
         </span>
       </div>
-    </div>
+    </button>
   );
 }

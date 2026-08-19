@@ -95,4 +95,26 @@ body {
 
 html {
   background-color: var(--background);
+  scroll-behavior: smooth;
+}
+
+@keyframes tech-tab-enter {
+  from {
+    opacity: 0;
+    transform: translateY(2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.tech-tab-panel {
+  animation: tech-tab-enter 160ms ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tech-tab-panel {
+    animation: none;
+  }
 }

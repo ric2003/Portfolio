@@ -4,13 +4,15 @@
     "home": "Início",
     "about": "Sobre",
     "experience": "Experiência",
-    "projects": "Projetos"
+    "projects": "Projetos",
+    "contact": "Contacto",
+    "label": "Navegação principal"
   },
   "hero": {
     "hi": "Olá, sou o",
     "location": "Cascais, Lisboa",
-    "title": "Licenciado em Engenharia Informática",
-    "description": "Atualmente na Critical TechWorks como Desenvolvedor Android. Adoro criar aplicações web e móveis.",
+    "title": "Engenheiro de Software",
+    "description": "Trabalho na Critical TechWorks num projeto Android para o setor automóvel.",
     "view_projects": "Ver Os Meus Projetos",
     "download_cv": "Descarregar CV",
     "find_me": "Encontra-me em:",
@@ -18,8 +20,11 @@
   },
   "about": {
     "title": "Sobre Mim",
-    "description": "Comecei a programar na licenciatura mas o desenvolvimento web e móvel foi o que me cativou. Gosto de criar produtos funcionais com uma excelente experiência de utilizador.",
-    "tech_stack_title": "Trabalhei com"
+    "description": "Estudei Engenharia Informática e sou engenheiro de software na Critical TechWorks. A maioria dos projetos abaixo vem do tempo da universidade, quando explorava desenvolvimento web e mobile e aprendia a transformar uma ideia num produto funcional.",
+    "tech_stack_title": "Tecnologias",
+    "work_tab": "Uso no trabalho",
+    "projects_tab": "Usei em projetos",
+    "android_tooling": "Ferramentas Android"
   },
   "experience": {
     "title": "Experiência",
@@ -28,7 +33,7 @@
         "role": "Desenvolvedor Android Fullstack Júnior",
         "company": "Critical TechWorks",
         "period": "Nov 2025 - Presente",
-        "description": "Trabalho numa equipa de projetos automóveis na Critical TechWorks. Desenvolvo funcionalidades e ferramentas internas para testar e melhorar o software."
+        "description": "Contribuo para um projeto Android automóvel como parte de uma equipa de engenharia de software."
       }
     ]
   },
@@ -48,6 +53,7 @@
     "source_code": "Código Fonte",
     "website": "Website",
     "source": "Código",
+    "collaborator_repository": "Projeto colaborativo — o repositório está alojado na conta GitHub do meu amigo da universidade.",
     "items": [
       {
         "title": "Water Wise",
@@ -76,6 +82,7 @@
     "linkedin": "LinkedIn",
     "github": "GitHub",
     "email": "Email",
+    "email_me": "Enviar email",
     "description": "Sente-te à vontade para entrar em contacto se quiseres conectar-te ou discutir um projeto."
   },
   "footer": {
@@ -83,6 +90,10 @@
   },
   "buttons": {
     "show_more": "Ver Mais",
-    "show_less": "Ver Menos"
+    "show_less": "Ver Menos",
+    "view_details": "Ver detalhes"
+  },
+  "theme": {
+    "toggle": "Alternar tema de cores"
   }
 }

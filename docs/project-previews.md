@@ -9,4 +9,4 @@ Captured on 20 September 2026. These are recordings of the deployed applications
 
 Previews load on interaction, loop without audio, and pause when outside the viewport or when the browser tab is hidden. Hover starts playback unless reduced motion is enabled. The play/pause button supports keyboard and touch users.
 
-The Racing Game iframe only mounts after selecting “Try live demo”. Closing it unmounts the game. Driving requires a desktop keyboard; phone visitors can watch the recording. The demo also links to the standalone app.
+“Try game” and project titles with a live URL open the deployed app in a new tab. The rest of each card links to its case study. No live app is embedded in the portfolio.

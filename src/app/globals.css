@@ -118,3 +118,15 @@ html {
     animation: none;
   }
 }
+
+/* The website title and preview controls have their own hover targets. */
+.project-card:hover:not(:has([data-card-action]:hover)) .project-details-label,
+.project-details:focus-visible .project-details-label {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.project-card:has(.project-details:focus-visible) {
+  outline: 2px solid var(--ring);
+  outline-offset: 4px;
+}

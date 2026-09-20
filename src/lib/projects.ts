@@ -23,7 +23,7 @@ export const projects: Project[] = [
   },
   {
     slug: "water-wise",
-    preview: { video: "/previews/water-wise.mp4", poster: "/previews/water-wise.webp" },
+    preview: { video: "/previews/water-wise.mp4", webm: "/videos/water-wise.webm", poster: "/videos/water-wise.webp" },
     titleKey: "projects.items.0.title",
     descriptionKey: "projects.items.0.description",
     tech: ["React", "Next.js", "Tailwind CSS", "Convex"],

@@ -5,8 +5,8 @@ import Image from "next/image";
 import { Pause, Play } from "lucide-react";
 
 /** Start on hover, with an explicit control for keyboard, touch and reduced motion. */
-export function ProjectPreview({ src, webm, poster, title, playLabel, pauseLabel }: {
-  src: string; webm?: string; poster: string; title: string; playLabel: string; pauseLabel: string;
+export function ProjectPreview({ src, webm, poster, title, playLabel, pauseLabel, aspectRatio = 16 / 9 }: {
+  aspectRatio?: number; src: string; webm?: string; poster: string; title: string; playLabel: string; pauseLabel: string;
 }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(false);
@@ -41,7 +41,7 @@ export function ProjectPreview({ src, webm, poster, title, playLabel, pauseLabel
   const play = () => { void videoRef.current?.play().catch(() => setPlaying(false)); };
 
   return (
-    <div className="relative aspect-video overflow-hidden bg-zinc-950" onBlur={(event) => { if (!event.currentTarget.contains(event.relatedTarget)) videoRef.current?.pause(); }}>
+    <div className="relative overflow-hidden bg-zinc-950" style={{ aspectRatio }} onBlur={(event) => { if (!event.currentTarget.contains(event.relatedTarget)) videoRef.current?.pause(); }}>
       {failed ? <Image src={poster} alt={title} fill sizes="(max-width: 1024px) 100vw, 896px" className="object-contain" /> : <video ref={videoRef} poster={poster} muted loop playsInline preload="none" aria-label={title} onPlay={() => setPlaying(true)} onPause={() => setPlaying(false)} onError={() => setFailed(true)} className="h-full w-full object-contain">
         {webm && <source src={webm} type='video/webm; codecs="vp9"' />}
         <source src={src} type="video/mp4" />

@@ -43,9 +43,8 @@ export function ProjectCaseStudy({ project, nextProject }: { project: Project; n
           {project.preview ? (
             <div className="overflow-hidden rounded-2xl border border-border bg-muted/50">
               <video
-                key={project.preview.video}
-                src={project.preview.video}
-                poster={project.preview.poster}
+                key={project.detailVideo?.webm ?? project.preview.video}
+                poster={project.detailVideo?.poster ?? project.preview.poster}
                 controls
                 muted
                 loop
@@ -53,7 +52,10 @@ export function ProjectCaseStudy({ project, nextProject }: { project: Project; n
                 preload="metadata"
                 aria-label={copy.title}
                 className="block max-h-[75vh] w-full object-contain"
-              />
+              >
+                {project.detailVideo && <source src={project.detailVideo.webm} type='video/webm; codecs="vp9"' />}
+                <source src={project.preview.video} type="video/mp4" />
+              </video>
             </div>
           ) : (
           <div className="relative aspect-[16/10] overflow-hidden rounded-2xl border border-border bg-muted/50 sm:aspect-video">

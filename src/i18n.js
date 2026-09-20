@@ -2,8 +2,9 @@ import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 
 // Import your translation files
-import enTranslations from "@/locales/en/translation.json";
-import ptTranslations from "@/locales/pt/translation.json";
+// (TS modules instead of raw JSON — Turbopack HMR can't hot-update JSON modules)
+import enTranslations from "@/locales/en/translation";
+import ptTranslations from "@/locales/pt/translation";
 
 const resources = {
   en: {

@@ -1,0 +1,118 @@
+// Portuguese (PT) translations.
+// Kept as a TS module instead of raw JSON because Turbopack HMR cannot
+// reliably hot-update JSON modules imported into the client bundle.
+const translation = {
+  language_label: "Idioma",
+  navigation: {
+    home: "Início",
+    about: "Sobre",
+    experience: "Experiência",
+    projects: "Projetos",
+    contact: "Contacto",
+    label: "Navegação principal",
+  },
+  hero: {
+    hi: "Olá, sou o",
+    location: "Cascais, Lisboa",
+    title: "Engenheiro de Software",
+    description: "Trabalho na Critical TechWorks num projeto Android para o setor automóvel.",
+    view_projects: "Ver Os Meus Projetos",
+    download_cv: "Descarregar CV",
+    find_me: "Encontra-me em:",
+    hello: "Olá!",
+  },
+  about: {
+    title: "Sobre Mim",
+    description:
+      "Estudei Engenharia Informática e sou engenheiro de software na Critical TechWorks. A maioria dos projetos abaixo vem do tempo da universidade, quando explorava desenvolvimento web e mobile e aprendia a transformar uma ideia num produto funcional.",
+    tech_stack_title: "Tecnologias",
+    work_tab: "Uso no trabalho",
+    projects_tab: "Usei em projetos",
+    android_tooling: "Ferramentas Android",
+  },
+  experience: {
+    title: "Experiência",
+    items: [
+      {
+        role: "Desenvolvedor Android Fullstack Júnior",
+        company: "Critical TechWorks",
+        period: "Nov 2025 - Presente",
+        description:
+          "Contribuo para um projeto Android automóvel como parte de uma equipa de engenharia de software.",
+      },
+    ],
+  },
+  education: {
+    title: "Educação",
+    items: [
+      {
+        degree: "Licenciatura em Engenharia Informática",
+        institution: "Universidade Lusófona",
+        period: "Set 2022 - Jul 2025",
+      },
+    ],
+  },
+  projects: {
+    title: "Os Meus Projetos",
+    view_project: "Ver Projeto",
+    source_code: "Código Fonte",
+    website: "Website",
+    source: "Código",
+    collaborator_repository:
+      "Projeto colaborativo — o repositório está alojado na conta GitHub do meu amigo da universidade.",
+    items: [
+      {
+        title: "Water Wise",
+        description:
+          "Co-desenvolvi uma plataforma geoespacial para gestão de reservatórios portugueses, concebida para apoiar agricultores e investigadores de recursos hídricos com dados em tempo real e em breve ferramentas de tomada de decisão.",
+      },
+      {
+        title: "Yoke - App de Fitness",
+        description:
+          "Co-desenvolvendo uma aplicação móvel de fitness como projeto paralelo com um amigo para acompanhar treinos, nutrição e progresso, com bibliotecas de exercícios e planeamento de refeições personalizável.",
+      },
+      {
+        title: "App SNS Hospitais",
+        description:
+          "Co-desenvolvi uma aplicação móvel para ajudar utilizadores a encontrar e avaliar hospitais em Portugal, com dados hospitalares em tempo real, mapas interativos e suporte offline.",
+      },
+      {
+        title: "Live Notes",
+        description:
+          "App de notas colaborativa em tempo real com canvas com zoom para criar, mover e editar notas. Inclui presenças em direto e sessões autenticadas. Construída com Next.js e Firebase.",
+      },
+      {
+        title: "App de puzzles com emojis",
+        description:
+          "Jogo para adivinhar o título a partir de combinações de emojis. Inclui categorias como Jogos, Filmes e Músicas, níveis de dificuldade, dicas progressivas, feedback e opção para saltar para outro enigma.",
+      },
+      {
+        title: "Racing Game",
+        description:
+          "Jogo de corridas 3D multijogador para browsers de computador. Corre com 2 a 4 jogadores em salas privadas, escolhe entre seis circuitos e usa turbos e power-ups. Desenvolvido com React e Three.js, com um servidor Node.js que sincroniza as corridas através de WebSockets. Feito com IA enquanto brincava com o lançamento de um novo modelo.",
+      },
+    ],
+  },
+  contact: {
+    title: "Vamos conectar-nos",
+    linkedin: "LinkedIn",
+    github: "GitHub",
+    email: "Email",
+    email_me: "Enviar email",
+    description:
+      "Sente-te à vontade para entrar em contacto se quiseres conectar-te ou discutir um projeto.",
+  },
+  footer: {
+    rights: "Todos os direitos reservados.",
+  },
+  buttons: {
+    show_more: "Ver Mais",
+    show_less: "Ver Menos",
+    view_details: "Ver detalhes",
+  },
+  theme: {
+    toggle: "Alternar tema de cores",
+  },
+};
+
+export default translation;

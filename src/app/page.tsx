@@ -10,7 +10,6 @@ import {
   Code,
   Mail,
   Download,
-  ExternalLink,
   Github,
   Linkedin,
   Moon,
@@ -22,14 +21,7 @@ import { Experience } from "@/components/experience";
 import { Education } from "@/components/education";
 import Link from "next/link";
 import { useTheme } from "next-themes";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+import { ProjectBento } from "@/components/project-bento";
 
 type TechTab = "work" | "projects";
 
@@ -66,68 +58,9 @@ const navigationItems = [
   { id: "contact", label: "navigation.contact", icon: Mail },
 ];
 
-type Project = {
-  titleKey: string;
-  descriptionKey: string;
-  tech: string[];
-  image: string | { light: string; dark: string };
-  viewProject?: string;
-  sourceCode?: string;
-  collaboratorRepository?: boolean;
-};
-
-const projects: Project[] = [
-  {
-    titleKey: "projects.items.0.title",
-    descriptionKey: "projects.items.0.description",
-    tech: ["React", "Next.js", "Tailwind CSS", "Convex"],
-    image: {
-      light: "/waterwise_lightMode.webp",
-      dark: "/waterwise_darkMode.webp",
-    },
-    viewProject: "https://water-wise-one.vercel.app/",
-    sourceCode: "https://github.com/Acr2004/water-wise",
-    collaboratorRepository: true,
-  },
-  {
-    titleKey: "projects.items.1.title",
-    descriptionKey: "projects.items.1.description",
-    tech: ["React Native", "TypeScript", "Node.js"],
-    image: "/yoke.webp",
-    sourceCode: "https://github.com/Acr2004/yoke-gym-app",
-    collaboratorRepository: true,
-  },
-  {
-    titleKey: "projects.items.4.title",
-    descriptionKey: "projects.items.4.description",
-    tech: ["React Native", "Expo"],
-    image: {
-      light: "/emojiPuzzle_lightMode.webp",
-      dark: "/emojiPuzzle_darkMode.webp",
-    },
-    sourceCode: "https://github.com/ric2003/emoji-word-puzzle",
-  },
-  {
-    titleKey: "projects.items.3.title",
-    descriptionKey: "projects.items.3.description",
-    tech: ["Next.js", "Firebase"],
-    image: "/noteApp.webp",
-    viewProject: "https://live-update-notes.netlify.app/",
-    sourceCode: "https://github.com/ric2003/notes-app",
-  },
-  {
-    titleKey: "projects.items.2.title",
-    descriptionKey: "projects.items.2.description",
-    tech: ["Flutter", "Dart", "Google Maps"],
-    image: "/flutter-sns-app.webp",
-    sourceCode: "https://github.com/ric2003/flutter-App-SNS-Hospitais",
-  },
-];
-
 export default function Home() {
   const { t, i18n } = useTranslation();
   const currentCV = i18n.language === "pt" ? "Ricardo-Goncalves-CV-pt.pdf" : "Ricardo-Goncalves-CV-en.pdf";
-  const [isExpanded, setIsExpanded] = useState(false);
   const [activeTechTab, setActiveTechTab] = useState<TechTab>("work");
   const { setTheme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
@@ -349,147 +282,7 @@ export default function Home() {
         {/* Education */}
         <Education />
 
-        {/* Projects */}
-        <section id="projects" className="mb-16">
-          <h2 className="text-xl font-bold mb-8">{t("projects.title")}</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {projects.slice(0, isExpanded ? projects.length : 4).map((project) => (
-              <Dialog key={project.titleKey}>
-                <DialogTrigger asChild>
-                  <button
-                    type="button"
-                    className="group flex w-full flex-col bg-muted/50 border border-border rounded-xl overflow-hidden hover:border-foreground/30 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background transition-all cursor-pointer text-left h-full"
-                  >
-                    <div className="aspect-video relative bg-muted overflow-hidden">
-                      {typeof project.image === "string" ? (
-                        <Image
-                          src={project.image}
-                          alt={t(project.titleKey)}
-                          fill
-                          className="object-contain p-2 transition-transform duration-500 group-hover:scale-105"
-                        />
-                      ) : (
-                        <>
-                          <Image
-                            src={project.image.light}
-                            alt={t(project.titleKey)}
-                            fill
-                            className="object-contain p-2 transition-transform duration-500 group-hover:scale-105 dark:hidden"
-                          />
-                          <Image
-                            src={project.image.dark}
-                            alt={t(project.titleKey)}
-                            fill
-                            className="object-contain p-2 transition-transform duration-500 group-hover:scale-105 hidden dark:block"
-                          />
-                        </>
-                      )}
-                    </div>
-                    <div className="p-4 flex flex-col flex-1">
-                      <h3 className="font-semibold text-foreground mb-1">
-                        {t(project.titleKey)}
-                      </h3>
-                      <p className="text-xs text-muted-foreground mb-3 line-clamp-2">
-                        {t(project.descriptionKey)}
-                      </p>
-                      <div className="mt-auto flex items-center justify-between gap-2">
-                        <span className="text-xs text-muted-foreground">
-                          {project.tech.slice(0, 2).join(" · ")}
-                        </span>
-                        <span className="text-xs font-medium text-foreground underline decoration-muted-foreground/50 group-hover:decoration-foreground transition-colors">
-                          {t("buttons.view_details")}
-                        </span>
-                      </div>
-                    </div>
-                  </button>
-                </DialogTrigger>
-                <DialogContent className="sm:max-w-[600px] max-h-[90vh] border border-border overflow-y-auto">
-                  <DialogHeader>
-                    <DialogTitle>{t(project.titleKey)}</DialogTitle>
-                    <DialogDescription>
-                      {t(project.descriptionKey)}
-                    </DialogDescription>
-                  </DialogHeader>
-                  <div className="aspect-video relative bg-muted rounded-lg overflow-hidden my-4">
-                    {typeof project.image === "string" ? (
-                      <Image
-                        src={project.image}
-                        alt={t(project.titleKey)}
-                        fill
-                        className="object-contain p-2"
-                      />
-                    ) : (
-                      <>
-                        <Image
-                          src={project.image.light}
-                          alt={t(project.titleKey)}
-                          fill
-                          className="object-contain p-2 dark:hidden"
-                        />
-                        <Image
-                          src={project.image.dark}
-                          alt={t(project.titleKey)}
-                          fill
-                          className="object-contain p-2 hidden dark:block"
-                        />
-                      </>
-                    )}
-                  </div>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.tech.map((tech) => (
-                      <span
-                        key={tech}
-                        className="px-2 py-1 text-xs font-medium bg-muted text-foreground border border-border rounded-md"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                  {project.collaboratorRepository && (
-                    <p className="text-xs text-muted-foreground -mt-2 mb-1">
-                      {t("projects.collaborator_repository")}
-                    </p>
-                  )}
-                  <div className="flex gap-4">
-                    {project.viewProject && (
-                      <a
-                        href={project.viewProject}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-2 text-sm font-medium text-foreground hover:text-blue-500 transition-colors"
-                      >
-                        <ExternalLink size={16} />
-                        {t("projects.website")}
-                      </a>
-                    )}
-                    {project.sourceCode && (
-                      <a
-                        href={project.sourceCode}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-2 text-sm font-medium text-foreground hover:text-[#6e5494] transition-colors"
-                      >
-                        <Github size={16} />
-                        {t("projects.source")}
-                      </a>
-                    )}
-                  </div>
-                </DialogContent>
-              </Dialog>
-            ))}
-          </div>
-          {projects.length > 4 && (
-            <div className="mt-8 flex justify-center">
-              <Button
-                variant="secondary"
-                className="w-full sm:w-auto"
-                onClick={() => setIsExpanded(!isExpanded)}
-              >
-                {isExpanded ? t("buttons.show_less") : t("buttons.show_more")}
-              </Button>
-            </div>
-          )}
-        </section>
+        <ProjectBento />
 
         {/* Contact / Footer */}
         <section id="contact" className="flex flex-col items-center pt-12 border-t border-border">
@@ -509,9 +302,6 @@ export default function Home() {
             </Link>
             <Link href="https://www.linkedin.com/in/ricardogoncalves03" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="text-muted-foreground hover:text-[#0077B5] transition-colors">
               <Linkedin size={24} />
-            </Link>
-            <Link href="mailto:ricgon20035@gmail.com" aria-label={t("contact.email")} className="text-muted-foreground hover:text-foreground transition-colors">
-              <Mail size={24} />
             </Link>
           </div>
 

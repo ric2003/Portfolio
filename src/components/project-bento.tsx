@@ -40,7 +40,7 @@ export function ProjectBento() {
   const order = ["racing-game", "water-wise", "live-notes", "yoke", "emoji-puzzle", "sns-hospitals"];
 
   return (
-    <section id="projects" className="mb-20 scroll-mt-8 lg:-mx-28">
+    <section id="projects" className="mb-20 scroll-mt-8">
       <h2 className="mb-7 text-xl font-bold">{t("projects.title")}</h2>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-6">
         {order.map((slug, index) => {

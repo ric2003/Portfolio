@@ -3,6 +3,7 @@
 The bento grid uses local, silent H.264 MP4 recordings in `public/previews`.
 
 - `racing-game.mp4`: a private two-player session at https://racing-game-sooty-eta.vercel.app/.
+- `live-notes.mp4`: Ricardo's supplied screen recording, captured on 20 September 2026. The full 16-second recording is preserved, with a matching poster frame.
 - `water-wise.mp4`: panning and zooming the map at https://water-wise-one.vercel.app/.
 
 Captured on 20 September 2026. These are recordings of the deployed applications, not simulated interfaces. Replace the files at the same paths to update the previews. Encode with `yuv420p` and MP4 fast-start for inline playback on iOS.

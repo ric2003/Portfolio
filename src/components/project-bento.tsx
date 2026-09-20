@@ -47,7 +47,7 @@ export function ProjectBento() {
           const project = projects.find((item) => item.slug === slug)!;
           const title = t(project.titleKey);
           const racing = slug === "racing-game";
-          const preview = racing || slug === "water-wise";
+          const preview = racing || slug === "water-wise" || slug === "live-notes";
           return (
             <article key={slug} className={`project-card group relative isolate flex flex-col overflow-hidden rounded-2xl border border-border bg-muted/30 transition-colors hover:border-foreground/30 ${racing ? "sm:col-span-6" : index < 3 ? "sm:col-span-3" : "sm:col-span-2"}`}>
               {preview ? (

@@ -42,7 +42,7 @@ export function ProjectPreview({ src, poster, title, playLabel, pauseLabel }: {
 
   return (
     <div className="relative aspect-video overflow-hidden bg-zinc-950" onBlur={(event) => { if (!event.currentTarget.contains(event.relatedTarget)) videoRef.current?.pause(); }}>
-      {failed ? <Image src={poster} alt={title} fill sizes="(max-width: 1024px) 100vw, 896px" className="object-contain" /> : <video ref={videoRef} src={src} poster={poster} muted loop playsInline preload="none" aria-label={title} onPlay={() => setPlaying(true)} onPause={() => setPlaying(false)} onError={() => setFailed(true)} className="h-full w-full object-cover" />}
+      {failed ? <Image src={poster} alt={title} fill sizes="(max-width: 1024px) 100vw, 896px" className="object-contain" /> : <video ref={videoRef} src={src} poster={poster} muted loop playsInline preload="none" aria-label={title} onPlay={() => setPlaying(true)} onPause={() => setPlaying(false)} onError={() => setFailed(true)} className="h-full w-full object-contain" />}
       {!failed && <button data-card-action type="button" aria-label={playing ? pauseLabel : playLabel} onClick={() => { if (playing) videoRef.current?.pause(); else play(); }} className="absolute bottom-3 right-3 z-20 inline-flex min-h-11 items-center gap-2 rounded-full border border-white/20 bg-black/75 px-4 text-xs font-medium text-white backdrop-blur-sm hover:bg-black focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
         {playing ? <Pause size={14} /> : <Play size={14} />}{playing ? pauseLabel : playLabel}
       </button>}

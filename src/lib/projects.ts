@@ -4,8 +4,7 @@ export type Project = {
   descriptionKey: string;
   tech: string[];
   image: string | { light: string; dark: string };
-  preview?: { video: string; poster: string };
-  detailVideo?: { webm: string; poster: string };
+  preview?: { video: string; webm?: string; poster: string };
   viewProject?: string;
   sourceCode?: string;
   collaboratorRepository?: boolean;
@@ -58,8 +57,7 @@ export const projects: Project[] = [
   },
   {
     slug: "live-notes",
-    detailVideo: { webm: "/videos/live-notes.webm", poster: "/videos/live-notes.webp" },
-    preview: { video: "/previews/live-notes.mp4", poster: "/previews/live-notes.webp" },
+    preview: { video: "/previews/live-notes.mp4", webm: "/videos/live-notes.webm", poster: "/videos/live-notes.webp" },
     titleKey: "projects.items.3.title",
     descriptionKey: "projects.items.3.description",
     tech: ["Next.js", "Firebase"],

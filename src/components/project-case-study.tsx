@@ -40,12 +40,29 @@ export function ProjectCaseStudy({ project, nextProject }: { project: Project; n
             {project.slug === "racing-game" && <p className="mt-3 text-xs text-muted-foreground">{language === "pt" ? "Só funciona no computador" : "Only works on computer"}</p>}
             {project.collaboratorRepository && <p className="mt-4 text-xs leading-relaxed text-muted-foreground">{labels.collaboration}</p>}
           </header>
+          {project.preview ? (
+            <div className="overflow-hidden rounded-2xl border border-border bg-muted/50">
+              <video
+                key={project.preview.video}
+                src={project.preview.video}
+                poster={project.preview.poster}
+                controls
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                aria-label={copy.title}
+                className="block max-h-[75vh] w-full object-contain"
+              />
+            </div>
+          ) : (
           <div className="relative aspect-[16/10] overflow-hidden rounded-2xl border border-border bg-muted/50 sm:aspect-video">
             {typeof project.image === "string" ? <Image src={project.image} alt={copy.title} fill priority sizes="(max-width: 1024px) 100vw, 976px" className="object-contain p-4 sm:p-8" /> : <>
               <Image src={project.image.light} alt={copy.title} fill priority sizes="(max-width: 1024px) 100vw, 976px" className="object-contain p-4 sm:p-8 dark:hidden" />
               <Image src={project.image.dark} alt={copy.title} fill priority sizes="(max-width: 1024px) 100vw, 976px" className="hidden object-contain p-4 sm:p-8 dark:block" />
             </>}
           </div>
+          )}
           <div className="mt-14 grid gap-10 md:grid-cols-[1fr_2fr] md:gap-16">
             <dl className="space-y-8">
               <div><dt className="mb-3 text-sm text-muted-foreground">{labels.role}</dt><dd className="font-medium">{copy.role}</dd></div>

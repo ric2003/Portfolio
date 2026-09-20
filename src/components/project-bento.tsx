@@ -47,11 +47,10 @@ export function ProjectBento() {
           const project = projects.find((item) => item.slug === slug)!;
           const title = t(project.titleKey);
           const racing = slug === "racing-game";
-          const preview = racing || slug === "water-wise" || slug === "live-notes";
           return (
             <article key={slug} className={`project-card group relative isolate flex flex-col overflow-hidden rounded-2xl border border-border bg-muted/30 transition-colors hover:border-foreground/30 ${racing ? "sm:col-span-6" : index < 3 ? "sm:col-span-3" : "sm:col-span-2"}`}>
-              {preview ? (
-                <ProjectPreview src={`/previews/${slug}.mp4`} poster={`/previews/${slug}.webp`} title={title} playLabel={pt ? "Ver prévia" : "Play preview"} pauseLabel={pt ? "Pausar" : "Pause preview"} />
+              {project.preview ? (
+                <ProjectPreview src={project.preview.video} poster={project.preview.poster} title={title} playLabel={pt ? "Ver prévia" : "Play preview"} pauseLabel={pt ? "Pausar" : "Pause preview"} />
               ) : <ProjectScreenshot project={project} title={title} mobile={index > 2} />}
               <div className="flex flex-1 flex-col p-5">
                 <h3 className={`${racing ? "text-2xl sm:text-3xl" : index < 3 ? "text-xl" : "text-base"} font-semibold tracking-tight`}>

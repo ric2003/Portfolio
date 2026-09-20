@@ -4,6 +4,7 @@ export type Project = {
   descriptionKey: string;
   tech: string[];
   image: string | { light: string; dark: string };
+  preview?: { video: string; poster: string };
   viewProject?: string;
   sourceCode?: string;
   collaboratorRepository?: boolean;
@@ -12,6 +13,7 @@ export type Project = {
 export const projects: Project[] = [
   {
     slug: "racing-game",
+    preview: { video: "/previews/racing-game.mp4", poster: "/previews/racing-game.webp" },
     titleKey: "projects.items.5.title",
     descriptionKey: "projects.items.5.description",
     tech: ["React", "Three.js", "TypeScript", "Node.js", "WebSockets"],
@@ -21,6 +23,7 @@ export const projects: Project[] = [
   },
   {
     slug: "water-wise",
+    preview: { video: "/previews/water-wise.mp4", poster: "/previews/water-wise.webp" },
     titleKey: "projects.items.0.title",
     descriptionKey: "projects.items.0.description",
     tech: ["React", "Next.js", "Tailwind CSS", "Convex"],
@@ -54,6 +57,7 @@ export const projects: Project[] = [
   },
   {
     slug: "live-notes",
+    preview: { video: "/previews/live-notes.mp4", poster: "/previews/live-notes.webp" },
     titleKey: "projects.items.3.title",
     descriptionKey: "projects.items.3.description",
     tech: ["Next.js", "Firebase"],

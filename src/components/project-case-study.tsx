@@ -37,7 +37,7 @@ export function ProjectCaseStudy({ project, nextProject }: { project: Project; n
               {project.viewProject && <a href={project.viewProject} target="_blank" rel="noopener noreferrer" className={`${project.slug === "racing-game" ? "hidden lg:inline-flex" : "inline-flex"} items-center gap-2 rounded-full bg-foreground px-5 py-3 text-sm font-medium text-background`}>{project.slug === "racing-game" ? (language === "pt" ? "Experimentar jogo" : "Try game") : labels.live}<ArrowUpRight size={16} /></a>}
               {project.sourceCode && <a href={project.sourceCode} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full border border-border px-5 py-3 text-sm font-medium hover:bg-muted"><Github size={16} />{labels.source}</a>}
             </div>
-            {project.slug === "racing-game" && <p className="mt-3 text-xs text-muted-foreground"><span className="hidden lg:inline">{language === "pt" ? "Só funciona no computador" : "Only works on computer"}</span><span className="lg:hidden">{language === "pt" ? "Vê o jogo no vídeo abaixo" : "Watch gameplay below"}</span></p>}
+            {project.slug === "racing-game" && <p className="mt-3 hidden text-xs text-muted-foreground lg:block">{language === "pt" ? "Só funciona no computador" : "Only works on computer"}</p>}
             {project.collaboratorRepository && <p className="mt-4 text-xs leading-relaxed text-muted-foreground">{labels.collaboration}</p>}
           </header>
           {project.preview ? (

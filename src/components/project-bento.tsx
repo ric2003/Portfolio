@@ -2,11 +2,11 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowUpRight } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { projects, type Project } from "@/lib/projects";
 import { ProjectPreview } from "@/components/project-preview";
 import { RacingDemo } from "@/components/racing-demo";
+import { ExternalLinkButton } from "@/components/external-link-button";
 
 function ProjectScreenshot({ project, title, mobile = false }: {
   project: Project;
@@ -54,14 +54,15 @@ export function ProjectBento() {
               ) : <ProjectScreenshot project={project} title={title} mobile={index > 2} />}
               <div className="flex flex-1 flex-col p-5">
                 <h3 className={`${racing ? "text-2xl sm:text-3xl" : index < 3 ? "text-xl" : "text-base"} font-semibold tracking-tight`}>
-                  {project.viewProject ? (
-                    <a data-card-action href={project.viewProject} target="_blank" rel="noopener noreferrer" aria-label={`${title} (${pt ? "abrir site num novo separador" : "open website in a new tab"})`} className="relative z-20 inline-flex items-center gap-2 underline-offset-4 hover:underline focus-visible:underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring">
-                      {title}<ArrowUpRight aria-hidden="true" size={18} className="shrink-0 text-muted-foreground" />
-                    </a>
-                  ) : title}
+                  {title}
                 </h3>
                 <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{project.tech.join(" · ")}</p>
                 {racing && <RacingDemo language={language} />}
+                {!racing && project.viewProject && (
+                  <div className="mt-4">
+                    <ExternalLinkButton language={language} href={project.viewProject}>{pt ? "Visitar site" : "Visit site"}</ExternalLinkButton>
+                  </div>
+                )}
                 <div className="mt-auto flex justify-end pt-4">
                   <Link href={`/projects/${slug}`} aria-label={`${pt ? "Ver detalhes" : "Show details"}: ${title}`} className="project-details text-xs font-medium text-muted-foreground underline-offset-4 after:absolute after:inset-0 after:z-10 focus-visible:outline-none">
                     <span className="project-details-label">{pt ? "Ver detalhes" : "Show details"}</span><span aria-hidden="true" className="ml-1">→</span>

@@ -87,7 +87,7 @@ const translation = {
           "Game to guess the title from emoji combinations. Features categories like Games, Movies, and Music, difficulty levels, progressive hints, feedback, and option to skip to another puzzle.",
       },
       {
-        title: "Racing Game",
+        title: "Kart Island",
         description:
           "Multiplayer 3D racing game for desktop browsers. Race with 2 to 4 players in private rooms, choose from six circuits, and use boosts and power-ups. Built with React and Three.js, with a Node.js server keeping races in sync over WebSockets. Made with AI while playing around with a new model drop.",
       },

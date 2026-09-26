@@ -87,7 +87,7 @@ const translation = {
           "Jogo para adivinhar o título a partir de combinações de emojis. Inclui categorias como Jogos, Filmes e Músicas, níveis de dificuldade, dicas progressivas, feedback e opção para saltar para outro enigma.",
       },
       {
-        title: "Racing Game",
+        title: "Kart Island",
         description:
           "Jogo de corridas 3D multijogador para browsers de computador. Corre com 2 a 4 jogadores em salas privadas, escolhe entre seis circuitos e usa turbos e power-ups. Desenvolvido com React e Three.js, com um servidor Node.js que sincroniza as corridas através de WebSockets. Feito com IA enquanto brincava com o lançamento de um novo modelo.",
       },

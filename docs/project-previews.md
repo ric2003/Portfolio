@@ -1,8 +1,8 @@
 # Project previews
 
-Project cards and details pages share the same video sources. Live Notes and Water Wise prefer full-resolution WebM files in `public/videos`, with H.264 MP4 compatibility fallbacks. Racing Game uses an MP4 in `public/previews`.
+Project cards and details pages share the same video sources. Live Notes and Water Wise prefer full-resolution WebM files in `public/videos`, with H.264 MP4 compatibility fallbacks. Kart Island uses an MP4 in `public/previews`.
 
-- `racing-game.mp4`: a private two-player session at https://racing-game-sooty-eta.vercel.app/.
+- `racing-game.mp4`: a private two-player session at https://play-kart-island.vercel.app/.
 - `live-notes.mp4`: Ricardo's replacement recording from 20 September 2026 at 22:08. The full 21.8 seconds are preserved at 1280 × 800 and 24 fps. The H.264 MP4 is 300,968 bytes, down from the 10,559,413-byte source. This smaller encode is only a compatibility fallback when WebM is unsupported.
 - `water-wise.mp4`: H.264 compatibility fallback generated from Ricardo's supplied `demo.webm`, preserving its 2880 × 1800 resolution and 60 fps. Both views prefer `public/videos/water-wise.webm`, an unchanged copy of the supplied 11.7-second, 6,444,139-byte VP9 recording. `public/videos/water-wise.webp` is a matching full-resolution poster.
 

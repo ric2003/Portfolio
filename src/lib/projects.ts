@@ -18,7 +18,7 @@ export const projects: Project[] = [
     descriptionKey: "projects.items.5.description",
     tech: ["React", "Three.js", "TypeScript", "Node.js", "WebSockets"],
     image: "/racing-game.png",
-    viewProject: "https://racing-game-sooty-eta.vercel.app/",
+    viewProject: "https://play-kart-island.vercel.app/",
     sourceCode: "https://github.com/ric2003/racing-game",
   },
   {

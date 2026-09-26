@@ -18,12 +18,15 @@ export function useTransitionRouter() {
       router.push(href);
       return;
     }
-    document.startViewTransition(() => new Promise<void>((resolve) => {
+    const root = document.documentElement;
+    root.dataset.viewTransition = "";
+    const transition = document.startViewTransition(() => new Promise<void>((resolve) => {
       finishTransition = resolve;
       // Never leave the page frozen if the navigation stalls.
       setTimeout(resolve, 1000);
       router.push(href);
     }));
+    transition.finished.finally(() => { delete root.dataset.viewTransition; });
   }, [router]);
 }
 

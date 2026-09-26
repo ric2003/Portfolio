@@ -3,7 +3,9 @@
 import { useState, useEffect, type KeyboardEvent } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { Dock, DockIcon } from "@/components/magicui/dock";
+import { DockIcon } from "@/components/magicui/dock";
+import { SiteDock } from "@/components/site-dock";
+import { SettingsPill } from "@/components/settings-pill";
 import {
   Home as HomeIcon,
   Briefcase,
@@ -120,18 +122,7 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-background text-foreground font-sans selection:bg-blue-500/30 transition-colors duration-300">
-      <div className="fixed top-5 right-5 z-50 flex items-center gap-1 rounded-full border border-border bg-background/85 p-1 shadow-sm backdrop-blur-md md:hidden">
-        <LanguageToggle />
-        <button
-          type="button"
-          onClick={toggleTheme}
-          className="p-2 rounded-full hover:bg-muted text-muted-foreground hover:text-foreground transition-colors"
-          aria-label={t("theme.toggle")}
-          title={t("theme.toggle")}
-        >
-          {mounted && resolvedTheme === "dark" ? <Moon size={20} /> : <Sun size={20} />}
-        </button>
-      </div>
+      <SettingsPill />
 
       <div className="max-w-2xl mx-auto py-12 px-6 sm:py-24 md:pb-24">
 
@@ -311,8 +302,7 @@ export default function Home() {
         </section>
 
         {/* Dock Navigation */}
-        <div className="hidden md:block fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
-          <Dock className="bg-background/80 backdrop-blur-md border border-border rounded-full px-3 h-14 shadow-lg">
+        <SiteDock>
             {navigationItems.map((item) => {
               const Icon = item.icon;
               return (
@@ -332,8 +322,7 @@ export default function Home() {
                 {mounted && resolvedTheme === 'dark' ? <Moon size={20} /> : <Sun size={20} />}
               </button>
             </DockIcon>
-          </Dock>
-        </div>
+        </SiteDock>
 
       </div >
     </main >

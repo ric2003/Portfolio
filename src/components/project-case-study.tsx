@@ -75,7 +75,7 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
                 className="block max-h-[75vh] w-full object-contain"
               >
                 {project.preview.webm && <source src={project.preview.webm} type='video/webm; codecs="vp9"' />}
-                <source src={project.preview.video} type="video/mp4" />
+                {project.preview.video && <source src={project.preview.video} type="video/mp4" />}
               </video>
             </div>
           ) : (

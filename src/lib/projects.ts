@@ -4,7 +4,7 @@ export type Project = {
   descriptionKey: string;
   tech: string[];
   image: string | { light: string; dark: string };
-  preview?: { video: string; webm?: string; poster: string; aspectRatio?: number };
+  preview?: { video?: string; webm?: string; poster: string; aspectRatio?: number };
   viewProject?: string;
   sourceCode?: string;
   collaboratorRepository?: boolean;
@@ -13,7 +13,7 @@ export type Project = {
 export const projects: Project[] = [
   {
     slug: "racing-game",
-    preview: { video: "/previews/racing-game.mp4", poster: "/previews/racing-game.webp" },
+    preview: { webm: "/videos/racing-game.webm", poster: "/videos/racing-game.webp", aspectRatio: 16 / 10 },
     titleKey: "projects.items.5.title",
     descriptionKey: "projects.items.5.description",
     tech: ["React", "Three.js", "TypeScript", "Node.js", "WebSockets"],

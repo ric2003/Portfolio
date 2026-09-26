@@ -132,6 +132,10 @@ html {
 }
 
 /* Page transitions between the project grid and case studies. */
+.vt-project-eyebrow {
+  view-transition-name: project-eyebrow;
+}
+
 .vt-project-intro {
   view-transition-name: project-intro;
 }
@@ -196,29 +200,75 @@ html[data-view-transition] .floating-surface {
   background-color: var(--background);
 }
 
-.pill-reveal {
+/* Extra pill content (the back button) grows to its real width (0fr → 1fr) at an even pace,
+   then fades in; it folds away the same way when leaving a case study. */
+.pill-reveal,
+.pill-collapse,
+.pill-extra {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.pill-reveal > div,
+.pill-collapse > div,
+.pill-extra > div {
   display: flex;
   align-items: center;
+  min-width: 0;
   overflow: hidden;
   white-space: nowrap;
-  animation: pill-reveal 360ms cubic-bezier(0.2, 0, 0, 1) both;
+}
+
+.pill-reveal {
+  animation: pill-reveal 650ms cubic-bezier(0.25, 0.8, 0.25, 1) both;
+}
+
+.pill-reveal > div {
+  animation: page-fade-in 450ms ease-out 200ms both;
+}
+
+.pill-collapse {
+  animation: pill-collapse 550ms cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+.pill-collapse > div {
+  animation: page-fade-out 220ms ease-out both;
 }
 
 @keyframes pill-reveal {
   from {
-    max-width: 0;
-    opacity: 0;
+    grid-template-columns: 0fr;
   }
+}
+
+@keyframes pill-collapse {
   to {
-    max-width: 14rem;
-    opacity: 1;
+    grid-template-columns: 0fr;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .pill-reveal {
+  .pill-reveal,
+  .pill-reveal > div {
     animation: none;
   }
+
+  .pill-collapse {
+    display: none;
+  }
+}
+
+/* The label above the title waits for the title too, rising in with the intro. */
+html::view-transition-group(project-eyebrow) {
+  animation: none;
+}
+
+html::view-transition-old(project-eyebrow) {
+  animation: 150ms ease-out both page-fade-out;
+}
+
+html::view-transition-new(project-eyebrow) {
+  animation: 420ms cubic-bezier(0.2, 0, 0, 1) 260ms both content-rise;
 }
 
 /* Swap the small and large title quickly so the glide never shows a double image. */

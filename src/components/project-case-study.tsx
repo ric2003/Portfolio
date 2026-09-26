@@ -36,16 +36,20 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
 
   return (
     <main className="min-h-screen bg-background text-foreground selection:bg-blue-500/30">
-      <div className="mx-auto max-w-5xl px-6 py-8 sm:py-12">
-        <nav aria-label={t("navigation.label")} className="mb-16 flex items-center justify-between gap-4">
-          <TransitionLink href={`/#project-${project.slug}`} onClick={() => { titleMorph.slug = project.slug; }} className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground"><ArrowLeft size={16} />{labels.back}</TransitionLink>
-          <div className="flex items-center gap-2">
+      <header className="sticky top-0 z-40 bg-background/80 backdrop-blur-md sm:pt-3">
+        <nav aria-label={t("navigation.label")} className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-6 py-3">
+          <TransitionLink href={`/#project-${project.slug}`} onClick={() => { titleMorph.slug = project.slug; }} className="group inline-flex h-10 items-center gap-2 rounded-full border border-border bg-muted/30 pl-3 pr-4 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring">
+            <ArrowLeft aria-hidden="true" size={16} className="transition-transform group-hover:-translate-x-0.5 motion-reduce:transform-none" />{labels.back}
+          </TransitionLink>
+          <div className="flex h-10 items-center gap-0.5 rounded-full border border-border bg-muted/30 px-0.5">
             <LanguageToggle />
-            <button type="button" aria-label={t("theme.toggle")} onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")} className="rounded-full p-2 text-muted-foreground hover:bg-muted hover:text-foreground">
+            <button type="button" aria-label={t("theme.toggle")} onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")} className="cursor-pointer rounded-full p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring">
               <Sun size={20} className="dark:hidden" /><Moon size={20} className="hidden dark:block" />
             </button>
           </div>
         </nav>
+      </header>
+      <div className="mx-auto max-w-5xl px-6 pb-8 pt-12 sm:pb-12 sm:pt-16">
         <article>
           <header className="mb-10 max-w-3xl">
             <p className="mb-4 text-xs font-medium uppercase tracking-widest text-muted-foreground">{labels.study}</p>

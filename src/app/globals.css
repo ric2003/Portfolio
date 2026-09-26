@@ -130,3 +130,84 @@ html {
   outline: 2px solid var(--ring);
   outline-offset: 4px;
 }
+
+/* Page transitions between the project grid and case studies. */
+.vt-project-intro {
+  view-transition-name: project-intro;
+}
+
+.vt-project-media {
+  view-transition-name: project-media;
+}
+
+.vt-project-body {
+  view-transition-name: project-body;
+}
+
+::view-transition-group(*) {
+  animation-duration: 380ms;
+  animation-timing-function: cubic-bezier(0.2, 0, 0, 1);
+}
+
+::view-transition-old(root) {
+  animation: 150ms ease-out both page-fade-out;
+}
+
+::view-transition-new(root) {
+  animation: 250ms ease-out 50ms both page-fade-in;
+}
+
+/* Swap the small and large title quickly so the glide never shows a double image. */
+::view-transition-old(project-title) {
+  animation: 120ms ease-out both page-fade-out;
+}
+
+::view-transition-new(project-title) {
+  animation: 120ms ease-out both page-fade-in;
+}
+
+/* Case study content settles in once the title has landed, one block after another. */
+::view-transition-group(project-intro),
+::view-transition-group(project-media),
+::view-transition-group(project-body) {
+  animation: none;
+}
+
+::view-transition-old(project-intro),
+::view-transition-old(project-media),
+::view-transition-old(project-body) {
+  animation: 150ms ease-out both page-fade-out;
+}
+
+::view-transition-new(project-intro),
+::view-transition-new(project-media),
+::view-transition-new(project-body) {
+  animation: 420ms cubic-bezier(0.2, 0, 0, 1) 260ms both content-rise;
+}
+
+::view-transition-new(project-media) {
+  animation-delay: 320ms;
+}
+
+::view-transition-new(project-body) {
+  animation-delay: 380ms;
+}
+
+@keyframes page-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes page-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes content-rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}

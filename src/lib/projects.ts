@@ -75,3 +75,6 @@ export const projects: Project[] = [
   },
 ];
 
+
+/** Display order used by the homepage grid and case study navigation. */
+export const projectOrder = ["racing-game", "water-wise", "live-notes", "yoke", "emoji-puzzle", "sns-hospitals"];

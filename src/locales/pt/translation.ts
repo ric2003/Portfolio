@@ -60,38 +60,38 @@ const translation = {
     source: "Código",
     collaborator_repository:
       "Projeto colaborativo — o repositório está alojado na conta GitHub do meu amigo da universidade.",
-    items: [
-      {
+    items: {
+      "water-wise": {
         title: "Water Wise",
         description:
           "O meu projeto final de licenciatura em Engenharia Informática, desenvolvido com um colega de curso. Uma plataforma web que reúne dados de albufeiras, estações meteorológicas e satélite para a gestão da água em Portugal numa única interface com mapa.",
       },
-      {
+      yoke: {
         title: "Yoke - App de Fitness",
         description:
           "Uma aplicação de fitness para treinos, nutrição e progresso, desenvolvida com um amigo em React Native. Escolhemo-lo em vez do Flutter porque já trabalhávamos com React todos os dias.",
       },
-      {
+      "sns-hospitals": {
         title: "App SNS Hospitais",
         description:
           "Uma aplicação Flutter para os hospitais públicos em Portugal, desenvolvida com um colega de curso para uma cadeira da universidade, ao longo de duas fases. Para além das funcionalidades obrigatórias, focámo-nos numa arquitetura limpa e numa aplicação que continua a funcionar sem Internet.",
       },
-      {
+      "live-notes": {
         title: "Live Notes",
         description:
           "Um quadro partilhado onde as pessoas deixam notas e veem as alterações de todos no momento, feito para explorar os WebSockets em tempo real do Firebase depois de experimentar o Convex.",
       },
-      {
+      "emoji-puzzle": {
         title: "Puzzles de Emojis",
         description:
           "Um pequeno jogo de adivinhas com emojis em React Native, feito para terminar algo simples depois de uma aplicação de fitness ambiciosa. Adivinha o jogo, filme ou música escondido em cada fila de emojis.",
       },
-      {
+      "racing-game": {
         title: "Kart Island",
         description:
           "Um jogo de corridas de karts 3D multijogador para browsers de computador, desenvolvido com IA como projeto pessoal. Até quatro pilotos partilham uma sala privada em seis circuitos, com pilotos controlados pelo computador a preencher os lugares vazios.",
       },
-    ],
+    },
   },
   contact: {
     title: "Vamos conectar-nos",

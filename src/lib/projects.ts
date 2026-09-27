@@ -1,7 +1,5 @@
 export type Project = {
   slug: string;
-  titleKey: string;
-  descriptionKey: string;
   tech: string[];
   image: string | { light: string; dark: string };
   preview?: { video?: string; webm?: string; poster: string; aspectRatio?: number };
@@ -14,8 +12,6 @@ export const projects: Project[] = [
   {
     slug: "racing-game",
     preview: { webm: "/videos/racing-game.webm", poster: "/videos/racing-game.webp", aspectRatio: 16 / 10 },
-    titleKey: "projects.items.5.title",
-    descriptionKey: "projects.items.5.description",
     tech: ["React", "Three.js", "TypeScript", "Node.js", "WebSockets"],
     image: "/videos/racing-game.webp",
     viewProject: "https://play-kart-island.vercel.app/",
@@ -24,8 +20,6 @@ export const projects: Project[] = [
   {
     slug: "water-wise",
     preview: { webm: "/videos/water-wise.webm", poster: "/videos/water-wise.webp", aspectRatio: 16 / 10 },
-    titleKey: "projects.items.0.title",
-    descriptionKey: "projects.items.0.description",
     tech: ["Next.js", "TypeScript", "React Query", "InfluxDB", "Convex"],
     image: {
       light: "/waterwise_lightMode.webp",
@@ -37,8 +31,6 @@ export const projects: Project[] = [
   },
   {
     slug: "yoke",
-    titleKey: "projects.items.1.title",
-    descriptionKey: "projects.items.1.description",
     tech: ["React Native", "Expo", "TypeScript"],
     image: "/yoke.webp",
     sourceCode: "https://github.com/Acr2004/yoke-gym-app",
@@ -46,8 +38,6 @@ export const projects: Project[] = [
   },
   {
     slug: "emoji-puzzle",
-    titleKey: "projects.items.4.title",
-    descriptionKey: "projects.items.4.description",
     tech: ["React Native", "Expo", "TypeScript"],
     image: {
       light: "/emojiPuzzle_lightMode.webp",
@@ -58,8 +48,6 @@ export const projects: Project[] = [
   {
     slug: "live-notes",
     preview: { video: "/previews/live-notes.mp4", webm: "/videos/live-notes.webm", poster: "/videos/live-notes.webp", aspectRatio: 16 / 10 },
-    titleKey: "projects.items.3.title",
-    descriptionKey: "projects.items.3.description",
     tech: ["Next.js", "TypeScript", "Firebase"],
     image: "/noteApp.webp",
     viewProject: "https://live-update-notes.netlify.app/",
@@ -67,8 +55,6 @@ export const projects: Project[] = [
   },
   {
     slug: "sns-hospitals",
-    titleKey: "projects.items.2.title",
-    descriptionKey: "projects.items.2.description",
     tech: ["Flutter", "Dart", "SQLite", "Google Maps"],
     image: "/flutter-sns-app.webp",
     sourceCode: "https://github.com/ric2003/flutter-App-SNS-Hospitais",

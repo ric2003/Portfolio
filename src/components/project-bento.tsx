@@ -6,6 +6,7 @@ import { projectOrder, projects, type Project } from "@/lib/projects";
 import { ProjectPreview } from "@/components/project-preview";
 import { RacingDemo } from "@/components/racing-demo";
 import { ExternalLinkButton } from "@/components/external-link-button";
+import { getProjectStudy } from "@/lib/project-studies";
 import { TransitionLink, titleMorph } from "@/components/view-transition";
 
 function ProjectScreenshot({ project, title, mobile = false }: {
@@ -39,7 +40,7 @@ export function ProjectBento() {
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-6">
         {projectOrder.map((slug, index) => {
           const project = projects.find((item) => item.slug === slug)!;
-          const title = t(project.titleKey);
+          const title = getProjectStudy(project, language).title;
           const racing = slug === "racing-game";
           return (
             <article key={slug} id={`project-${slug}`} className={`project-card scroll-mt-24 group relative isolate flex flex-col overflow-hidden rounded-2xl border border-border bg-muted/30 transition-colors hover:border-foreground/30 ${racing ? "sm:col-span-6" : index < 3 ? "sm:col-span-3" : "sm:col-span-2"}`}>

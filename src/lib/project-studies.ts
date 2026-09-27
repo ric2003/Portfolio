@@ -33,9 +33,8 @@ const studies: Record<string, Record<"en" | "pt", Study>> = {
 
 export function getProjectStudy(project: Project, language: "en" | "pt") {
   const translations = language === "pt" ? pt : en;
-  const index = Number(project.titleKey.split(".")[2]);
   return {
-    ...translations.projects.items[index],
+    ...translations.projects.items[project.slug as keyof typeof translations.projects.items],
     ...studies[project.slug as keyof typeof studies][language],
   };
 }

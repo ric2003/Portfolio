@@ -29,7 +29,8 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.defaultPrevented || event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
-      if ((event.target as HTMLElement).closest("input, textarea, select, [contenteditable]")) return;
+      // Leave arrow keys to form fields and media controls, e.g. seeking a focused video.
+      if ((event.target as HTMLElement).closest("input, textarea, select, video, audio, [contenteditable], [role=slider]")) return;
       if (event.key === "ArrowLeft") navigate(`/projects/${previousProject.slug}`);
       if (event.key === "ArrowRight") navigate(`/projects/${nextProject.slug}`);
     };

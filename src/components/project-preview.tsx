@@ -11,6 +11,8 @@ export function ProjectPreview({ src, webm, poster, title, playLabel, pauseLabel
   const videoRef = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(false);
   const [failed, setFailed] = useState(false);
+  // An explicit pause wins over hover autoplay until the visitor presses play again.
+  const userPaused = useRef(false);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -21,7 +23,7 @@ export function ProjectPreview({ src, webm, poster, title, playLabel, pauseLabel
     const pauseWhenHidden = () => { if (document.hidden) video.pause(); };
     const card = video.closest("article");
     const startOnHover = () => {
-      if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      if (!userPaused.current && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
         void video.play().catch(() => setPlaying(false));
       }
     };
@@ -46,7 +48,7 @@ export function ProjectPreview({ src, webm, poster, title, playLabel, pauseLabel
         {webm && <source src={webm} type='video/webm; codecs="vp9"' />}
         {src && <source src={src} type="video/mp4" />}
       </video>}
-      {!failed && <button data-card-action type="button" aria-label={playing ? pauseLabel : playLabel} onClick={() => { if (playing) videoRef.current?.pause(); else play(); }} className="absolute bottom-3 right-3 z-20 inline-flex min-h-11 items-center gap-2 rounded-full border border-white/20 bg-black/75 px-4 text-xs font-medium text-white backdrop-blur-sm hover:bg-black focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
+      {!failed && <button data-card-action type="button" aria-label={playing ? pauseLabel : playLabel} onClick={() => { userPaused.current = playing; if (playing) videoRef.current?.pause(); else play(); }} className="absolute bottom-3 right-3 z-20 inline-flex min-h-11 items-center gap-2 rounded-full border border-white/20 bg-black/75 px-4 text-xs font-medium text-white backdrop-blur-sm hover:bg-black focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
         {playing ? <Pause size={14} /> : <Play size={14} />}{playing ? pauseLabel : playLabel}
       </button>}
     </div>

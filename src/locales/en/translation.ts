@@ -69,7 +69,7 @@ const translation = {
       {
         title: "Yoke - Fitness App",
         description:
-          "Co-developing a mobile fitness app as a side project with a friend to track workouts, nutrition, and progress, featuring exercise libraries and customizable meal planning.",
+          "A fitness app for workouts, nutrition and progress, built with a friend in React Native. We picked it over Flutter because we were already working in React every day.",
       },
       {
         title: "SNS Hospitals App",

@@ -39,7 +39,7 @@ export const projects: Project[] = [
     slug: "yoke",
     titleKey: "projects.items.1.title",
     descriptionKey: "projects.items.1.description",
-    tech: ["React Native", "TypeScript", "Node.js"],
+    tech: ["React Native", "Expo", "TypeScript"],
     image: "/yoke.webp",
     sourceCode: "https://github.com/Acr2004/yoke-gym-app",
     collaboratorRepository: true,

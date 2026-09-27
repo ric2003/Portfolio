@@ -82,9 +82,9 @@ const translation = {
           "Um quadro partilhado onde as pessoas deixam notas e veem as alterações de todos no momento, feito para explorar os WebSockets em tempo real do Firebase depois de experimentar o Convex.",
       },
       {
-        title: "App de puzzles com emojis",
+        title: "Puzzles de Emojis",
         description:
-          "Jogo para adivinhar o título a partir de combinações de emojis. Inclui categorias como Jogos, Filmes e Músicas, níveis de dificuldade, dicas progressivas, feedback e opção para saltar para outro enigma.",
+          "Um pequeno jogo de adivinhas com emojis em React Native, feito para terminar algo simples depois de uma aplicação de fitness ambiciosa. Adivinha o jogo, filme ou música escondido em cada fila de emojis.",
       },
       {
         title: "Kart Island",

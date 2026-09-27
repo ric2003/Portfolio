@@ -84,7 +84,7 @@ const translation = {
       {
         title: "Emoji Puzzle App",
         description:
-          "Game to guess the title from emoji combinations. Features categories like Games, Movies, and Music, difficulty levels, progressive hints, feedback, and option to skip to another puzzle.",
+          "A small emoji guessing game in React Native, built to finish something simple after an ambitious fitness app. Guess the game, movie or song hidden in each row of emojis.",
       },
       {
         title: "Kart Island",

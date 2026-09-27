@@ -48,7 +48,7 @@ export const projects: Project[] = [
     slug: "emoji-puzzle",
     titleKey: "projects.items.4.title",
     descriptionKey: "projects.items.4.description",
-    tech: ["React Native", "Expo"],
+    tech: ["React Native", "Expo", "TypeScript"],
     image: {
       light: "/emojiPuzzle_lightMode.webp",
       dark: "/emojiPuzzle_darkMode.webp",

@@ -89,7 +89,7 @@ const translation = {
       {
         title: "Kart Island",
         description:
-          "Jogo de corridas 3D multijogador para browsers de computador. Corre com 2 a 4 jogadores em salas privadas, escolhe entre seis circuitos e usa turbos e power-ups. Desenvolvido com React e Three.js, com um servidor Node.js que sincroniza as corridas através de WebSockets. Feito com IA enquanto brincava com o lançamento de um novo modelo.",
+          "Um jogo de corridas de karts 3D multijogador para browsers de computador, desenvolvido com IA como projeto pessoal. Até quatro pilotos partilham uma sala privada em seis circuitos, com pilotos controlados pelo computador a preencher os lugares vazios.",
       },
     ],
   },

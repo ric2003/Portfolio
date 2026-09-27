@@ -89,7 +89,7 @@ const translation = {
       {
         title: "Kart Island",
         description:
-          "Multiplayer 3D racing game for desktop browsers. Race with 2 to 4 players in private rooms, choose from six circuits, and use boosts and power-ups. Built with React and Three.js, with a Node.js server keeping races in sync over WebSockets. Made with AI while playing around with a new model drop.",
+          "A multiplayer 3D kart racing game for desktop browsers, built with AI as a personal project. Up to four racers share a private room across six circuits, with computer drivers filling any empty spots.",
       },
     ],
   },

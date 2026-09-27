@@ -53,7 +53,7 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
             <div className="vt-project-intro">
             <p className="mt-6 text-lg leading-relaxed text-muted-foreground">{copy.description}</p>
             <div className="mt-8 flex flex-wrap gap-3">
-              {project.viewProject && <a href={project.viewProject} target="_blank" rel="noopener noreferrer" className={`${project.slug === "racing-game" ? "hidden lg:inline-flex" : "inline-flex"} items-center gap-2 rounded-full bg-foreground px-5 py-3 text-sm font-medium text-background`}>{labels.visitProject(copy.title)}<ArrowUpRight size={16} /></a>}
+              {project.viewProject && <a href={project.viewProject} target="_blank" rel="noopener noreferrer" className={`${project.slug === "racing-game" ? "hidden lg:inline-flex" : "inline-flex"} items-center gap-2 rounded-full bg-foreground px-5 py-3 text-sm font-medium text-background`}>{project.slug === "racing-game" ? labels.tryProject(copy.title) : labels.visitProject(copy.title)}<ArrowUpRight size={16} /></a>}
               {project.sourceCode && <a href={project.sourceCode} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full border border-border px-5 py-3 text-sm font-medium hover:bg-muted"><Github size={16} />{labels.source}</a>}
             </div>
             {project.slug === "racing-game" && <p className="mt-3 hidden text-xs text-muted-foreground lg:block">{language === "pt" ? "Só funciona no computador" : "Only works on computer"}</p>}

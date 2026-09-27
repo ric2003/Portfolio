@@ -16,17 +16,12 @@ function ProjectScreenshot({ project, title, mobile = false }: {
   const images = typeof project.image === "string"
     ? [{ src: project.image, className: "" }]
     : [{ src: project.image.light, className: "dark:hidden" }, { src: project.image.dark, className: "hidden dark:block" }];
-  const backdrop = {
-    yoke: "bg-amber-500/10",
-    "emoji-puzzle": "bg-violet-500/10",
-    "sns-hospitals": "bg-sky-500/10",
-  }[project.slug] ?? "bg-muted/50";
-
   return (
-    <div className={`relative flex items-center justify-center overflow-hidden border-b border-border ${mobile ? `h-72 p-5 ${backdrop}` : "aspect-video bg-muted/50"}`}>
-      <div className={mobile ? "relative h-full aspect-[1170/2532] overflow-hidden rounded-xl ring-1 ring-black/10 shadow-md transition-transform duration-300 group-hover:-translate-y-1 motion-reduce:transform-none" : "relative h-full w-full"}>
+    <div className={`relative flex items-center justify-center overflow-hidden border-b border-border bg-muted/50 ${mobile ? "h-72" : "aspect-video"}`}>
+      {/* Phone screenshots rise from the bottom edge, cropped like a product shot. */}
+      <div className={mobile ? "absolute top-7 left-1/2 w-[62%] max-w-60 sm:w-[82%] -translate-x-1/2 aspect-[1170/2532] overflow-hidden rounded-[1.25rem] ring-1 ring-black/10 shadow-2xl shadow-black/40 transition-transform duration-300 group-hover:-translate-y-1.5 motion-reduce:transform-none dark:ring-white/10" : "relative h-full w-full"}>
         {images.map(({ src, className }) => (
-          <Image key={src} src={src} alt={title} fill loading="eager" sizes={mobile ? "120px" : "(max-width: 639px) 100vw, 424px"} className={`object-contain ${className}`} />
+          <Image key={src} src={src} alt={title} fill loading="eager" sizes={mobile ? "(max-width: 639px) 62vw, 200px" : "(max-width: 639px) 100vw, 424px"} className={`object-cover object-top ${className}`} />
         ))}
       </div>
     </div>

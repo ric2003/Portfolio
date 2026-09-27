@@ -60,7 +60,7 @@ export const projects: Project[] = [
     preview: { video: "/previews/live-notes.mp4", webm: "/videos/live-notes.webm", poster: "/videos/live-notes.webp", aspectRatio: 16 / 10 },
     titleKey: "projects.items.3.title",
     descriptionKey: "projects.items.3.description",
-    tech: ["Next.js", "Firebase"],
+    tech: ["Next.js", "TypeScript", "Firebase"],
     image: "/noteApp.webp",
     viewProject: "https://live-update-notes.netlify.app/",
     sourceCode: "https://github.com/ric2003/notes-app",

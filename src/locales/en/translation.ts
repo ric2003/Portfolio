@@ -79,7 +79,7 @@ const translation = {
       {
         title: "Live Notes App",
         description:
-          "Real-time collaborative notes app with a zoomable canvas to create, move, and edit notes. Includes live presence and authenticated sessions. Built with Next.js and Firebase.",
+          "A shared board where people leave notes and see everyone's changes as they happen, built to explore Firebase's real-time WebSockets after trying Convex.",
       },
       {
         title: "Emoji Puzzle App",

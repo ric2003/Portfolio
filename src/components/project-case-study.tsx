@@ -49,7 +49,6 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
       <div className="mx-auto max-w-5xl px-6 pb-8 pt-28 sm:pb-12 md:pb-32 md:pt-24">
         <article>
           <header className="mb-10 max-w-3xl">
-            <p className="vt-project-eyebrow mb-4 text-xs font-medium uppercase tracking-widest text-muted-foreground">{labels.study}</p>
             <h1 className="text-4xl font-bold tracking-tight sm:text-6xl"><span className="inline-block leading-[1.1] [view-transition-name:project-title]">{copy.title}</span></h1>
             <div className="vt-project-intro">
             <p className="mt-6 text-lg leading-relaxed text-muted-foreground">{copy.description}</p>

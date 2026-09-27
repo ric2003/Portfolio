@@ -64,7 +64,7 @@ const translation = {
       {
         title: "Water Wise",
         description:
-          "Co-developed a geospatial platform for managing Portuguese reservoirs, designed to support farmers and water researchers with real-time data and soon decision-making tools.",
+          "My final-year Computer Engineering project, built with a classmate. A web platform that brings reservoir, weather station and satellite data for water management in Portugal into one map-based interface.",
       },
       {
         title: "Yoke - Fitness App",
@@ -74,7 +74,7 @@ const translation = {
       {
         title: "SNS Hospitals App",
         description:
-          "Co-developed a mobile app to help users find and evaluate hospitals in Portugal, featuring real-time hospital data, interactive maps, and offline support.",
+          "A Flutter app for Portugal's public hospitals, built with a classmate for a university class, across two phases. Beyond the required features, we focused on a clean architecture and on an app that keeps working offline.",
       },
       {
         title: "Live Notes App",

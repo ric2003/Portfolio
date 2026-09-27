@@ -64,7 +64,7 @@ const translation = {
       {
         title: "Water Wise",
         description:
-          "Co-desenvolvi uma plataforma geoespacial para gestão de reservatórios portugueses, concebida para apoiar agricultores e investigadores de recursos hídricos com dados em tempo real e em breve ferramentas de tomada de decisão.",
+          "O meu projeto final de licenciatura em Engenharia Informática, desenvolvido com um colega de curso. Uma plataforma web que reúne dados de albufeiras, estações meteorológicas e satélite para a gestão da água em Portugal numa única interface com mapa.",
       },
       {
         title: "Yoke - App de Fitness",
@@ -74,7 +74,7 @@ const translation = {
       {
         title: "App SNS Hospitais",
         description:
-          "Co-desenvolvi uma aplicação móvel para ajudar utilizadores a encontrar e avaliar hospitais em Portugal, com dados hospitalares em tempo real, mapas interativos e suporte offline.",
+          "Uma aplicação Flutter para os hospitais públicos em Portugal, desenvolvida com um colega de curso para uma cadeira da universidade, ao longo de duas fases. Para além das funcionalidades obrigatórias, focámo-nos numa arquitetura limpa e numa aplicação que continua a funcionar sem Internet.",
       },
       {
         title: "Live Notes",

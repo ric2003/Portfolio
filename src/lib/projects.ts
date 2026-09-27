@@ -26,7 +26,7 @@ export const projects: Project[] = [
     preview: { webm: "/videos/water-wise.webm", poster: "/videos/water-wise.webp", aspectRatio: 16 / 10 },
     titleKey: "projects.items.0.title",
     descriptionKey: "projects.items.0.description",
-    tech: ["React", "Next.js", "Tailwind CSS", "Convex"],
+    tech: ["Next.js", "TypeScript", "React Query", "InfluxDB", "Convex"],
     image: {
       light: "/waterwise_lightMode.webp",
       dark: "/waterwise_darkMode.webp",
@@ -69,7 +69,7 @@ export const projects: Project[] = [
     slug: "sns-hospitals",
     titleKey: "projects.items.2.title",
     descriptionKey: "projects.items.2.description",
-    tech: ["Flutter", "Dart", "Google Maps"],
+    tech: ["Flutter", "Dart", "SQLite", "Google Maps"],
     image: "/flutter-sns-app.webp",
     sourceCode: "https://github.com/ric2003/flutter-App-SNS-Hospitais",
   },

@@ -85,14 +85,19 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
             </>}
           </div>
           )}
-          <div className="vt-project-body mt-14 grid gap-10 md:grid-cols-[1fr_2fr] md:gap-16">
-            <dl className="space-y-8">
-              <div><dt className="mb-3 text-sm text-muted-foreground">{labels.role}</dt><dd className="font-medium">{copy.role}</dd></div>
-              <div><dt className="mb-3 text-sm text-muted-foreground">{labels.stack}</dt><dd className="flex flex-wrap gap-2">{project.tech.map((tech) => <span key={tech} className="rounded-md border border-border bg-muted/50 px-3 py-1 text-xs">{tech}</span>)}</dd></div>
+          <div className="vt-project-body mt-14">
+            <dl className="grid grid-cols-2 gap-x-6 gap-y-4 border-y border-border py-5 sm:flex sm:flex-wrap sm:gap-x-10">
+              {[
+                [labels.role, copy.role],
+                [labels.team, copy.team],
+                [labels.context, copy.context],
+                [labels.stack, project.tech.join(" · ")],
+              ].filter(([, value]) => value).map(([label, value]) => (
+                <div key={label} className={label === labels.stack ? "col-span-2" : undefined}><dt className="mb-1 text-xs text-muted-foreground">{label}</dt><dd className="text-sm font-medium">{value}</dd></div>
+              ))}
             </dl>
-            <div className="space-y-8">
-              <section><h2 className="mb-3 text-xl font-semibold">{labels.challenge}</h2><p className="leading-relaxed text-muted-foreground">{copy.challenge}</p></section>
-              <section><h2 className="mb-3 text-xl font-semibold">{labels.approach}</h2><p className="leading-relaxed text-muted-foreground">{copy.approach}</p></section>
+            <div className="mt-10 max-w-2xl space-y-5">
+              {copy.story.map((paragraph) => <p key={paragraph} className="text-lg leading-relaxed text-muted-foreground">{paragraph}</p>)}
             </div>
           </div>
 

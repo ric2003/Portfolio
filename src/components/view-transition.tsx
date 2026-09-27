@@ -33,8 +33,16 @@ export function useTransitionRouter() {
 export function ViewTransitionResolver() {
   const pathname = usePathname();
   useEffect(() => {
-    finishTransition?.();
+    const finish = finishTransition;
     finishTransition = null;
+    if (!finish) return;
+    // Wait for on-screen images to decode so the new page isn't captured with empty frames.
+    const visible = [...document.images].filter((image) => {
+      const rect = image.getBoundingClientRect();
+      return rect.bottom > 0 && rect.top < innerHeight && rect.width > 0;
+    });
+    const timeout = new Promise((resolve) => setTimeout(resolve, 400));
+    void Promise.race([Promise.all(visible.map((image) => image.decode().catch(() => {}))), timeout]).then(finish);
   }, [pathname]);
   return null;
 }

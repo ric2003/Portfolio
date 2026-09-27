@@ -26,7 +26,7 @@ function ProjectScreenshot({ project, title, mobile = false }: {
     <div className={`relative flex items-center justify-center overflow-hidden border-b border-border ${mobile ? `h-72 p-5 ${backdrop}` : "aspect-video bg-muted/50"}`}>
       <div className={mobile ? "relative h-full aspect-[1170/2532] overflow-hidden rounded-xl ring-1 ring-black/10 shadow-md transition-transform duration-300 group-hover:-translate-y-1 motion-reduce:transform-none" : "relative h-full w-full"}>
         {images.map(({ src, className }) => (
-          <Image key={src} src={src} alt={title} fill sizes={mobile ? "120px" : "(max-width: 639px) 100vw, 424px"} className={`object-contain ${className}`} />
+          <Image key={src} src={src} alt={title} fill loading="eager" sizes={mobile ? "120px" : "(max-width: 639px) 100vw, 424px"} className={`object-contain ${className}`} />
         ))}
       </div>
     </div>

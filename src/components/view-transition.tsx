@@ -27,6 +27,23 @@ function transitionTo(navigate: () => void) {
     setTimeout(resolve, 1000);
     navigate();
   }));
+  // Safari can retain finished snapshot animations between navigations.
+  // Restart only the incoming content, preserving the CSS delays and title morph.
+  void transition.ready.then(() => {
+    const entrances = new Set([
+      "::view-transition-new(project-intro)",
+      "::view-transition-new(project-media)",
+      "::view-transition-new(project-body)",
+    ]);
+    for (const animation of document.getAnimations()) {
+      const effect = animation.effect;
+      if (effect instanceof KeyframeEffect && effect.target === root &&
+          entrances.has(effect.pseudoElement ?? "")) {
+        animation.currentTime = 0;
+        animation.play();
+      }
+    }
+  }, () => {}); // A skipped transition may reject ready.
   transition.finished.finally(() => { delete root.dataset.viewTransition; });
 }
 

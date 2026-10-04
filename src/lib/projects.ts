@@ -5,6 +5,7 @@ export type Project = {
   preview?: { video?: string; webm?: string; poster: string; aspectRatio?: number };
   viewProject?: string;
   sourceCode?: string;
+  finalReport?: string;
   collaboratorRepository?: boolean;
 };
 
@@ -27,6 +28,7 @@ export const projects: Project[] = [
     },
     viewProject: "https://water-wise-one.vercel.app/",
     sourceCode: "https://github.com/Acr2004/water-wise",
+    finalReport: "/reports/water-wise-final-report-pt.pdf",
     collaboratorRepository: true,
   },
   {

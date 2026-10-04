@@ -58,36 +58,44 @@ const translation = {
     source_code: "Source Code",
     website: "Website",
     source: "Source",
+    final_report: "Read the final report",
+    final_report_language: "PDF in Portuguese",
     collaborator_repository:
       "This was a collaborative project. The repository is hosted on my university friend's GitHub account.",
     items: {
       "water-wise": {
         title: "Water Wise",
+        subtitle: "Water data across Portugal",
         description:
           "My final-year Computer Engineering project, built with a classmate. A web platform that brings reservoir, weather station and satellite data for water management in Portugal into one map-based interface.",
       },
       yoke: {
         title: "Yoke - Fitness App",
+        subtitle: "A fitness app prototype",
         description:
           "A fitness app for workouts, nutrition and progress, built with a friend in React Native. We picked it over Flutter because we were already working in React every day.",
       },
       "sns-hospitals": {
         title: "SNS Hospitals App",
+        subtitle: "Hospital information, offline",
         description:
           "A Flutter app for Portugal's public hospitals, built with a classmate for a university class, across two phases. Beyond the required features, we focused on a clean architecture and on an app that keeps working offline.",
       },
       "live-notes": {
         title: "Live Notes App",
+        subtitle: "A shared board for notes",
         description:
           "A shared board where people leave notes and see everyone's changes as they happen, built to explore Firebase's real-time WebSockets after trying Convex.",
       },
       "emoji-puzzle": {
         title: "Emoji Puzzle App",
+        subtitle: "Guess the title from emojis",
         description:
           "A small emoji guessing game in React Native, built to finish something simple after an ambitious fitness app. Guess the game, movie or song hidden in each row of emojis.",
       },
       "racing-game": {
         title: "Kart Island",
+        subtitle: "Multiplayer kart racing",
         description:
           "A multiplayer 3D kart racing game for desktop browsers, built with AI as a personal project. Up to four racers share a private room across six circuits, with computer drivers filling any empty spots.",
       },

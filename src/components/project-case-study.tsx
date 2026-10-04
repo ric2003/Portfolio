@@ -99,6 +99,12 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
             </dl>
             <div className="mt-10 max-w-2xl space-y-5">
               {copy.story.map((paragraph) => <p key={paragraph} className="text-lg leading-relaxed text-muted-foreground">{paragraph}</p>)}
+              {project.finalReport && (
+                <a href={project.finalReport} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 flex-wrap items-center gap-x-3 gap-y-1 rounded-sm text-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring">
+                  <span className="inline-flex items-center gap-1.5 underline underline-offset-4">{t("projects.final_report")}<ArrowUpRight aria-hidden="true" size={14} /></span>
+                  <span className="text-xs text-muted-foreground">{language === "pt" ? "PDF" : t("projects.final_report_language")}</span>
+                </a>
+              )}
             </div>
           </div>
 

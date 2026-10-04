@@ -45,13 +45,13 @@ export function ProjectBento() {
           return (
             <article key={slug} id={`project-${slug}`} className={`project-card scroll-mt-24 group relative isolate flex flex-col overflow-hidden rounded-2xl border border-border bg-muted/30 transition-colors hover:border-foreground/30 ${racing ? "sm:col-span-6" : index < 3 ? "sm:col-span-3" : "sm:col-span-2"}`}>
               {project.preview ? (
-                <ProjectPreview src={project.preview.video} webm={project.preview.webm} aspectRatio={project.preview.aspectRatio} poster={project.preview.poster} title={title} playLabel={pt ? "Ver prévia" : "Play preview"} pauseLabel={pt ? "Pausar" : "Pause preview"} />
+                <ProjectPreview src={project.preview.video} webm={project.preview.webm} aspectRatio={project.preview.aspectRatio} poster={project.preview.poster} title={title} playLabel={pt ? "Ver demonstração" : "Play preview"} pauseLabel={pt ? "Pausar" : "Pause preview"} />
               ) : <ProjectScreenshot project={project} title={title} mobile={index > 2} />}
               <div className="flex flex-1 flex-col p-5">
                 <h3 className={`${racing ? "text-2xl sm:text-3xl" : index < 3 ? "text-xl" : "text-base"} font-semibold tracking-tight`}>
                   <span data-project-title className="inline-block leading-[1.1]" style={titleMorph.slug === slug ? { viewTransitionName: "project-title" } : undefined}>{title}</span>
                 </h3>
-                <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{project.tech.join(" · ")}</p>
+                <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{t(`projects.items.${slug}.subtitle`)}</p>
                 {racing && <RacingDemo language={language} />}
                 {!racing && project.viewProject && (
                   <div className="mt-4">

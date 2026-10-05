@@ -118,3 +118,193 @@ html {
     animation: none;
   }
 }
+
+/* The website title and preview controls have their own hover targets. */
+.project-card:hover:not(:has([data-card-action]:hover)) .project-details-label,
+.project-details:focus-visible .project-details-label {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.project-card:has(.project-details:focus-visible) {
+  outline: 2px solid var(--ring);
+  outline-offset: 4px;
+}
+
+/* Page transitions between the project grid and case studies. */
+.vt-project-intro {
+  view-transition-name: project-intro;
+}
+
+.vt-project-media {
+  view-transition-name: project-media;
+}
+
+.vt-project-body {
+  view-transition-name: project-body;
+}
+
+::view-transition-group(*) {
+  animation-duration: 380ms;
+  animation-timing-function: cubic-bezier(0.2, 0, 0, 1);
+}
+
+::view-transition-old(root) {
+  animation: 150ms ease-out both page-fade-out;
+}
+
+::view-transition-new(root) {
+  animation: 250ms ease-out 50ms both page-fade-in;
+}
+
+/* The dock and phone pill stay in place across pages.
+   Every selector is qualified with html: the CSS minifier otherwise merges these rules
+   with other view-transition selectors and drops them. */
+html::view-transition-group(site-dock),
+html::view-transition-group(site-settings) {
+  z-index: 10;
+}
+
+html::view-transition-old(site-dock),
+html::view-transition-new(site-dock) {
+  height: 100%;
+  object-fit: none;
+}
+
+html::view-transition-old(site-dock) {
+  animation: 90ms ease-out both page-fade-out;
+}
+
+html::view-transition-new(site-dock) {
+  animation: 160ms ease-out 60ms both page-fade-in;
+}
+
+/* The phone pill is shown live instead of morphing a snapshot of its frosted background;
+   its own contents animate in (see .pill-reveal). */
+html::view-transition-group(site-settings),
+html::view-transition-new(site-settings) {
+  animation: none;
+}
+
+html::view-transition-old(site-settings) {
+  display: none;
+}
+
+/* Safari draws backdrop blur as a rectangle while a view transition runs; go opaque instead. */
+html[data-view-transition] .floating-surface {
+  backdrop-filter: none;
+  background-color: var(--background);
+}
+
+/* Extra pill content (the back button) grows to its real width (0fr → 1fr) at an even pace,
+   then fades in; it folds away the same way when leaving a case study. */
+.pill-reveal,
+.pill-collapse,
+.pill-extra {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.pill-reveal > div,
+.pill-collapse > div,
+.pill-extra > div {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.pill-reveal {
+  animation: pill-reveal 650ms cubic-bezier(0.25, 0.8, 0.25, 1) both;
+}
+
+.pill-reveal > div {
+  animation: page-fade-in 450ms ease-out 200ms both;
+}
+
+.pill-collapse {
+  animation: pill-collapse 550ms cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+.pill-collapse > div {
+  animation: page-fade-out 220ms ease-out both;
+}
+
+@keyframes pill-reveal {
+  from {
+    grid-template-columns: 0fr;
+  }
+}
+
+@keyframes pill-collapse {
+  to {
+    grid-template-columns: 0fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pill-reveal,
+  .pill-reveal > div {
+    animation: none;
+  }
+
+  .pill-collapse {
+    display: none;
+  }
+}
+
+/* Swap the small and large title quickly so the glide never shows a double image. */
+::view-transition-old(project-title) {
+  animation: 120ms ease-out both page-fade-out;
+}
+
+::view-transition-new(project-title) {
+  animation: 120ms ease-out both page-fade-in;
+}
+
+/* Case study content settles in once the title has landed, one block after another. */
+::view-transition-group(project-intro),
+::view-transition-group(project-media),
+::view-transition-group(project-body) {
+  animation: none;
+}
+
+::view-transition-old(project-intro),
+::view-transition-old(project-media),
+::view-transition-old(project-body) {
+  animation: 150ms ease-out both page-fade-out;
+}
+
+::view-transition-new(project-intro),
+::view-transition-new(project-media),
+::view-transition-new(project-body) {
+  animation: 420ms cubic-bezier(0.2, 0, 0, 1) 260ms both content-rise;
+}
+
+::view-transition-new(project-media) {
+  animation-delay: 320ms;
+}
+
+::view-transition-new(project-body) {
+  animation-delay: 380ms;
+}
+
+@keyframes page-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes page-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes content-rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}

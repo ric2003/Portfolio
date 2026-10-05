@@ -4,6 +4,7 @@ import { ThemeProvider } from "next-themes";
 import I18nProviderClient from "@/components/I18nProviderClient";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
+import { ViewTransitionResolver } from "@/components/view-transition";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -48,6 +49,7 @@ export default function RootLayout({
             {children}
           </I18nProviderClient>
         </ThemeProvider>
+        <ViewTransitionResolver />
         <Analytics />
       </body>
     </html>

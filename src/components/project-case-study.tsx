@@ -10,7 +10,7 @@ import { LanguageToggle } from "@/components/ui/language-toggle";
 import { SettingsPill } from "@/components/settings-pill";
 import { DockIcon } from "@/components/magicui/dock";
 import { SiteDock } from "@/components/site-dock";
-import { getProjectStudy, studyLabels } from "@/lib/project-studies";
+import { getProjectStudy } from "@/lib/project-studies";
 import { projectOrder, projects, type Project } from "@/lib/projects";
 
 const ordered = projectOrder.map((slug) => projects.find((project) => project.slug === slug)!);
@@ -19,7 +19,6 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
   const { i18n, t } = useTranslation();
   const language = i18n.language.startsWith("pt") ? "pt" : "en";
   const copy = getProjectStudy(project, language);
-  const labels = studyLabels[language];
   const { resolvedTheme, setTheme } = useTheme();
   const navigate = useTransitionRouter();
   const index = ordered.findIndex((item) => item.slug === project.slug);
@@ -43,7 +42,7 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
       <nav aria-label={t("navigation.label")} className="md:hidden">
         <SettingsPill>
           <TransitionLink href={`/#project-${project.slug}`} onClick={() => { titleMorph.slug = project.slug; }} className="group inline-flex h-9 items-center gap-2 rounded-full pl-2.5 pr-3 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring">
-            <ArrowLeft aria-hidden="true" size={16} className="transition-transform group-hover:-translate-x-0.5 motion-reduce:transform-none" />{labels.back}
+            <ArrowLeft aria-hidden="true" size={16} className="transition-transform group-hover:-translate-x-0.5 motion-reduce:transform-none" />{t("projects.back")}
           </TransitionLink>
         </SettingsPill>
       </nav>
@@ -54,11 +53,11 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
             <div className="vt-project-intro">
             <p className="mt-6 text-lg leading-relaxed text-muted-foreground">{copy.description}</p>
             <div className="mt-8 flex flex-wrap gap-3">
-              {project.viewProject && <a href={project.viewProject} target="_blank" rel="noopener noreferrer" className={`${project.slug === "racing-game" ? "hidden lg:inline-flex" : "inline-flex"} items-center gap-2 rounded-full bg-foreground px-5 py-3 text-sm font-medium text-background`}>{project.slug === "racing-game" ? labels.tryProject(copy.title) : labels.visitProject(copy.title)}<ArrowUpRight size={16} /></a>}
-              {project.sourceCode && <a href={project.sourceCode} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full border border-border px-5 py-3 text-sm font-medium hover:bg-muted"><Github size={16} />{labels.source}</a>}
+              {project.viewProject && <a href={project.viewProject} target="_blank" rel="noopener noreferrer" className={`${project.slug === "racing-game" ? "hidden lg:inline-flex" : "inline-flex"} items-center gap-2 rounded-full bg-foreground px-5 py-3 text-sm font-medium text-background`}>{project.slug === "racing-game" ? t("projects.try_project", { title: copy.title }) : t("projects.visit_project", { title: copy.title })}<ArrowUpRight size={16} /></a>}
+              {project.sourceCode && <a href={project.sourceCode} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full border border-border px-5 py-3 text-sm font-medium hover:bg-muted"><Github size={16} />{t("projects.view_source")}</a>}
             </div>
-            {project.slug === "racing-game" && <p className="mt-3 hidden text-xs text-muted-foreground lg:block">{language === "pt" ? "Só funciona no computador" : "Only works on computer"}</p>}
-            {project.collaboratorRepository && <p className="mt-4 text-xs leading-relaxed text-muted-foreground">{labels.collaboration}</p>}
+            {project.slug === "racing-game" && <p className="mt-3 hidden text-xs text-muted-foreground lg:block">{t("projects.desktop_only")}</p>}
+            {project.collaboratorRepository && <p className="mt-4 text-xs leading-relaxed text-muted-foreground">{t("projects.collaborator_repository")}</p>}
             </div>
           </header>
           {project.preview ? (
@@ -89,12 +88,12 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
           <div className="vt-project-body mt-14">
             <dl className="grid grid-cols-2 gap-x-6 gap-y-4 border-y border-border py-5 sm:flex sm:flex-wrap sm:gap-x-10">
               {[
-                [labels.role, copy.role],
-                [labels.team, copy.team],
-                [labels.context, copy.context],
-                [labels.stack, project.tech.join(" · ")],
+                [t("projects.role"), copy.role],
+                [t("projects.team"), copy.team],
+                [t("projects.context"), copy.context],
+                [t("projects.stack"), project.tech.join(" · ")],
               ].filter(([, value]) => value).map(([label, value]) => (
-                <div key={label} className={label === labels.stack ? "col-span-2" : undefined}><dt className="mb-1 text-xs text-muted-foreground">{label}</dt><dd className="text-sm font-medium">{value}</dd></div>
+                <div key={label} className={label === t("projects.stack") ? "col-span-2" : undefined}><dt className="mb-1 text-xs text-muted-foreground">{label}</dt><dd className="text-sm font-medium">{value}</dd></div>
               ))}
             </dl>
             <div className="mt-10 max-w-2xl space-y-5">
@@ -102,7 +101,7 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
               {project.finalReport && (
                 <a href={project.finalReport} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 flex-wrap items-center gap-x-3 gap-y-1 rounded-sm text-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring">
                   <span className="inline-flex items-center gap-1.5 underline underline-offset-4">{t("projects.final_report")}<ArrowUpRight aria-hidden="true" size={14} /></span>
-                  <span className="text-xs text-muted-foreground">{language === "pt" ? "PDF" : t("projects.final_report_language")}</span>
+                  <span className="text-xs text-muted-foreground">{t("projects.final_report_language")}</span>
                 </a>
               )}
             </div>
@@ -110,7 +109,7 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
 
         </article>
         <footer className="mt-16 border-t border-border pt-8">
-          <nav aria-label={labels.projects} className="grid grid-cols-2 items-center gap-3 sm:grid-cols-[1fr_auto_1fr]">
+          <nav aria-label={t("navigation.projects")} className="grid grid-cols-2 items-center gap-3 sm:grid-cols-[1fr_auto_1fr]">
             <ol className="col-span-2 mb-3 flex items-center justify-center gap-1 sm:col-span-1 sm:col-start-2 sm:row-start-1 sm:mb-0">
               {ordered.map((item) => {
                 const current = item.slug === project.slug;
@@ -127,10 +126,10 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
             </ol>
               <TransitionLink href={`/projects/${previousProject.slug}`} className="group flex min-w-0 items-center gap-2 rounded-xl p-3 hover:bg-muted/50 sm:gap-3 sm:p-4 sm:col-start-1 sm:row-start-1">
                 <ArrowLeft aria-hidden="true" className="shrink-0 transition-transform group-hover:-translate-x-1 motion-reduce:transform-none" />
-                <div className="min-w-0"><p className="mb-1 truncate text-sm text-muted-foreground">{labels.previous}</p><p className="font-semibold sm:truncate sm:text-xl">{getProjectStudy(previousProject, language).title}</p></div>
+                <div className="min-w-0"><p className="mb-1 truncate text-sm text-muted-foreground">{t("projects.previous")}</p><p className="font-semibold sm:truncate sm:text-xl">{getProjectStudy(previousProject, language).title}</p></div>
               </TransitionLink>
               <TransitionLink href={`/projects/${nextProject.slug}`} className="group flex min-w-0 items-center justify-end gap-2 rounded-xl p-3 text-right hover:bg-muted/50 sm:gap-3 sm:p-4 sm:col-start-3 sm:row-start-1">
-                <div className="min-w-0"><p className="mb-1 truncate text-sm text-muted-foreground">{labels.next}</p><p className="font-semibold sm:truncate sm:text-xl">{getProjectStudy(nextProject, language).title}</p></div>
+                <div className="min-w-0"><p className="mb-1 truncate text-sm text-muted-foreground">{t("projects.next")}</p><p className="font-semibold sm:truncate sm:text-xl">{getProjectStudy(nextProject, language).title}</p></div>
                 <ArrowRight aria-hidden="true" className="shrink-0 transition-transform group-hover:translate-x-1 motion-reduce:transform-none" />
               </TransitionLink>
           </nav>
@@ -138,7 +137,7 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
       </div>
       <SiteDock>
         <TransitionLink href={`/#project-${project.slug}`} onClick={() => { titleMorph.slug = project.slug; }} className="group ml-1 inline-flex h-10 items-center gap-2 self-center rounded-full pl-2 pr-3 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground">
-          <ArrowLeft aria-hidden="true" size={18} className="transition-transform group-hover:-translate-x-0.5 motion-reduce:transform-none" />{labels.back}
+          <ArrowLeft aria-hidden="true" size={18} className="transition-transform group-hover:-translate-x-0.5 motion-reduce:transform-none" />{t("projects.back")}
         </TransitionLink>
         <div className="mx-2 h-6 w-px self-center bg-border" />
         <DockIcon className="mx-1">

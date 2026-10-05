@@ -32,7 +32,6 @@ function ProjectScreenshot({ project, title, mobile = false }: {
 export function ProjectBento() {
   const { t, i18n } = useTranslation();
   const language = i18n.language.startsWith("pt") ? "pt" : "en";
-  const pt = language === "pt";
 
   return (
     <section id="projects" className="mb-20 scroll-mt-8">
@@ -45,22 +44,22 @@ export function ProjectBento() {
           return (
             <article key={slug} id={`project-${slug}`} className={`project-card scroll-mt-24 group relative isolate flex flex-col overflow-hidden rounded-2xl border border-border bg-muted/30 transition-colors hover:border-foreground/30 ${racing ? "sm:col-span-6" : index < 3 ? "sm:col-span-3" : "sm:col-span-2"}`}>
               {project.preview ? (
-                <ProjectPreview src={project.preview.video} webm={project.preview.webm} aspectRatio={project.preview.aspectRatio} poster={project.preview.poster} title={title} playLabel={pt ? "Ver demonstração" : "Play preview"} pauseLabel={pt ? "Pausar" : "Pause preview"} />
+                <ProjectPreview src={project.preview.video} webm={project.preview.webm} aspectRatio={project.preview.aspectRatio} poster={project.preview.poster} title={title} playLabel={t("projects.play_preview")} pauseLabel={t("projects.pause_preview")} />
               ) : <ProjectScreenshot project={project} title={title} mobile={index > 2} />}
               <div className="flex flex-1 flex-col p-5">
                 <h3 className={`${racing ? "text-2xl sm:text-3xl" : index < 3 ? "text-xl" : "text-base"} font-semibold tracking-tight`}>
                   <span data-project-title className="inline-block leading-[1.1]" style={titleMorph.slug === slug ? { viewTransitionName: "project-title" } : undefined}>{title}</span>
                 </h3>
                 <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{t(`projects.items.${slug}.subtitle`)}</p>
-                {racing && <RacingDemo language={language} />}
+                {racing && <RacingDemo />}
                 {!racing && project.viewProject && (
                   <div className="mt-4">
-                    <ExternalLinkButton language={language} href={project.viewProject}>{pt ? "Visitar site" : "Visit site"}</ExternalLinkButton>
+                    <ExternalLinkButton href={project.viewProject}>{t("projects.visit_site")}</ExternalLinkButton>
                   </div>
                 )}
                 <div className="mt-auto flex justify-end pt-4">
-                  <TransitionLink href={`/projects/${slug}`} onClick={(event) => { titleMorph.slug = null; document.querySelectorAll<HTMLElement>("[data-project-title]").forEach((heading) => { heading.style.viewTransitionName = ""; }); const heading = event.currentTarget.closest("article")?.querySelector<HTMLElement>("[data-project-title]"); if (heading) heading.style.viewTransitionName = "project-title"; }} aria-label={`${pt ? "Ver detalhes" : "Show details"}: ${title}`} className="project-details text-xs font-medium text-muted-foreground underline-offset-4 after:absolute after:inset-0 after:z-10 focus-visible:outline-none">
-                    <span className="project-details-label">{pt ? "Ver detalhes" : "Show details"}</span>
+                  <TransitionLink href={`/projects/${slug}`} onClick={(event) => { titleMorph.slug = null; document.querySelectorAll<HTMLElement>("[data-project-title]").forEach((heading) => { heading.style.viewTransitionName = ""; }); const heading = event.currentTarget.closest("article")?.querySelector<HTMLElement>("[data-project-title]"); if (heading) heading.style.viewTransitionName = "project-title"; }} aria-label={`${t("projects.show_details")}: ${title}`} className="project-details text-xs font-medium text-muted-foreground underline-offset-4 after:absolute after:inset-0 after:z-10 focus-visible:outline-none">
+                    <span className="project-details-label">{t("projects.show_details")}</span>
                   </TransitionLink>
                 </div>
               </div>

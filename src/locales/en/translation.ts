@@ -2,6 +2,7 @@
 // Kept as a TS module instead of raw JSON because Turbopack HMR cannot
 // reliably hot-update JSON modules imported into the client bundle.
 const translation = {
+  opens_in_new_tab: " (opens in a new tab)",
   language_label: "Language",
   navigation: {
     home: "Home",
@@ -53,6 +54,22 @@ const translation = {
     ],
   },
   projects: {
+    play_preview: "Play preview",
+    pause_preview: "Pause preview",
+    visit_site: "Visit site",
+    show_details: "Show details",
+    try_game: "Try game",
+    desktop_only: "Only works on computer",
+    back: "All projects",
+    role: "Role",
+    team: "Team",
+    context: "Context",
+    stack: "Stack",
+    next: "Next project",
+    previous: "Previous project",
+    visit_project: "Visit {{title}}",
+    try_project: "Try {{title}}",
+    view_source: "View source",
     title: "My Projects",
     view_project: "View Project",
     source_code: "Source Code",
@@ -64,36 +81,83 @@ const translation = {
       "This was a collaborative project. The repository is hosted on my university friend's GitHub account.",
     items: {
       "water-wise": {
+        role: "Co-developer",
+        team: "2 people",
+        context: "Final-year project",
+        story: [
+          "Water Wise was my final-year project in Computer Engineering at Universidade Lusófona, a decision-support platform to help farmers, water managers and researchers follow the state of Portugal's reservoirs. I built it with a classmate, starting from a Figma prototype and working in sprints on Trello. We mostly built it together, sometimes each taking charge of a page, reviewing each other's code and designing the interface side by side.",
+          "The project came from the university's Faculty of Engineering, as the web platform of a wider European water management proposal. Two professors supervised us, and our contact at the Faculty of Engineering, an expert in time-series data, acted as our stakeholder, explaining what the platform needed and helping us get the data. After we finished, the platform was renamed Harmonia and presented and approved as part of that European initiative.",
+          "The data comes from several places, including a weather station API, telemetry in InfluxDB, satellite imagery and other groups' predictive models. Station and database requests go through Next.js API routes, so credentials stay on the server. On the client, React Query caches data in IndexedDB so returning to a page is instant, Convex powers real-time alerts, Clerk handles sign-in, and the interface works in English and Portuguese.",
+          "We tested it through two rounds of surveys with people who work in this area and would use a platform like it.",
+        ],
         title: "Water Wise",
         subtitle: "Water data across Portugal",
         description:
           "My final-year Computer Engineering project, built with a classmate. A web platform that brings reservoir, weather station and satellite data for water management in Portugal into one map-based interface.",
       },
       yoke: {
+        role: "Co-developer",
+        team: "2 people",
+        context: "Side project",
+        story: [
+          "Yoke started during my final year at university, around the time our classes were introducing Flutter. My friend and I were convinced React Native was the better choice, and since we were already writing React every day in Next.js for our final-year project, it felt familiar from the first screen.",
+          "We planned a full fitness app covering workouts, nutrition, history and progress, and built it with Expo and Expo Router, with a tab for each area. The part we took furthest was the exercise library, a filterable catalogue with a detail page for every exercise, where people can also add their own exercises and keep them on their phone.",
+        ],
         title: "Yoke - Fitness App",
         subtitle: "A fitness app prototype",
         description:
           "A fitness app for workouts, nutrition and progress, built with a friend in React Native. We picked it over Flutter because we were already working in React every day.",
       },
       "sns-hospitals": {
+        role: "Co-developer",
+        team: "2 people",
+        context: "University class",
+        story: [
+          "I built this with a classmate for a mobile development class at university, over two phases, each with its own set of requirements. We mostly built it together. Sometimes one of us took charge of a screen or of getting a specific test to pass, but we reviewed each other's code, suggested improvements, and designed the interface by pitching ideas for what to add and how to present the information.",
+          "We used the Repository pattern in a layered architecture. The interface only talks to a repository, which sits in front of two data sources, the SNS API and a local SQLite database, and decides which one to use based on connectivity. That keeps the app working offline and the business logic out of the widgets.",
+          "Dependencies are injected with Provider, a widely used approach in Flutter. The data sources and device services, like location and connectivity, are defined as interfaces and registered once at startup, and screens get them from the widget tree instead of creating them. When we changed a data source or added features in the second phase, we only had to touch one layer, not the whole app.",
+        ],
         title: "SNS Hospitals App",
         subtitle: "Hospital information, offline",
         description:
           "A Flutter app for Portugal's public hospitals, built with a classmate for a university class, across two phases. Beyond the required features, we focused on a clean architecture and on an app that keeps working offline.",
       },
       "live-notes": {
+        role: "Developer",
+        team: "Solo",
+        context: "Personal project",
+        story: [
+          "After using Convex for real-time alerts in my final-year project and enjoying it, I wanted to see how Firebase handles the same problem. Live Notes was the result, a shared board where everyone sees notes appear, move and change as they happen. It started out simple, and with the help of AI I grew it into the canvas it is now, with zooming, panning, a minimap and notes you can drag anywhere.",
+          "Firebase's Realtime Database keeps a WebSocket open to every visitor and pushes changes the moment they are written, so each client listens to the board instead of asking for updates. Presence runs over the same connection, with Firebase removing a person automatically when their connection drops. Since the app was already on Firebase, I used its Google sign-in for accounts, while guests can still join anonymously, and usernames are claimed in transactions so two people can never take the same one.",
+          "Edits go through server routes that validate them, and each save carries the text it was based on, so a conflicting edit is caught instead of silently overwriting someone else's. Unsaved changes wait in a queue that survives reloads and closed tabs, and the database security rules have their own tests.",
+        ],
         title: "Live Notes App",
         subtitle: "A shared board for notes",
         description:
           "A shared board where people leave notes and see everyone's changes as they happen, built to explore Firebase's real-time WebSockets after trying Convex.",
       },
       "emoji-puzzle": {
+        role: "Developer",
+        team: "Solo",
+        context: "Personal project",
+        story: [
+          "Yoke turned out to be really ambitious, so I wanted to try React Native again with something small enough to finish. Emoji Puzzle is a guessing game where each puzzle is a row of emojis hiding the title of a game, movie or song.",
+          "The trickiest part was deciding when a guess counts. Instead of demanding an exact match, the answer checker compares the guess word by word and tolerates small differences like plurals or verb endings, so it can reply Correct, Near or Wrong. Hints reveal the category first and then more of the answer after each miss, stats and streaks are saved on the phone, and the game logic lives in a hook and a context, separate from the screens.",
+        ],
         title: "Emoji Puzzle App",
         subtitle: "Guess the title from emojis",
         description:
           "A small emoji guessing game in React Native, built to finish something simple after an ambitious fitness app. Guess the game, movie or song hidden in each row of emojis.",
       },
       "racing-game": {
+        role: "Development with AI",
+        team: "Solo",
+        context: "Personal project",
+        story: [
+          "I built Kart Island with AI as a personal project, to see how far a new model could take a real-time multiplayer game. Later, when GPT-6 Astra became better at building objects in Blender, I used it to fill the world with more 3D models.",
+          "The server is authoritative. It runs the race at a fixed 60 ticks per second and owns movement, collisions, laps and standings, while players only send their controls. The track, physics and race rules live in shared code with no framework, so the server and the browser run exactly the same simulation.",
+          "To keep driving responsive despite network delay, the browser predicts your own kart and corrects it against snapshots the server sends 20 times a second, and draws the other karts from a short buffer of snapshots so they move smoothly. Computer drivers use the same karts and rules as players, and a seeded test run across every track and difficulty checks them before changes ship.",
+        ],
         title: "Kart Island",
         subtitle: "Multiplayer kart racing",
         description:

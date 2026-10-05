@@ -114,8 +114,8 @@ const translation = {
         context: "Cadeira universitária",
         story: [
           "Desenvolvi esta aplicação com um colega de curso para uma cadeira de desenvolvimento mobile, ao longo de duas fases, cada uma com os seus requisitos. Construímo-la sobretudo em conjunto. Às vezes um de nós ficava responsável por um ecrã ou por pôr um teste específico a passar, mas revíamos o código um do outro, sugeríamos melhorias e desenhávamos a interface a lançar ideias sobre o que acrescentar e como apresentar a informação.",
-          "Usámos o padrão Repository numa arquitetura em camadas. A interface fala apenas com um repositório, que fica à frente de duas fontes de dados, a API do SNS e uma base de dados SQLite local, e decide qual usar consoante a conectividade. Assim, a aplicação continua a funcionar sem Internet e a lógica de negócio fica fora dos widgets.",
-          "As dependências são injetadas com o Provider, uma abordagem muito usada em Flutter. As fontes de dados e os serviços do dispositivo, como a localização e a conectividade, são definidos como interfaces e registados uma vez no arranque, e os ecrãs obtêm-nos da árvore de widgets em vez de os criarem. Quando mudámos uma fonte de dados ou acrescentámos funcionalidades na segunda fase, bastou mexer numa camada, e não na aplicação inteira.",
+          "Usámos o padrão Repository numa arquitetura em camadas. A interface fala apenas com um repositório, que obtém a informação dos hospitais através da API do SNS e recorre aos dados guardados numa base de dados SQLite local quando não há ligação à Internet, para que continuem disponíveis offline. Isto também mantém a lógica de negócio fora dos widgets.",
+          "As dependências são injetadas com o Provider, uma abordagem muito usada em Flutter. As fontes de dados e os serviços do dispositivo, como a localização e a conectividade, são definidos como interfaces e registados uma vez no arranque, e os ecrãs obtêm-nos da árvore de widgets em vez de os criarem.",
         ],
         title: "App SNS Hospitais",
         subtitle: "Informação hospitalar offline",

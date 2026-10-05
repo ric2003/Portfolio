@@ -114,8 +114,8 @@ const translation = {
         context: "University class",
         story: [
           "I built this with a classmate for a mobile development class at university, over two phases, each with its own set of requirements. We mostly built it together. Sometimes one of us took charge of a screen or of getting a specific test to pass, but we reviewed each other's code, suggested improvements, and designed the interface by pitching ideas for what to add and how to present the information.",
-          "We used the Repository pattern in a layered architecture. The interface only talks to a repository, which sits in front of two data sources, the SNS API and a local SQLite database, and decides which one to use based on connectivity. That keeps the app working offline and the business logic out of the widgets.",
-          "Dependencies are injected with Provider, a widely used approach in Flutter. The data sources and device services, like location and connectivity, are defined as interfaces and registered once at startup, and screens get them from the widget tree instead of creating them. When we changed a data source or added features in the second phase, we only had to touch one layer, not the whole app.",
+          "We used the Repository pattern in a layered architecture. The interface only talks to a repository, which gets hospital information from the SNS API and falls back to the data saved in a local SQLite database when there’s no internet connection, so users can still view it offline. This also keeps the business logic out of the widgets.",
+          "Dependencies are injected with Provider, a widely used approach in Flutter. The data sources and device services, like location and connectivity, are defined as interfaces and registered once at startup, and screens get them from the widget tree instead of creating them.",
         ],
         title: "SNS Hospitals App",
         subtitle: "Hospital information, offline",
